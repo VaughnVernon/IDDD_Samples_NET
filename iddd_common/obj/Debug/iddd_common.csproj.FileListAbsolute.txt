@@ -1,0 +1,5 @@
+C:\Dropbox\Work\Samples\IDDD_Samples_NET\iddd_common\bin\Debug\iddd_common.dll
+C:\Dropbox\Work\Samples\IDDD_Samples_NET\iddd_common\bin\Debug\iddd_common.pdb
+C:\Dropbox\Work\Samples\IDDD_Samples_NET\iddd_common\obj\Debug\iddd_common.csprojResolveAssemblyReference.cache
+C:\Dropbox\Work\Samples\IDDD_Samples_NET\iddd_common\obj\Debug\iddd_common.dll
+C:\Dropbox\Work\Samples\IDDD_Samples_NET\iddd_common\obj\Debug\iddd_common.pdb
