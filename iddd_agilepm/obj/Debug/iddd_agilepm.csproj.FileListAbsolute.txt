@@ -1,0 +1,7 @@
+C:\Dropbox\Work\Samples\IDDD_Samples_NET\iddd_agilepm\bin\Debug\iddd_agilepm.dll
+C:\Dropbox\Work\Samples\IDDD_Samples_NET\iddd_agilepm\bin\Debug\iddd_agilepm.pdb
+C:\Dropbox\Work\Samples\IDDD_Samples_NET\iddd_agilepm\bin\Debug\iddd_common.dll
+C:\Dropbox\Work\Samples\IDDD_Samples_NET\iddd_agilepm\bin\Debug\iddd_common.pdb
+C:\Dropbox\Work\Samples\IDDD_Samples_NET\iddd_agilepm\obj\Debug\iddd_agilepm.csprojResolveAssemblyReference.cache
+C:\Dropbox\Work\Samples\IDDD_Samples_NET\iddd_agilepm\obj\Debug\iddd_agilepm.dll
+C:\Dropbox\Work\Samples\IDDD_Samples_NET\iddd_agilepm\obj\Debug\iddd_agilepm.pdb

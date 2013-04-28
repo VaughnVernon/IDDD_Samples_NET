@@ -1,0 +1,7 @@
+C:\Dropbox\Work\Samples\IDDD_Samples_NET\iddd_identityaccess\bin\Debug\iddd_identityaccess.dll
+C:\Dropbox\Work\Samples\IDDD_Samples_NET\iddd_identityaccess\bin\Debug\iddd_identityaccess.pdb
+C:\Dropbox\Work\Samples\IDDD_Samples_NET\iddd_identityaccess\bin\Debug\iddd_common.dll
+C:\Dropbox\Work\Samples\IDDD_Samples_NET\iddd_identityaccess\bin\Debug\iddd_common.pdb
+C:\Dropbox\Work\Samples\IDDD_Samples_NET\iddd_identityaccess\obj\Debug\iddd_identityaccess.csprojResolveAssemblyReference.cache
+C:\Dropbox\Work\Samples\IDDD_Samples_NET\iddd_identityaccess\obj\Debug\iddd_identityaccess.dll
+C:\Dropbox\Work\Samples\IDDD_Samples_NET\iddd_identityaccess\obj\Debug\iddd_identityaccess.pdb
