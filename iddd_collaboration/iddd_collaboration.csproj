@@ -40,8 +40,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SaaSOvation.Collaboration.Domain.Model.Collaborators\Author.cs" />
+    <Compile Include="SaaSOvation.Collaboration.Domain.Model.Collaborators\Collaborator .cs" />
+    <Compile Include="SaaSOvation.Collaboration.Domain.Model.Collaborators\Creator.cs" />
+    <Compile Include="SaaSOvation.Collaboration.Domain.Model.Collaborators\ICollaboratorService.cs" />
+    <Compile Include="SaaSOvation.Collaboration.Domain.Model.Collaborators\Moderator.cs" />
+    <Compile Include="SaaSOvation.Collaboration.Domain.Model.Collaborators\Owner.cs" />
+    <Compile Include="SaaSOvation.Collaboration.Domain.Model.Collaborators\Participant.cs" />
+    <Compile Include="SaaSOvation.Collaboration.Domain.Model.Tenants\Tenant.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="SaaSOvation.Collaboration.Domain.Model.Calendars\" />
+    <Folder Include="SaaSOvation.Collaboration.Domain.Model.Forums\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
