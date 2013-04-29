@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SaaSOvation.Common.Domain.Model
 {
-    public class Identity<T>
+    public abstract class Identity
     {
         public Identity()
         {
@@ -18,5 +18,32 @@ namespace SaaSOvation.Common.Domain.Model
         }
 
         public string Id { get; private set; }
+
+        public override bool Equals(object anotherObject)
+        {
+            bool equalObjects = false;
+
+            if (anotherObject != null && this.GetType() == anotherObject.GetType())
+            {
+                Identity typedObject = (Identity)anotherObject;
+                equalObjects = this.Id.Equals(typedObject.Id);
+            }
+
+            return equalObjects;
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCodeValue =
+                + (this.GetType().GetHashCode() * 907)
+                + this.Id.GetHashCode();
+
+            return hashCodeValue;
+        }
+
+        public override string ToString()
+        {
+            return this.GetType().Name + " [Id=" + Id + "]";
+        }
     }
 }

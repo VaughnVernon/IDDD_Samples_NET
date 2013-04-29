@@ -6,7 +6,7 @@
     {
         public ProcessTimedOut(
                 string tenantId,
-                Identity<Process> processId,
+                ProcessId processId,
                 int totalRetriesPermitted,
                 int retryCount)
         {
@@ -20,7 +20,7 @@
 
         public int EventVersion { get; set; }
         public DateTime OccurredOn { get; set; }
-        public Identity<Process> ProcessId { get; private set; }
+        public ProcessId ProcessId { get; private set; }
         public int RetryCount { get; private set; }
         public string TenantId { get; private set; }
         public int TotalRetriesPermitted { get; private set; }

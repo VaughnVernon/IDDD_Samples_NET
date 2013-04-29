@@ -2,13 +2,14 @@
 {
     using System;
     using SaaSOvation.Common.Domain.Model;
+    using SaaSOvation.AgilePM.Domain.Model.Tenants;
 
     public class ProductBacklogItem
     {
         public ProductBacklogItem(
-            Identity<Tenants.Tenant> tenantId,
-            Identity<Product> productId,
-            Identity<BacklogItems.BacklogItem> backlogItem,
+            TenantId tenantId,
+            ProductId productId,
+            BacklogItemId backlogItem,
             int ordering)
         {
             this.BacklogItemId = backlogItem;
@@ -17,13 +18,13 @@
             this.TenantId = tenantId;
         }
 
-        public Identity<BacklogItems.BacklogItem> BacklogItemId { get; private set; }
+        public BacklogItemId BacklogItemId { get; private set; }
 
         public int Ordering { get; private set; }
 
-        public Identity<Product> ProductId { get; private set; }
+        public ProductId ProductId { get; private set; }
 
-        public Identity<Tenants.Tenant> TenantId { get; private set; }
+        public TenantId TenantId { get; private set; }
 
         public override bool Equals(object anotherObject)
         {
@@ -60,7 +61,7 @@
                     + ", ordering=" + Ordering + "]";
         }
 
-        internal void ReorderFrom(Identity<BacklogItems.BacklogItem> id, int ordering)
+        internal void ReorderFrom(BacklogItemId id, int ordering)
         {
             if (this.BacklogItemId.Equals(id))
             {

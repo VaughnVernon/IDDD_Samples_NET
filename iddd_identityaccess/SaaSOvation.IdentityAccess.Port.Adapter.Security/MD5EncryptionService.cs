@@ -14,7 +14,7 @@
 
         public string EncryptedValue(string plainTextValue)
         {
-            this.AssertArgumentNotEmpty(
+            AssertionConcern.AssertArgumentNotEmpty(
                     plainTextValue,
                     "Plain text value to encrypt must be provided.");
 

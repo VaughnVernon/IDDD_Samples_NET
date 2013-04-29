@@ -7,7 +7,7 @@
     public class ProductOwner : Member
     {
         public ProductOwner(
-            Identity<Tenant> tenantId,
+            TenantId tenantId,
             string username,
             string firstName,
             string lastName,
@@ -17,7 +17,7 @@
         {
         }
 
-        public Identity<ProductOwner> ProductOwnerId { get; private set; }
+        public ProductOwnerId ProductOwnerId { get; private set; }
 
         public override bool Equals(object anotherObject)
         {

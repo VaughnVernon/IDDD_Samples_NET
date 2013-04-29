@@ -45,6 +45,7 @@
     <Compile Include="SaaSOvation.AgilePM.Domain.Model.Discussions\DiscussionAvailability.cs" />
     <Compile Include="SaaSOvation.AgilePM.Domain.Model.Products\BacklogItems\BacklogItemStatus.cs" />
     <Compile Include="SaaSOvation.AgilePM.Domain.Model.Products\BacklogItems\BacklogItemType.cs" />
+    <Compile Include="SaaSOvation.AgilePM.Domain.Model.Products\BacklogItems\BacklogItemId.cs" />
     <Compile Include="SaaSOvation.AgilePM.Domain.Model.Products\BacklogItems\StoryPoints.cs" />
     <Compile Include="SaaSOvation.AgilePM.Domain.Model.Products\Product.cs" />
     <Compile Include="SaaSOvation.AgilePM.Domain.Model.Products\ProductBacklogItem.cs" />
@@ -55,15 +56,19 @@
     <Compile Include="SaaSOvation.AgilePM.Domain.Model.Products\ProductDiscussionRequested.cs" />
     <Compile Include="SaaSOvation.AgilePM.Domain.Model.Products\ProductReleaseScheduled.cs" />
     <Compile Include="SaaSOvation.AgilePM.Domain.Model.Products\ProductSprintScheduled.cs" />
+    <Compile Include="SaaSOvation.AgilePM.Domain.Model.Products\Releases\ReleaseId.cs" />
     <Compile Include="SaaSOvation.AgilePM.Domain.Model.Products\Releases\ScheduledBacklogItem.cs" />
     <Compile Include="SaaSOvation.AgilePM.Domain.Model.Products\Releases\Release.cs" />
     <Compile Include="SaaSOvation.AgilePM.Domain.Model.Products\Sprints\CommittedBacklogItem.cs" />
+    <Compile Include="SaaSOvation.AgilePM.Domain.Model.Products\Sprints\SprintId.cs" />
     <Compile Include="SaaSOvation.AgilePM.Domain.Model.Products\Sprints\Sprint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SaaSOvation.AgilePM.Domain.Model.Products\ProductId.cs" />
     <Compile Include="SaaSOvation.AgilePM.Domain.Model.Teams\Member.cs" />
     <Compile Include="SaaSOvation.AgilePM.Domain.Model.Teams\MemberChangeTracker.cs" />
     <Compile Include="SaaSOvation.AgilePM.Domain.Model.Teams\ProductOwner.cs" />
-    <Compile Include="SaaSOvation.AgilePM.Domain.Model.Tenants\Tenant.cs" />
+    <Compile Include="SaaSOvation.AgilePM.Domain.Model.Teams\ProductOwnerId.cs" />
+    <Compile Include="SaaSOvation.AgilePM.Domain.Model.Tenants\TenantId.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\iddd_common\iddd_common.csproj">

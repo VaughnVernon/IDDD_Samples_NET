@@ -7,8 +7,8 @@
     {
         void Add(User user);
 
-        User UserFromAuthenticCredentials(Identity<Tenant> tenantId, string username, string encryptedPassword);
+        User UserFromAuthenticCredentials(TenantId tenantId, string username, string encryptedPassword);
 
-        User UserWithUsername(Identity<Tenant> tenantId, string username);
+        User UserWithUsername(TenantId tenantId, string username);
     }
 }

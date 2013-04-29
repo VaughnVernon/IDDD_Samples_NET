@@ -5,6 +5,6 @@
 
     public interface GroupRepository
     {
-        Group GroupNamed(Identity<Tenant> identity, string p);
+        Group GroupNamed(TenantId identity, string p);
     }
 }

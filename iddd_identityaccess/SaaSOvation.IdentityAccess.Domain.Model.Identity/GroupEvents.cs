@@ -5,7 +5,7 @@
 
     public class GroupGroupAdded : DomainEvent
     {
-        public GroupGroupAdded(Identity<Tenant> tenantId, string groupName, string nestedGroupName)
+        public GroupGroupAdded(TenantId tenantId, string groupName, string nestedGroupName)
         {
             this.EventVersion = 1;
             this.GroupName = groupName;
@@ -27,7 +27,7 @@
 
     public class GroupGroupRemoved : DomainEvent
     {
-        public GroupGroupRemoved(Identity<Tenant> tenantId, string groupName, string nestedGroupName)
+        public GroupGroupRemoved(TenantId tenantId, string groupName, string nestedGroupName)
         {
             this.EventVersion = 1;
             this.GroupName = groupName;
@@ -49,7 +49,7 @@
 
     public class GroupUserAdded : DomainEvent
     {
-        public GroupUserAdded(Identity<Tenant> tenantId, string groupName, string username)
+        public GroupUserAdded(TenantId tenantId, string groupName, string username)
         {
             this.EventVersion = 1;
             this.GroupName = groupName;
@@ -71,7 +71,7 @@
 
     public class GroupUserRemoved : DomainEvent
     {
-        public GroupUserRemoved(Identity<Tenant> tenantId, string groupName, string username)
+        public GroupUserRemoved(TenantId tenantId, string groupName, string username)
         {
             this.EventVersion = 1;
             this.GroupName = groupName;

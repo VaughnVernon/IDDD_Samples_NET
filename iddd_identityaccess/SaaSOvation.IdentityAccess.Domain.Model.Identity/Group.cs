@@ -8,7 +8,7 @@
     {
         public const string ROLE_GROUP_PREFIX = "ROLE-INTERNAL-GROUP: ";
 
-        public Group(Identity<Tenant> tenantId, string name, string description)
+        public Group(TenantId tenantId, string name, string description)
             : this()
         {
             this.Description = description;
@@ -25,15 +25,15 @@
 
         public string Name { get; private set; }
 
-        public Identity<Tenant> TenantId { get; private set; }
+        public TenantId TenantId { get; private set; }
 
         internal ISet<GroupMember> GroupMembers { get; set; }
 
         public void AddGroup(Group group, GroupMemberService groupMemberService)
         {
-            this.AssertArgumentNotNull(group, "Group must not be null.");
-            this.AssertArgumentEquals(this.TenantId, group.TenantId, "Wrong tenant for this group.");
-            this.AssertArgumentFalse(groupMemberService.IsMemberGroup(group, this.ToGroupMember()), "Group recurrsion.");
+            AssertionConcern.AssertArgumentNotNull(group, "Group must not be null.");
+            AssertionConcern.AssertArgumentEquals(this.TenantId, group.TenantId, "Wrong tenant for this group.");
+            AssertionConcern.AssertArgumentFalse(groupMemberService.IsMemberGroup(group, this.ToGroupMember()), "Group recurrsion.");
 
             if (this.GroupMembers.Add(group.ToGroupMember()) && !this.IsInternalGroup())
             {
@@ -48,9 +48,9 @@
 
         public void AddUser(User user)
         {
-            this.AssertArgumentNotNull(user, "User must not be null.");
-            this.AssertArgumentEquals(this.TenantId, user.TenantId, "Wrong tenant for this group.");
-            this.AssertArgumentTrue(user.Enabled, "User is not enabled.");
+            AssertionConcern.AssertArgumentNotNull(user, "User must not be null.");
+            AssertionConcern.AssertArgumentEquals(this.TenantId, user.TenantId, "Wrong tenant for this group.");
+            AssertionConcern.AssertArgumentTrue(user.Enabled, "User is not enabled.");
 
             if (this.GroupMembers.Add(user.ToGroupMember()) && !this.IsInternalGroup())
             {
@@ -65,9 +65,9 @@
 
         public bool IsMember(User user, GroupMemberService groupMemberService)
         {
-            this.AssertArgumentNotNull(user, "User must not be null.");
-            this.AssertArgumentEquals(this.TenantId, user.TenantId, "Wrong tenant for this group.");
-            this.AssertArgumentTrue(user.Enabled, "User is not enabled.");
+            AssertionConcern.AssertArgumentNotNull(user, "User must not be null.");
+            AssertionConcern.AssertArgumentEquals(this.TenantId, user.TenantId, "Wrong tenant for this group.");
+            AssertionConcern.AssertArgumentTrue(user.Enabled, "User is not enabled.");
 
             bool isMember = this.GroupMembers.Contains(user.ToGroupMember());
 
@@ -85,8 +85,8 @@
 
         public void RemoveGroup(Group group)
         {
-            this.AssertArgumentNotNull(group, "Group must not be null.");
-            this.AssertArgumentEquals(this.TenantId, group.TenantId, "Wrong tenant for this group.");
+            AssertionConcern.AssertArgumentNotNull(group, "Group must not be null.");
+            AssertionConcern.AssertArgumentEquals(this.TenantId, group.TenantId, "Wrong tenant for this group.");
 
             // not a nested remove, only direct member
             if (this.GroupMembers.Remove(group.ToGroupMember()) && !this.IsInternalGroup())
@@ -102,8 +102,8 @@
 
         public void RemoveUser(User user)
         {
-            this.AssertArgumentNotNull(user, "User must not be null.");
-            this.AssertArgumentEquals(this.TenantId, user.TenantId, "Wrong tenant for this group.");
+            AssertionConcern.AssertArgumentNotNull(user, "User must not be null.");
+            AssertionConcern.AssertArgumentEquals(this.TenantId, user.TenantId, "Wrong tenant for this group.");
 
             // not a nested remove, only direct member
             if (this.GroupMembers.Remove(user.ToGroupMember()) && !this.IsInternalGroup())

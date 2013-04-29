@@ -9,9 +9,9 @@
     public class ProductSprintScheduled : DomainEvent
     {
         public ProductSprintScheduled(
-            Identity<Tenant> tenantId,
-            Identity<Product> productId,
-            Identity<Sprint> sprintId,
+            TenantId tenantId,
+            ProductId productId,
+            SprintId sprintId,
             string name,
             string goals,
             DateTime starts,
@@ -38,12 +38,12 @@
 
         public DateTime OccurredOn { get; set; }
 
-        public Identity<Product> ProductId { get; private set; }
+        public ProductId ProductId { get; private set; }
 
-        public Identity<Sprint> SprintId { get; private set; }
+        public SprintId SprintId { get; private set; }
 
         public DateTime Starts { get; private set; }
 
-        public Identity<Tenant> TenantId { get; private set; }
+        public TenantId TenantId { get; private set; }
     }
 }

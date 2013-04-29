@@ -13,7 +13,7 @@
             this.Description = description;
             this.Name = name;
             this.RegistrationInvitations = new HashSet<RegistrationInvitation>();
-            this.TenantId = new Identity<Tenant>();
+            this.TenantId = new TenantId();
         }
 
         public bool Active { get; private set; }
@@ -22,7 +22,7 @@
 
         public string Name { get; private set; }
 
-        public Identity<Tenant> TenantId { get; private set; }
+        public TenantId TenantId { get; private set; }
 
         private ISet<RegistrationInvitation> RegistrationInvitations { get; set; }
 
@@ -38,14 +38,14 @@
 
         public ICollection<InvitationDescriptor> AllAvailableRegistrationInvitations()
         {
-            this.AssertStateTrue(this.Active, "Tenant is not active.");
+            AssertionConcern.AssertStateTrue(this.Active, "Tenant is not active.");
 
             return this.AllRegistrationInvitationsFor(true);
         }
 
         public ICollection<InvitationDescriptor> AllUnavailableRegistrationInvitations()
         {
-            this.AssertStateTrue(this.Active, "Tenant is not active.");
+            AssertionConcern.AssertStateTrue(this.Active, "Tenant is not active.");
 
             return this.AllRegistrationInvitationsFor(false);
         }
@@ -62,7 +62,7 @@
 
         public bool IsRegistrationAvailableThrough(string invitationIdentifier)
         {
-            this.AssertStateTrue(this.Active, "Tenant is not active.");
+            AssertionConcern.AssertStateTrue(this.Active, "Tenant is not active.");
 
             RegistrationInvitation invitation = this.InvitationOf(invitationIdentifier);
 
@@ -71,8 +71,8 @@
 
         public RegistrationInvitation OfferRegistrationInvitation(string description)
         {
-            this.AssertStateTrue(this.Active, "Tenant is not active.");
-            this.AssertArgumentTrue(this.IsRegistrationAvailableThrough(description), "Invitation already exists.");
+            AssertionConcern.AssertStateTrue(this.Active, "Tenant is not active.");
+            AssertionConcern.AssertArgumentTrue(this.IsRegistrationAvailableThrough(description), "Invitation already exists.");
 
             RegistrationInvitation invitation =
                 new RegistrationInvitation(
@@ -80,14 +80,14 @@
                         new Guid().ToString(),
                         description);
 
-            this.AssertStateTrue(this.RegistrationInvitations.Add(invitation), "The invitation should have been added.");
+            AssertionConcern.AssertStateTrue(this.RegistrationInvitations.Add(invitation), "The invitation should have been added.");
 
             return invitation;
         }
 
         public Group ProvisionGroup(string name, string description)
         {
-            this.AssertStateTrue(this.Active, "Tenant is not active.");
+            AssertionConcern.AssertStateTrue(this.Active, "Tenant is not active.");
 
             Group group = new Group(this.TenantId, name, description);
 
@@ -103,7 +103,7 @@
 
         public Role ProvisionRole(string name, string description, bool supportsNesting)
         {
-            this.AssertStateTrue(this.Active, "Tenant is not active.");
+            AssertionConcern.AssertStateTrue(this.Active, "Tenant is not active.");
 
             Role role = new Role(this.TenantId, name, description, supportsNesting);
 
@@ -114,7 +114,7 @@
 
         public RegistrationInvitation RedefineRegistrationInvitationAs(string invitationIdentifier)
         {
-            this.AssertStateTrue(this.Active, "Tenant is not active.");
+            AssertionConcern.AssertStateTrue(this.Active, "Tenant is not active.");
 
             RegistrationInvitation invitation = this.InvitationOf(invitationIdentifier);
 
@@ -133,7 +133,7 @@
                 Enablement enablement,
                 Person person)
         {
-            this.AssertStateTrue(this.Active, "Tenant is not active.");
+            AssertionConcern.AssertStateTrue(this.Active, "Tenant is not active.");
 
             User user = null;
 

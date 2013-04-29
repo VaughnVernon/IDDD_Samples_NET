@@ -7,6 +7,6 @@
     {
         void Add(Tenant tenant);
 
-        Tenant TenantOfId(Identity<Tenant> tenantId);
+        Tenant TenantOfId(TenantId tenantId);
     }
 }

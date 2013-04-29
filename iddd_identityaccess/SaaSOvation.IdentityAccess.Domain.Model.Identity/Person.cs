@@ -5,7 +5,7 @@
 
     public class Person : AssertionConcern
     {
-        public Person(Identity<Tenant> tenantId, FullName name, ContactInformation contactInformation)
+        public Person(TenantId tenantId, FullName name, ContactInformation contactInformation)
         {
             this.ContactInformation = contactInformation;
             this.Name = name;
@@ -24,7 +24,7 @@
 
         public FullName Name { get; private set; }
 
-        public Identity<Tenant> TenantId { get; internal set; }
+        public TenantId TenantId { get; internal set; }
 
         public User User { get; internal set; }
 

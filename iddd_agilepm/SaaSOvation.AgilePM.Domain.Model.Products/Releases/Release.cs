@@ -9,9 +9,9 @@
     public class Release : Entity
     {
         public Release(
-            Identity<Tenants.Tenant> tenantId,
-            Identity<Product> productId,
-            Identity<Release> releaseId,
+            TenantId tenantId,
+            ProductId productId,
+            ReleaseId releaseId,
             string name,
             string description,
             DateTime begins,
@@ -40,11 +40,11 @@
 
         public string Name { get; private set; }
 
-        public Identity<Product> ProductId { get; private set; }
+        public ProductId ProductId { get; private set; }
 
-        public Identity<Release> ReleaseId { get; private set; }
+        public ReleaseId ReleaseId { get; private set; }
 
-        public Identity<Tenant> TenantId;
+        public TenantId TenantId;
 
         private ISet<ScheduledBacklogItem> BacklogItems;
 

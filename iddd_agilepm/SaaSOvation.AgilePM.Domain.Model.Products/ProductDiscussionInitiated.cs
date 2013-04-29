@@ -6,7 +6,7 @@
     
     public class ProductDiscussionInitiated : DomainEvent
     {
-        public ProductDiscussionInitiated(Identity<Tenant> tenantId, Identity<Product> productId, ProductDiscussion productDiscussion)
+        public ProductDiscussionInitiated(TenantId tenantId, ProductId productId, ProductDiscussion productDiscussion)
         {
             this.EventVersion = 1;
             this.OccurredOn = DateTime.Now;
@@ -21,8 +21,8 @@
 
         public ProductDiscussion ProductDiscussion { get; private set; }
 
-        public Identity<Product> ProductId { get; private set; }
+        public ProductId ProductId { get; private set; }
 
-        public Identity<Tenant> TenantId { get; private set; }
+        public TenantId TenantId { get; private set; }
     }
 }

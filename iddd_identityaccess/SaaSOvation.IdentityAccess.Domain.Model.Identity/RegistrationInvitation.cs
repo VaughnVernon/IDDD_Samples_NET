@@ -6,7 +6,7 @@
     public class RegistrationInvitation
     {
         public RegistrationInvitation(
-            Identity<Tenant> tenantId,
+            TenantId tenantId,
             string invitationId,
             string description,
             DateTime startingOn,
@@ -19,7 +19,7 @@
             this.Until = until;
         }
 
-        public RegistrationInvitation(Identity<Tenant> tenantId, string invitationId, string description)
+        public RegistrationInvitation(TenantId tenantId, string invitationId, string description)
             : this(tenantId, invitationId, description, DateTime.MinValue, DateTime.MinValue)
         {
         }
@@ -30,7 +30,7 @@
 
         public DateTime StartingOn { get; private set; }
 
-        public Identity<Tenant> TenantId { get; private set; }
+        public TenantId TenantId { get; private set; }
 
         public DateTime Until { get; private set; }
 

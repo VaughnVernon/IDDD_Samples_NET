@@ -22,11 +22,11 @@
 
         private UserRepository UserRepository { get; set; }
 
-        public bool IsUserInRole(Identity<Tenant> tenantId, string username, string roleName)
+        public bool IsUserInRole(TenantId tenantId, string username, string roleName)
         {
-            this.AssertArgumentNotNull(tenantId, "TenantId must not be null.");
-            this.AssertArgumentNotEmpty(username, "Username must not be provided.");
-            this.AssertArgumentNotEmpty(roleName, "Role name must not be null.");
+            AssertionConcern.AssertArgumentNotNull(tenantId, "TenantId must not be null.");
+            AssertionConcern.AssertArgumentNotEmpty(username, "Username must not be provided.");
+            AssertionConcern.AssertArgumentNotEmpty(roleName, "Role name must not be null.");
 
             User user = this.UserRepository.UserWithUsername(tenantId, username);
 
@@ -35,8 +35,8 @@
 
         public bool IsUserInRole(User user, string roleName)
         {
-            this.AssertArgumentNotNull(user, "User must not be null.");
-            this.AssertArgumentNotEmpty(roleName, "Role name must not be null.");
+            AssertionConcern.AssertArgumentNotNull(user, "User must not be null.");
+            AssertionConcern.AssertArgumentNotEmpty(roleName, "Role name must not be null.");
 
             bool authorized = false;
 

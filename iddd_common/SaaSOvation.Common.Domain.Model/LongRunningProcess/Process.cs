@@ -24,7 +24,7 @@
 
         ProcessCompletionType ProcessCompletionType();
 
-        Identity<Process> ProcessId();
+        ProcessId ProcessId();
 
         DateTime StartTime();
 

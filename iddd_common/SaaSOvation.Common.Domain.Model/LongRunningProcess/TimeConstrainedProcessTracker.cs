@@ -7,7 +7,7 @@
     {
         public TimeConstrainedProcessTracker(
                 string tenantId,
-                Identity<Process> processId,
+                ProcessId processId,
                 string description,
                 DateTime originalStartTime,
                 long allowableDuration,
@@ -33,7 +33,7 @@
 
         public string Description { get; private set; }
 
-        public Identity<Process> ProcessId { get; private set; }
+        public ProcessId ProcessId { get; private set; }
 
         public bool ProcessInformedOfTimeout { get; private set; }
 

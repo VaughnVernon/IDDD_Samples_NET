@@ -60,6 +60,7 @@
     <Compile Include="SaaSOvation.IdentityAccess.Domain.Model.Identity\RegistrationInvitation.cs" />
     <Compile Include="SaaSOvation.IdentityAccess.Domain.Model.Identity\Tenant.cs" />
     <Compile Include="SaaSOvation.IdentityAccess.Domain.Model.Identity\TenantEvents.cs" />
+    <Compile Include="SaaSOvation.IdentityAccess.Domain.Model.Identity\TenantId.cs" />
     <Compile Include="SaaSOvation.IdentityAccess.Domain.Model.Identity\TenantProvisioningService.cs" />
     <Compile Include="SaaSOvation.IdentityAccess.Domain.Model.Identity\TenantRepository.cs" />
     <Compile Include="SaaSOvation.IdentityAccess.Domain.Model.Identity\User.cs" />

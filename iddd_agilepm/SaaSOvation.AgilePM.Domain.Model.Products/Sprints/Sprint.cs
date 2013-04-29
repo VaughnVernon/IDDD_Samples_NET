@@ -1,16 +1,17 @@
 ﻿namespace SaaSOvation.AgilePM.Domain.Model.Products.Sprints
 {
-    using SaaSOvation.Common.Domain.Model;
     using System;
-    using System.Collections.ObjectModel;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using SaaSOvation.AgilePM.Domain.Model.Tenants;
+    using SaaSOvation.Common.Domain.Model;
 
     public class Sprint : Entity
     {
         public Sprint(
-            Identity<Tenants.Tenant> tenantId,
-            Identity<Product> productId,
-            Identity<Sprint> sprintId,
+            TenantId tenantId,
+            ProductId productId,
+            SprintId sprintId,
             string name,
             string goals,
             DateTime begins,
@@ -39,11 +40,11 @@
 
         public string Name { get; private set; }
 
-        public Identity<Product> ProductId { get; private set; }
+        public ProductId ProductId { get; private set; }
 
-        public Identity<Sprint> SprintId { get; private set; }
+        public SprintId SprintId { get; private set; }
 
-        public Identity<Tenants.Tenant> TenantId { get; private set; }
+        public TenantId TenantId { get; private set; }
 
         private ISet<CommittedBacklogItem> BacklogItems;
 

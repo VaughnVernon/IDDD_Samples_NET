@@ -6,7 +6,7 @@
     public class User : AssertionConcern
     {
         internal User(
-                Identity<Tenant> tenantId,
+                TenantId tenantId,
                 string username,
                 string password,
                 Enablement enablement,
@@ -14,7 +14,6 @@
 
             : this()
         {
-
             this.Enablement = enablement;
             this.Person = person;
             this.TenantId = tenantId;
@@ -51,7 +50,7 @@
 
         public Person Person { get; private set; }
 
-        public Identity<Tenant> TenantId { get; private set; }
+        public TenantId TenantId { get; private set; }
 
         public UserDescriptor UserDescriptor
         {
@@ -68,11 +67,11 @@
 
         public void ChangePassword(string currentPassword, string changedPassword)
         {
-            this.AssertArgumentNotEmpty(
+            AssertionConcern.AssertArgumentNotEmpty(
                     currentPassword,
                     "Current and new password must be provided.");
 
-            this.AssertArgumentEquals(
+            AssertionConcern.AssertArgumentEquals(
                     this.Password,
                     this.AsEncryptedValue(currentPassword),
                     "Current password not confirmed.");
@@ -163,19 +162,19 @@
 
         private void AssertPasswordsNotSame(string currentPassword, string changedPassword)
         {
-            this.AssertArgumentNotEquals(currentPassword, changedPassword, "The password is unchanged.");
+            AssertionConcern.AssertArgumentNotEquals(currentPassword, changedPassword, "The password is unchanged.");
         }
 
         private void AssertPasswordNotWeak(string plainTextPassword)
         {
-            this.AssertArgumentFalse(
+            AssertionConcern.AssertArgumentFalse(
                     DomainRegistry.PasswordService.IsWeak(plainTextPassword),
                     "The password must be stronger.");
         }
 
         private void AssertUsernamePasswordNotSame(string plainTextPassword)
         {
-            this.AssertArgumentNotEquals(
+            AssertionConcern.AssertArgumentNotEquals(
                     this.Username,
                     plainTextPassword,
                     "The username and password must not be the same.");

@@ -10,7 +10,7 @@
             return new UserDescriptor();
         }
 
-        public UserDescriptor(Identity<Tenant> tenantId, string username, string emailAddress)
+        public UserDescriptor(TenantId tenantId, string username, string emailAddress)
         {
             this.EmailAddress = emailAddress;
             this.TenantId = tenantId;
@@ -23,7 +23,7 @@
 
         public string EmailAddress { get; private set; }
 
-        public Identity<Tenant> TenantId { get; private set; }
+        public TenantId TenantId { get; private set; }
 
         public string Username { get; private set; }
 

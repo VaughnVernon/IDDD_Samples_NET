@@ -1,16 +1,16 @@
 ﻿namespace SaaSOvation.AgilePM.Domain.Model.Products
 {
     using System;
-    using SaaSOvation.Common.Domain.Model;
-    using SaaSOvation.AgilePM.Domain.Model.Tenants;
     using SaaSOvation.AgilePM.Domain.Model.Teams;
+    using SaaSOvation.AgilePM.Domain.Model.Tenants;
+    using SaaSOvation.Common.Domain.Model;
 
-    class ProductDiscussionRequested : DomainEvent
+    public class ProductDiscussionRequested : DomainEvent
     {
         public ProductDiscussionRequested(
-            Identity<Tenant> tenantId,
-            Identity<Product> productId,
-            Identity<ProductOwner> productOwnerId,
+            TenantId tenantId,
+            ProductId productId,
+            ProductOwnerId productOwnerId,
             string name,
             string description,
             bool requestingDiscussion)
@@ -33,12 +33,12 @@
 
         public DateTime OccurredOn { get; set; }
 
-        public Identity<Product> ProductId { get; private set; }
+        public ProductId ProductId { get; private set; }
 
-        public Identity<ProductOwner> ProductOwnerId { get; private set; }
+        public ProductOwnerId ProductOwnerId { get; private set; }
 
         public bool RequestingDiscussion { get; private set; }
 
-        public Identity<Tenant> TenantId { get; private set; }
+        public TenantId TenantId { get; private set; }
     }
 }

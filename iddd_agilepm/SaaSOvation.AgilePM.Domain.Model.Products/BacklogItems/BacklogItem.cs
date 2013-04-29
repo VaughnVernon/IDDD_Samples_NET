@@ -7,9 +7,9 @@
     public class BacklogItem : Entity
     {
         public BacklogItem(
-            Identity<Tenant> tenantId,
-            Identity<Product> productId,
-            Identity<BacklogItem> backlogItemId,
+            TenantId tenantId,
+            ProductId productId,
+            BacklogItemId backlogItemId,
             string summary,
             string category,
             BacklogItemType type,
@@ -26,11 +26,11 @@
             this.Type = type;
         }
 
-        public Identity<BacklogItem> BacklogItemId { get; private set; }
+        public BacklogItemId BacklogItemId { get; private set; }
 
         public string Category { get; private set; }
 
-        public Identity<Product> ProductId { get; private set; }
+        public ProductId ProductId { get; private set; }
 
         private BacklogItemStatus Status;
 
@@ -38,7 +38,7 @@
 
         public string Summary { get; private set; }
 
-        public Identity<Tenant> TenantId { get; private set; }
+        public TenantId TenantId { get; private set; }
 
         public BacklogItemType Type { get; private set; }
 

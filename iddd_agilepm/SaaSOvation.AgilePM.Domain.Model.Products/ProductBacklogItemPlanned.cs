@@ -3,13 +3,14 @@
     using System;
     using SaaSOvation.Common.Domain.Model;
     using SaaSOvation.AgilePM.Domain.Model.Products.BacklogItems;
+    using SaaSOvation.AgilePM.Domain.Model.Tenants;
 
     public class ProductBacklogItemPlanned : DomainEvent
     {
         public ProductBacklogItemPlanned(
-            Identity<Tenants.Tenant> tenantId,
-            Identity<Product> productId,
-            Identity<BacklogItems.BacklogItem> backlogItemId,
+            TenantId tenantId,
+            ProductId productId,
+            BacklogItemId backlogItemId,
             string summary,
             string category,
             BacklogItems.BacklogItemType backlogItemType,
@@ -26,7 +27,7 @@
             this.Type = backlogItemType;
         }
 
-        public Identity<BacklogItems.BacklogItem> BacklogItemId { get; private set; }
+        public BacklogItemId BacklogItemId { get; private set; }
 
         public string Category { get; private set; }
 
@@ -34,13 +35,13 @@
 
         public DateTime OccurredOn { get; set; }
 
-        public Identity<Product> ProductId { get; private set; }
+        public ProductId ProductId { get; private set; }
 
         public StoryPoints StoryPoints { get; private set; }
 
         public string Summary { get; private set; }
 
-        public Identity<Tenants.Tenant> TenantId { get; private set; }
+        public TenantId TenantId { get; private set; }
 
         public BacklogItemType Type { get; private set; }
     }

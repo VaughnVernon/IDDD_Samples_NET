@@ -6,7 +6,7 @@
 
     public class Role : AssertionConcern
     {
-        public Role(Identity<Tenant> tenantId, string name, string description, bool supportsNesting)
+        public Role(TenantId tenantId, string name, string description, bool supportsNesting)
         {
             this.Description = description;
             this.Name = name;
@@ -22,15 +22,15 @@
 
         public bool SupportsNesting { get; private set; }
 
-        public Identity<Tenant> TenantId { get; private set; }
+        public TenantId TenantId { get; private set; }
 
         private Group Group { get; set; }
 
         public void AssignGroup(Group group, GroupMemberService groupMemberService)
         {
-            this.AssertStateTrue(this.SupportsNesting, "This role does not support group nesting.");
-            this.AssertArgumentNotNull(group, "Group must not be null.");
-            this.AssertArgumentEquals(this.TenantId, group.TenantId, "Wrong tenant for this group.");
+            AssertionConcern.AssertStateTrue(this.SupportsNesting, "This role does not support group nesting.");
+            AssertionConcern.AssertArgumentNotNull(group, "Group must not be null.");
+            AssertionConcern.AssertArgumentEquals(this.TenantId, group.TenantId, "Wrong tenant for this group.");
 
             this.Group.AddGroup(group, groupMemberService);
 
@@ -44,8 +44,8 @@
 
         public void AssignUser(User user)
         {
-            this.AssertArgumentNotNull(user, "User must not be null.");
-            this.AssertArgumentEquals(this.TenantId, user.TenantId, "Wrong tenant for this user.");
+            AssertionConcern.AssertArgumentNotNull(user, "User must not be null.");
+            AssertionConcern.AssertArgumentEquals(this.TenantId, user.TenantId, "Wrong tenant for this user.");
 
             this.Group.AddUser(user);
 
@@ -67,9 +67,9 @@
 
         public void UnassignGroup(Group group)
         {
-            this.AssertStateTrue(this.SupportsNesting, "This role does not support group nesting.");
-            this.AssertArgumentNotNull(group, "Group must not be null.");
-            this.AssertArgumentEquals(this.TenantId, group.TenantId, "Wrong tenant for this group.");
+            AssertionConcern.AssertStateTrue(this.SupportsNesting, "This role does not support group nesting.");
+            AssertionConcern.AssertArgumentNotNull(group, "Group must not be null.");
+            AssertionConcern.AssertArgumentEquals(this.TenantId, group.TenantId, "Wrong tenant for this group.");
 
             this.Group.RemoveGroup(group);
 
@@ -83,8 +83,8 @@
 
         public void UnassignUser(User user)
         {
-            this.AssertArgumentNotNull(user, "User must not be null.");
-            this.AssertArgumentEquals(this.TenantId, user.TenantId, "Wrong tenant for this user.");
+            AssertionConcern.AssertArgumentNotNull(user, "User must not be null.");
+            AssertionConcern.AssertArgumentEquals(this.TenantId, user.TenantId, "Wrong tenant for this user.");
 
             this.Group.RemoveUser(user);
 

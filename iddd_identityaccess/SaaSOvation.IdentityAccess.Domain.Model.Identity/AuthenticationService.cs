@@ -22,13 +22,13 @@
         private UserRepository UserRepository { get; set; }
 
         public UserDescriptor Authenticate(
-                Identity<Tenant> tenantId,
+                TenantId tenantId,
                 string username,
                 string password)
         {
-            this.AssertArgumentNotNull(tenantId, "TenantId must not be null.");
-            this.AssertArgumentNotEmpty(username, "Username must be provided.");
-            this.AssertArgumentNotEmpty(password, "Password must be provided.");
+            AssertionConcern.AssertArgumentNotNull(tenantId, "TenantId must not be null.");
+            AssertionConcern.AssertArgumentNotEmpty(username, "Username must be provided.");
+            AssertionConcern.AssertArgumentNotEmpty(password, "Password must be provided.");
 
             UserDescriptor userDescriptor = UserDescriptor.NullDescriptorInstance();
 

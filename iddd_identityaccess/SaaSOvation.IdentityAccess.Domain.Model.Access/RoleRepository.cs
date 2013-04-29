@@ -8,6 +8,6 @@
     {
         void Add(Role role);
 
-        Role RoleNamed(Identity<Tenant> identity, string roleName);
+        Role RoleNamed(TenantId identity, string roleName);
     }
 }

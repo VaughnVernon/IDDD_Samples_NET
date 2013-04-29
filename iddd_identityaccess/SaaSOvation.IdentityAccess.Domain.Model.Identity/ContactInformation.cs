@@ -137,9 +137,9 @@
 
             set
             {
-                this.AssertArgumentNotEmpty(value, "The email address is required.");
-                this.AssertArgumentLength(value, 1, 100, "Email address must be 100 characters or less.");
-                this.AssertArgumentMatches(
+                AssertionConcern.AssertArgumentNotEmpty(value, "The email address is required.");
+                AssertionConcern.AssertArgumentLength(value, 1, 100, "Email address must be 100 characters or less.");
+                AssertionConcern.AssertArgumentMatches(
                         "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*",
                         value,
                         "Email address format is invalid.");
@@ -276,9 +276,9 @@
 
             set
             {
-                this.AssertArgumentNotEmpty(value, "Telephone number is required.");
-                this.AssertArgumentLength(value, 5, 20, "Telephone number may not be more than 20 characters.");
-                this.AssertArgumentMatches(
+                AssertionConcern.AssertArgumentNotEmpty(value, "Telephone number is required.");
+                AssertionConcern.AssertArgumentLength(value, 5, 20, "Telephone number may not be more than 20 characters.");
+                AssertionConcern.AssertArgumentMatches(
                         "((\\(\\d{3}\\))|(\\d{3}-))\\d{3}-\\d{4}",
                         value,
                         "Telephone number or its format is invalid.");

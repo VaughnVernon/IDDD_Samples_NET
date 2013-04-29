@@ -8,9 +8,9 @@
     public class ProductReleaseScheduled : DomainEvent
     {
         public ProductReleaseScheduled(
-            Identity<Tenant> tenantId,
-            Identity<Product> productId,
-            Identity<Release> releaseId,
+            TenantId tenantId,
+            ProductId productId,
+            ReleaseId releaseId,
             string name,
             string description,
             DateTime starts,
@@ -37,12 +37,12 @@
 
         public DateTime OccurredOn { get; set; }
 
-        public Identity<Product> ProductId { get; private set; }
+        public ProductId ProductId { get; private set; }
 
-        public Identity<Release> ReleaseId { get; private set; }
+        public ReleaseId ReleaseId { get; private set; }
 
         public DateTime Starts { get; private set; }
 
-        public Identity<Tenant> TenantId { get; private set; }
+        public TenantId TenantId { get; private set; }
     }
 }

@@ -6,7 +6,7 @@
     public class PersonContactInformationChanged : DomainEvent
     {
         public PersonContactInformationChanged(
-                Identity<Tenant> tenantId,
+                TenantId tenantId,
                 String username,
                 ContactInformation contactInformation)
         {
@@ -31,7 +31,7 @@
     public class PersonNameChanged : DomainEvent
     {
         public PersonNameChanged(
-                Identity<Tenant> tenantId,
+                TenantId tenantId,
                 String username,
                 FullName name)
         {
@@ -56,7 +56,7 @@
     public class UserEnablementChanged : DomainEvent
     {
         public UserEnablementChanged(
-                Identity<Tenant> tenantId,
+                TenantId tenantId,
                 String username,
                 Enablement enablement)
         {
@@ -81,7 +81,7 @@
     public class UserPasswordChanged : DomainEvent
     {
         public UserPasswordChanged(
-                Identity<Tenant> tenantId,
+                TenantId tenantId,
                 String username)
         {
             this.EventVersion = 1;
@@ -102,7 +102,7 @@
     public class UserRegistered : DomainEvent
     {
         public UserRegistered(
-                Identity<Tenant> tenantId,
+                TenantId tenantId,
                 String username,
                 FullName name,
                 EmailAddress emailAddress)

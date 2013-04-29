@@ -7,7 +7,7 @@
 
     public class GroupMember : AssertionConcern
     {
-        internal GroupMember(Identity<Tenant> tenantId, string name, GroupMemberType type)
+        internal GroupMember(TenantId tenantId, string name, GroupMemberType type)
         {
             this.Name = name;
             this.TenantId = tenantId;
@@ -20,7 +20,7 @@
 
         public string Name { get; private set; }
 
-        public Identity<Tenant> TenantId { get; private set; }
+        public TenantId TenantId { get; private set; }
 
         private GroupMemberType _type;
         public GroupMemberType Type
@@ -32,7 +32,7 @@
             
             private set
             {
-                this.AssertArgumentNotNull(value, "Type must be provided");
+                AssertionConcern.AssertArgumentNotNull(value, "Type must be provided");
                 this._type = value;
             }
         }

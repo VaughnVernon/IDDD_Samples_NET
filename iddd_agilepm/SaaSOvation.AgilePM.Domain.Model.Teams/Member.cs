@@ -7,7 +7,7 @@
     public class Member
     {
         protected Member(
-            Identity<Tenant> tenantId,
+            TenantId tenantId,
             string username,
             string firstName,
             string lastName,
@@ -29,7 +29,7 @@
 
         public string LastName { get; private set; }
 
-        public Identity<Tenant> TenantId { get; private set; }
+        public TenantId TenantId { get; private set; }
 
         public string Username { get; private set; }
 

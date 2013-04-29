@@ -14,9 +14,9 @@
     public class Product : Entity
     {
         public Product(
-                Identity<Tenant> tenantId,
-                Identity<Product> productId,
-                Identity<ProductOwner> productOwnerId,
+                TenantId tenantId,
+                ProductId productId,
+                ProductOwnerId productOwnerId,
                 string name,
                 string description,
                 DiscussionAvailability discussionAvailability)
@@ -48,11 +48,11 @@
 
         public string Name { get; private set; }
 
-        public Identity<Product> ProductId { get; private set; }
+        public ProductId ProductId { get; private set; }
 
-        public Identity<ProductOwner> ProductOwnerId { get; private set; }
+        public ProductOwnerId ProductOwnerId { get; private set; }
 
-        public Identity<Tenant> TenantId { get; private set; }
+        public TenantId TenantId { get; private set; }
 
         private ISet<ProductBacklogItem> BacklogItems { get; set; }
 
@@ -102,7 +102,7 @@
         }
 
         public BacklogItems.BacklogItem PlanBacklogItem(
-                Identity<BacklogItems.BacklogItem> newBacklogItemId,
+                BacklogItemId newBacklogItemId,
                 String summary,
                 String category,
                 BacklogItemType type,
@@ -135,8 +135,8 @@
 
         public void PlannedProductBacklogItem(BacklogItem backlogItem)
         {
-            this.AssertArgumentEquals(this.TenantId, backlogItem.TenantId, "The product and backlog item must have same tenant.");
-            this.AssertArgumentEquals(this.ProductId, backlogItem.ProductId, "The backlog item must belong to product.");
+            AssertionConcern.AssertArgumentEquals(this.TenantId, backlogItem.TenantId, "The product and backlog item must have same tenant.");
+            AssertionConcern.AssertArgumentEquals(this.ProductId, backlogItem.ProductId, "The backlog item must belong to product.");
 
             int ordering = this.BacklogItems.Count + 1;
 
@@ -150,7 +150,7 @@
             this.BacklogItems.Add(productBacklogItem);
         }
 
-        public void ReorderFrom(Identity<BacklogItem> id, int ordering)
+        public void ReorderFrom(BacklogItemId id, int ordering)
         {
             foreach (ProductBacklogItem productBacklogItem in this.BacklogItems)
             {
@@ -178,7 +178,7 @@
         }
 
         public Release ScheduleRelease(
-                Identity<Release> newReleaseId,
+                ReleaseId newReleaseId,
                 String name,
                 String description,
                 DateTime begins,
@@ -209,7 +209,7 @@
         }
 
         public Sprint ScheduleSprint(
-                Identity<Sprint> newSprintId,
+                SprintId newSprintId,
                 String name,
                 String goals,
                 DateTime begins,

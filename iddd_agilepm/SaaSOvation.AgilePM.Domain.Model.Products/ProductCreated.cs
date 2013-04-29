@@ -9,9 +9,9 @@
     public class ProductCreated : DomainEvent
     {
         public ProductCreated(
-            Identity<Tenant> tenantId,
-            Identity<Product> productId,
-            Identity<ProductOwner> productOwnerId,
+            TenantId tenantId,
+            ProductId productId,
+            ProductOwnerId productOwnerId,
             string name,
             string description,
             DiscussionAvailability availability)
@@ -36,10 +36,10 @@
 
         public DateTime OccurredOn { get; set; }
 
-        public Identity<Product> ProductId { get; private set; }
+        public ProductId ProductId { get; private set; }
 
-        public Identity<ProductOwner> ProductOwnerId { get; private set; }
+        public ProductOwnerId ProductOwnerId { get; private set; }
 
-        public Identity<Tenant> TenantId { get; private set; }
+        public TenantId TenantId { get; private set; }
     }
 }

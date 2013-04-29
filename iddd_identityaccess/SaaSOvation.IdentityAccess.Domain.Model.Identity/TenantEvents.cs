@@ -6,7 +6,7 @@
     public class TenantAdministratorRegistered : DomainEvent
     {
         public TenantAdministratorRegistered(
-            Identity<Tenant> tenantId,
+            TenantId tenantId,
             string name,
             FullName administorName,
             EmailAddress emailAddress,
@@ -36,7 +36,7 @@
 
     public class GroupProvisioned : DomainEvent
     {
-        public GroupProvisioned(Identity<Tenant> tenantId, string name)
+        public GroupProvisioned(TenantId tenantId, string name)
         {
             this.EventVersion = 1;
             this.Name = name;
@@ -55,7 +55,7 @@
 
     public class TenantActivated : DomainEvent
     {
-        public TenantActivated(Identity<Tenant> tenantId)
+        public TenantActivated(TenantId tenantId)
         {
             this.EventVersion = 1;
             this.OccurredOn = new DateTime();
@@ -71,7 +71,7 @@
 
     public class TenantDeactivated : DomainEvent
     {
-        public TenantDeactivated(Identity<Tenant> tenantId)
+        public TenantDeactivated(TenantId tenantId)
         {
             this.EventVersion = 1;
             this.OccurredOn = new DateTime();
@@ -87,7 +87,7 @@
 
     public class TenantProvisioned : DomainEvent
     {
-        public TenantProvisioned(Identity<Tenant> tenantId)
+        public TenantProvisioned(TenantId tenantId)
         {
             this.EventVersion = 1;
             this.OccurredOn = new DateTime();

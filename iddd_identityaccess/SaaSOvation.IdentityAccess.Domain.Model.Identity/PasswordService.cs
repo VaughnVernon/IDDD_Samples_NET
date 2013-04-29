@@ -79,7 +79,7 @@
 
         private int CalculatePasswordStrength(String plainTextPassword)
         {
-            this.AssertArgumentNotNull(plainTextPassword, "Password strength cannot be tested on null.");
+            AssertionConcern.AssertArgumentNotNull(plainTextPassword, "Password strength cannot be tested on null.");
 
             int strength = 0;
 

@@ -5,7 +5,7 @@
 
     public class InvitationDescriptor
     {
-        public InvitationDescriptor(Identity<Tenant> tenantId, string invitationId, string description, DateTime startingOn, DateTime until)
+        public InvitationDescriptor(TenantId tenantId, string invitationId, string description, DateTime startingOn, DateTime until)
         {
             this.Description = description;
             this.InvitationId = invitationId;

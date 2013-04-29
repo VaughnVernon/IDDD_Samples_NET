@@ -47,6 +47,7 @@
     <Compile Include="SaaSOvation.Common.Domain.Model\DomainEventSubscriber.cs" />
     <Compile Include="SaaSOvation.Common.Domain.Model\Identity.cs" />
     <Compile Include="SaaSOvation.Common.Domain.Model\LongRunningProcess\Process.cs" />
+    <Compile Include="SaaSOvation.Common.Domain.Model\LongRunningProcess\ProcessId.cs" />
     <Compile Include="SaaSOvation.Common.Domain.Model\LongRunningProcess\ProcessTimedOut.cs" />
     <Compile Include="SaaSOvation.Common.Domain.Model\LongRunningProcess\TimeConstrainedProcessTracker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

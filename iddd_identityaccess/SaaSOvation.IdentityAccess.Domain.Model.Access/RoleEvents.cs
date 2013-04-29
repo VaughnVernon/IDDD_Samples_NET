@@ -6,7 +6,7 @@
 
     public class GroupAssignedToRole : DomainEvent
     {
-        public GroupAssignedToRole(Identity<Identity.Tenant> tenantId, string roleName, string groupName)
+        public GroupAssignedToRole(TenantId tenantId, string roleName, string groupName)
         {
             this.EventVersion = 1;
             this.GroupName = groupName;
@@ -23,12 +23,12 @@
 
         public string RoleName { get; private set; }
 
-        public Identity<Tenant> TenantId;
+        public TenantId TenantId;
     }
 
     public class GroupUnassignedFromRole : DomainEvent
     {
-        public GroupUnassignedFromRole(Identity<Identity.Tenant> tenantId, string roleName, string groupName)
+        public GroupUnassignedFromRole(TenantId tenantId, string roleName, string groupName)
         {
             this.EventVersion = 1;
             this.GroupName = groupName;
@@ -45,12 +45,12 @@
 
         public string RoleName { get; private set; }
 
-        public Identity<Tenant> TenantId;
+        public TenantId TenantId;
     }
 
     public class RoleProvisioned : DomainEvent
     {
-        public RoleProvisioned(Identity<Tenant> tenantId, string name)
+        public RoleProvisioned(TenantId tenantId, string name)
         {
             this.EventVersion = 1;
             this.Name = name;
@@ -70,7 +70,7 @@
     public class UserAssignedToRole : DomainEvent
     {
         public UserAssignedToRole(
-            Identity<Identity.Tenant> tenantId,
+            TenantId tenantId,
             string roleName,
             string username,
             string firstName,
@@ -99,14 +99,14 @@
 
         public string RoleName { get; private set; }
 
-        public Identity<Tenant> TenantId;
+        public TenantId TenantId;
 
         public string Username { get; private set; }
     }
 
     public class UserUnassignedFromRole : DomainEvent
     {
-        public UserUnassignedFromRole(Identity<Identity.Tenant> tenantId, string roleName, string username)
+        public UserUnassignedFromRole(TenantId tenantId, string roleName, string username)
         {
             this.EventVersion = 1;
             this.OccurredOn = new DateTime();
@@ -123,6 +123,6 @@
 
         public string RoleName { get; private set; }
 
-        public Identity<Tenant> TenantId;
+        public TenantId TenantId;
     }
 }
