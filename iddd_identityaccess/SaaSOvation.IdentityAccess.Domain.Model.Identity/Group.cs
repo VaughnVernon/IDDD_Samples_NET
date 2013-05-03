@@ -18,7 +18,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
     using SaaSOvation.Common.Domain.Model;
     using System.Collections.Generic;
 
-    public class Group : AssertionConcern
+    public class Group
     {
         public const string ROLE_GROUP_PREFIX = "ROLE-INTERNAL-GROUP: ";
 

@@ -19,7 +19,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
 
     public enum GroupMemberType { Group, User }
 
-    public class GroupMember : AssertionConcern
+    public class GroupMember
     {
         internal GroupMember(TenantId tenantId, string name, GroupMemberType type)
         {

@@ -17,7 +17,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
     using System;
     using SaaSOvation.Common.Domain.Model;
 
-    public class AuthenticationService : AssertionConcern
+    public class AuthenticationService
     {
         public AuthenticationService(
                 TenantRepository tenantRepository,

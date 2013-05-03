@@ -125,7 +125,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
         }
     }
 
-    public class EmailAddress : AssertionConcern
+    public class EmailAddress
     {
         public EmailAddress(String address)
         {
@@ -189,7 +189,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
         }
     }
 
-    public class PostalAddress : AssertionConcern
+    public class PostalAddress
     {
         public PostalAddress(
                 String streetAddress,
@@ -264,7 +264,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
         }
     }
 
-    public class Telephone : AssertionConcern
+    public class Telephone
     {
         public Telephone(String number)
         {

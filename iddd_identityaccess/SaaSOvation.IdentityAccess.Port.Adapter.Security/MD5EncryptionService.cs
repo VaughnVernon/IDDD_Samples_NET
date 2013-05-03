@@ -20,7 +20,7 @@ namespace SaaSOvation.IdentityAccess.Port.Adapter.Security
     using SaaSOvation.IdentityAccess.Domain.Model.Identity;
     using SaaSOvation.Common.Domain.Model;
 
-    public class MD5EncryptionService : AssertionConcern, EncryptionService
+    public class MD5EncryptionService : EncryptionService
     {
         public MD5EncryptionService()
         {

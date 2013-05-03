@@ -17,7 +17,7 @@ namespace SaaSOvation.Common.Domain.Model.LongRunningProcess
     using System;
     using System.Reflection;
 
-    public class TimeConstrainedProcessTracker : AssertionConcern
+    public class TimeConstrainedProcessTracker
     {
         public TimeConstrainedProcessTracker(
                 string tenantId,

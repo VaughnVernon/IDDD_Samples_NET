@@ -17,7 +17,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
     using System;
     using SaaSOvation.Common.Domain.Model;
 
-    public class PasswordService : AssertionConcern
+    public class PasswordService
     {
         private const string DIGITS = "0123456789";
         private const string LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";

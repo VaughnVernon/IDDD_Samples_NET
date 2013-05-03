@@ -17,7 +17,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
     using System;
     using SaaSOvation.Common.Domain.Model;
 
-    public class FullName : AssertionConcern
+    public class FullName
     {
         public FullName(string firstName, string lastName)
         {

@@ -14,11 +14,10 @@
 
 namespace SaaSOvation.IdentityAccess.Domain.Model.Access
 {
-    using System;
     using SaaSOvation.Common.Domain.Model;
     using SaaSOvation.IdentityAccess.Domain.Model.Identity;
 
-    public class AuthorizationService : AssertionConcern
+    public class AuthorizationService
     {
         public AuthorizationService(
                 UserRepository userRepository,

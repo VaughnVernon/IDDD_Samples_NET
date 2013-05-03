@@ -17,7 +17,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
     using System;
     using SaaSOvation.Common.Domain.Model;
 
-    public class Person : AssertionConcern
+    public class Person
     {
         public Person(TenantId tenantId, FullName name, ContactInformation contactInformation)
         {

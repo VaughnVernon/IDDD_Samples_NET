@@ -19,7 +19,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
     using SaaSOvation.Common.Domain.Model;
     using SaaSOvation.IdentityAccess.Domain.Model.Access;
 
-    public class Tenant : AssertionConcern
+    public class Tenant
     {
         public Tenant(string name, string description, bool active)
         {

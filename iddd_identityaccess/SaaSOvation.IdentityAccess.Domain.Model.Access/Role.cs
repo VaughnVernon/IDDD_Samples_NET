@@ -18,7 +18,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Access
     using SaaSOvation.Common.Domain.Model;
     using SaaSOvation.IdentityAccess.Domain.Model.Identity;
 
-    public class Role : AssertionConcern
+    public class Role
     {
         public Role(TenantId tenantId, string name, string description, bool supportsNesting)
         {

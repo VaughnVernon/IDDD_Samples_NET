@@ -14,10 +14,7 @@
 
 namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
 {
-    using System;
-    using SaaSOvation.Common.Domain.Model;
-
-    public class UserDescriptor : AssertionConcern
+    public class UserDescriptor
     {
         public static UserDescriptor NullDescriptorInstance()
         {
