@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iddd_collaboration", "iddd_
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iddd_identityaccess", "iddd_identityaccess\iddd_identityaccess.csproj", "{FE7CF2BC-5070-4CC7-AB31-4E7F12AA65BF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaaSOvation.IdentityAccess.Tests", "src\SaaSOvation.IdentityAccess.Tests\SaaSOvation.IdentityAccess.Tests.csproj", "{73E94CFE-8AC4-4B97-9BB8-4D2959E3962E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{FE7CF2BC-5070-4CC7-AB31-4E7F12AA65BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE7CF2BC-5070-4CC7-AB31-4E7F12AA65BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE7CF2BC-5070-4CC7-AB31-4E7F12AA65BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73E94CFE-8AC4-4B97-9BB8-4D2959E3962E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73E94CFE-8AC4-4B97-9BB8-4D2959E3962E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73E94CFE-8AC4-4B97-9BB8-4D2959E3962E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73E94CFE-8AC4-4B97-9BB8-4D2959E3962E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
