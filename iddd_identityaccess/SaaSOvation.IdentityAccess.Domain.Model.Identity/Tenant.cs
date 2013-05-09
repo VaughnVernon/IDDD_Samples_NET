@@ -86,7 +86,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
         public RegistrationInvitation OfferRegistrationInvitation(string description)
         {
             AssertionConcern.AssertStateTrue(this.Active, "Tenant is not active.");
-            AssertionConcern.AssertArgumentTrue(this.IsRegistrationAvailableThrough(description), "Invitation already exists.");
+            AssertionConcern.AssertArgumentFalse(this.IsRegistrationAvailableThrough(description), "Invitation already exists.");
 
             RegistrationInvitation invitation =
                 new RegistrationInvitation(
