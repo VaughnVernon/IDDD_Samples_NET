@@ -2,8 +2,11 @@
 {
     using System;
 
+    using NUnit.Framework;
+
     using SaaSOvation.IdentityAccess.Domain.Model.Identity;
 
+    [TestFixture]
     public abstract class IdentityAccessTest
     {
         protected static readonly string FIXTURE_PASSWORD = "SecretPassword!";
@@ -49,6 +52,13 @@
             {
                 return DateTime.Now.AddDays(1);
             }
+        }
+
+        [TearDown]
+        protected virtual void TearDown()
+        {
+            this.tenantAggregate = null;
+            TestDomainRegistry.Reset();
         }
     }
 }

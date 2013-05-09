@@ -45,5 +45,12 @@
         {
             get { return tenantRepository ?? (tenantRepository = new InMemoryTenantRepository()); }
         }
+
+        public static void Reset()
+        {
+            roleRepository = null;
+            userRepository = null;
+            tenantRepository = null;
+        }
     }
 }
