@@ -36,11 +36,11 @@
         {
             var tenant = this.TenantAggregate;
 
-            tenant.OfferRegistrationInvitation("Today-and-Tommorow")
+            tenant.OfferRegistrationInvitation("Today-and-Tomorrow")
                   .WillStartOn(this.Today)
                   .LastingUntil(this.Tomorrow);
 
-            Assert.IsTrue(tenant.IsRegistrationAvailableThrough("Today-and-Tommorow"));
+            Assert.IsTrue(tenant.IsRegistrationAvailableThrough("Today-and-Tomorrow"));
         }
     }
 }
