@@ -76,6 +76,7 @@
             Assert.AreEqual(2, tenant.AllAvailableRegistrationInvitations().Count);
         }
 
+        [Test]
         public void UnavailableInvitationDescriptor()
         {
             var tenant = this.TenantAggregate;
