@@ -91,7 +91,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
             RegistrationInvitation invitation =
                 new RegistrationInvitation(
                         this.TenantId,
-                        new Guid().ToString(),
+                        Guid.NewGuid().ToString(),
                         description);
 
             AssertionConcern.AssertStateTrue(this.RegistrationInvitations.Add(invitation), "The invitation should have been added.");
