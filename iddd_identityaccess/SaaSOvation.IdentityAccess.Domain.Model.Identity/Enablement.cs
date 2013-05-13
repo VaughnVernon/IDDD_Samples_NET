@@ -23,7 +23,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
             return new Enablement(true, DateTime.MinValue, DateTime.MinValue);
         }
 
-        public Enablement(bool enabled, DateTime startDate, DateTime endDate)
+        public Enablement(bool enabled, DateTime? startDate, DateTime? endDate)
         {
             if (startDate > endDate)
             {
@@ -31,8 +31,8 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
             }
 
             this.Enabled = enabled;
-            this.EndDate = endDate;
-            this.StartDate = startDate;
+            this.EndDate = endDate.GetValueOrDefault(DateTime.MaxValue);
+            this.StartDate = startDate.GetValueOrDefault(DateTime.MinValue);
         }
 
         public bool Enabled { get; private set; }

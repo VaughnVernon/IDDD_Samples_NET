@@ -50,7 +50,27 @@
         {
             get
             {
-                return DateTime.Now.AddDays(1);
+                return this.Today.AddDays(1);
+            }
+        }
+
+        protected DateTime DayAfterTomorrow
+        {
+            get
+            {
+                return this.Tomorrow.AddDays(1);
+            }
+        }
+
+        protected ContactInformation ContactInformation
+        {
+            get
+            {
+                return new ContactInformation(
+                    new EmailAddress(FIXTURE_USER_EMAIL_ADDRESS),
+                    new PostalAddress("123 Pearl Street", "Boulder", "CO", "80301", "US"),
+                    new Telephone("303-555-1210"),
+                    new Telephone("303-555-1212"));
             }
         }
 
@@ -59,6 +79,28 @@
         {
             this.tenantAggregate = null;
             TestDomainRegistry.Reset();
+        }
+
+        protected RegistrationInvitation RegistrationInvitationEntity(Tenant tenant)
+        {
+            RegistrationInvitation registrationInvitation =
+                tenant
+                    .OfferRegistrationInvitation("Today-and-Tomorrow: " + DateTime.Now.Ticks)
+                    .WillStartOn(this.Today)
+                    .LastingUntil(this.Tomorrow);
+
+            return registrationInvitation;
+        }
+
+        protected Person PersonEntity(Tenant tenant)
+        {
+            Person person =
+                new Person(
+                    tenant.TenantId,
+                    new FullName("John", "Doe"),
+                    this.ContactInformation);
+
+            return person;
         }
     }
 }
