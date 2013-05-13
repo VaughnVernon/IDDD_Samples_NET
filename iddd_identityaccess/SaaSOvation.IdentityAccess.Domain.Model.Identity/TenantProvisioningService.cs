@@ -25,14 +25,14 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
                 UserRepository userRepository,
                 RoleRepository roleRepository)
         {
-            this.RoleRepository = roleRepository;
-            this.TenantRepository = tenantRepository;
-            this.UserRepository = userRepository;
+            this.roleRepository = roleRepository;
+            this.tenantRepository = tenantRepository;
+            this.userRepository = userRepository;
         }
 
-        private RoleRepository RoleRepository { get; set; }
-        private TenantRepository TenantRepository { get; set; }
-        private UserRepository UserRepository { get; set; }
+        readonly RoleRepository roleRepository;
+        readonly TenantRepository tenantRepository;
+        readonly UserRepository userRepository;
 
         public Tenant ProvisionTenant(
                 String tenantName,
@@ -46,17 +46,11 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
             try
             {
                 // must be active to register admin
-                Tenant tenant = new Tenant(tenantName, tenantDescription, true);
+                var tenant = new Tenant(tenantName, tenantDescription, true);
 
-                this.TenantRepository.Add(tenant);
+                this.tenantRepository.Add(tenant);
 
-                this.RegisterAdministratorFor(
-                        tenant,
-                        administorName,
-                        emailAddress,
-                        postalAddress,
-                        primaryTelephone,
-                        secondaryTelephone);
+                RegisterAdministratorFor(tenant, administorName, emailAddress, postalAddress, primaryTelephone, secondaryTelephone);
 
                 DomainEventPublisher.Instance.Publish(new TenantProvisioned(tenant.TenantId));
 
@@ -71,20 +65,13 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
             }
         }
 
-        private void RegisterAdministratorFor(
-                Tenant tenant,
-                FullName administorName,
-                EmailAddress emailAddress,
-                PostalAddress postalAddress,
-                Telephone primaryTelephone,
-                Telephone secondaryTelephone)
+        void RegisterAdministratorFor(Tenant tenant, FullName administorName, EmailAddress emailAddress, PostalAddress postalAddress, Telephone primaryTelephone, Telephone secondaryTelephone)
         {
-            RegistrationInvitation invitation =
-                    tenant.OfferRegistrationInvitation("init").OpenEnded();
+            var invitation = tenant.OfferRegistrationInvitation("init").OpenEnded();
 
-            String strongPassword = new PasswordService().GenerateStrongPassword();
+            var strongPassword = new PasswordService().GenerateStrongPassword();
 
-            User admin =
+            var admin =
                 tenant.RegisterUser(
                         invitation.InvitationId,
                         "admin",
@@ -101,26 +88,15 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
 
             tenant.WithdrawInvitation(invitation.InvitationId);
 
-            this.UserRepository.Add(admin);
+            this.userRepository.Add(admin);
 
-            Role adminRole =
-                tenant.ProvisionRole(
-                        "Administrator",
-                        "Default " + tenant.Name + " administrator.");
+            var adminRole = tenant.ProvisionRole("Administrator", "Default " + tenant.Name + " administrator.");
 
             adminRole.AssignUser(admin);
 
-            this.RoleRepository.Add(adminRole);
+            this.roleRepository.Add(adminRole);
 
-            DomainEventPublisher
-                .Instance
-                .Publish(new TenantAdministratorRegistered(
-                            tenant.TenantId,
-                            tenant.Name,
-                            administorName,
-                            emailAddress,
-                            admin.Username,
-                            strongPassword));
+            DomainEventPublisher.Instance.Publish(new TenantAdministratorRegistered(tenant.TenantId, tenant.Name, administorName, emailAddress, admin.Username, strongPassword));
         }
     }
 }

@@ -56,7 +56,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
             return enabled;
         }
 
-        public bool IsTimeExpired()
+        bool IsTimeExpired()
         {
             bool timeExpired = false;
 

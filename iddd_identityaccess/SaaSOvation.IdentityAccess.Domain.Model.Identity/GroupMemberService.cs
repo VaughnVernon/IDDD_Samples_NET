@@ -15,58 +15,42 @@
 namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
 {
     using System;
+    using System.Linq;
 
     public class GroupMemberService
     {
-        public GroupMemberService(
-                UserRepository userRepository,
-                GroupRepository groupRepository)
+        public GroupMemberService(UserRepository userRepository, GroupRepository groupRepository)
         {
-            this.GroupRepository = groupRepository;
-            this.UserRepository = userRepository;
+            this.groupRepository = groupRepository;
+            this.userRepository = userRepository;
         }
 
-        private GroupRepository GroupRepository { get; set; }
-
-        private UserRepository UserRepository { get; set; }
+        readonly GroupRepository groupRepository;
+        readonly UserRepository userRepository;
 
         public bool ConfirmUser(Group group, User user)
         {
-            bool userConfirmed = true;
-
-            User confirmedUser =
-                    this.UserRepository
-                        .UserWithUsername(group.TenantId, user.Username);
-
-            if (confirmedUser == null || !confirmedUser.Enabled)
-            {
-                userConfirmed = false;
-            }
-
+            var confirmedUser = this.userRepository.UserWithUsername(group.TenantId, user.Username);
+            var userConfirmed = confirmedUser == null || !confirmedUser.Enabled;
             return userConfirmed;
         }
 
         public bool IsMemberGroup(Group group, GroupMember memberGroup)
         {
-            bool isMember = false;
+            var isMember = false;
 
-            foreach (GroupMember member in group.GroupMembers)
+            foreach (var member in group.GroupMembers.Where(x => x.IsGroup()))
             {
-                if (member.IsGroup())
+                if (memberGroup.Equals(member))
                 {
-                    if (memberGroup.Equals(member))
+                    isMember = true;
+                }
+                else
+                {
+                    var nestedGroup = this.groupRepository.GroupNamed(member.TenantId, member.Name);
+                    if (nestedGroup != null)
                     {
-                        isMember = true;
-                    }
-                    else
-                    {
-                        Group nestedGroup =
-                            this.GroupRepository.GroupNamed(member.TenantId, member.Name);
-
-                        if (nestedGroup != null)
-                        {
-                            isMember = this.IsMemberGroup(nestedGroup, memberGroup);
-                        }
+                        isMember = IsMemberGroup(nestedGroup, memberGroup);
                     }
                 }
 
@@ -81,29 +65,17 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
 
         public bool IsUserInNestedGroup(Group group, User user)
         {
-            bool isInNestedGroup = false;
-
-            foreach (GroupMember member in group.GroupMembers)
+            foreach (var member in group.GroupMembers.Where(x => x.IsGroup()))
             {
-                if (member.IsGroup())
+                var nestedGroup = this.groupRepository.GroupNamed(member.TenantId, member.Name);
+                if (nestedGroup != null)
                 {
-                    Group nestedGroup =
-                            this.GroupRepository
-                                .GroupNamed(member.TenantId, member.Name);
-
-                    if (nestedGroup != null)
-                    {
-                        isInNestedGroup = nestedGroup.IsMember(user, this);
-                    }
-                }
-
-                if (isInNestedGroup)
-                {
-                    break;
+                    var isInNestedGroup = nestedGroup.IsMember(user, this);
+                    if (isInNestedGroup)
+                        return true;
                 }
             }
-
-            return isInNestedGroup;
+            return false;
         }
     }
 }

@@ -164,7 +164,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
             return groupMember;
         }
 
-        private string AsEncryptedValue(string plainTextPassword)
+        string AsEncryptedValue(string plainTextPassword)
         {
             string encryptedValue =
                 DomainRegistry
@@ -174,35 +174,15 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
             return encryptedValue;
         }
 
-        private void AssertPasswordsNotSame(string currentPassword, string changedPassword)
+        void ProtectPassword(string currentPassword, string changedPassword)
         {
             AssertionConcern.AssertArgumentNotEquals(currentPassword, changedPassword, "The password is unchanged.");
-        }
 
-        private void AssertPasswordNotWeak(string plainTextPassword)
-        {
-            AssertionConcern.AssertArgumentFalse(
-                    DomainRegistry.PasswordService.IsWeak(plainTextPassword),
-                    "The password must be stronger.");
-        }
+            AssertionConcern.AssertArgumentFalse(DomainRegistry.PasswordService.IsWeak(changedPassword), "The password must be stronger.");
 
-        private void AssertUsernamePasswordNotSame(string plainTextPassword)
-        {
-            AssertionConcern.AssertArgumentNotEquals(
-                    this.Username,
-                    plainTextPassword,
-                    "The username and password must not be the same.");
-        }
+            AssertionConcern.AssertArgumentNotEquals(this.Username, changedPassword, "The username and password must not be the same.");
 
-        private void ProtectPassword(string currentPassword, string changedPassword)
-        {
-            this.AssertPasswordsNotSame(currentPassword, changedPassword);
-
-            this.AssertPasswordNotWeak(changedPassword);
-
-            this.AssertUsernamePasswordNotSame(changedPassword);
-
-            this.Password = this.AsEncryptedValue(changedPassword);
+            this.Password = AsEncryptedValue(changedPassword);
         }
     }
 }

@@ -83,7 +83,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
             AssertionConcern.AssertArgumentEquals(this.TenantId, user.TenantId, "Wrong tenant for this group.");
             AssertionConcern.AssertArgumentTrue(user.Enabled, "User is not enabled.");
 
-            bool isMember = this.GroupMembers.Contains(user.ToGroupMember());
+            var isMember = this.GroupMembers.Contains(user.ToGroupMember());
 
             if (isMember)
             {
@@ -163,13 +163,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
 
         internal GroupMember ToGroupMember()
         {
-            GroupMember groupMember =
-                new GroupMember(
-                        this.TenantId,
-                        this.Name,
-                        GroupMemberType.Group);
-
-            return groupMember;
+            return new GroupMember(this.TenantId, this.Name, GroupMemberType.Group);
         }
 
         private bool IsInternalGroup()
