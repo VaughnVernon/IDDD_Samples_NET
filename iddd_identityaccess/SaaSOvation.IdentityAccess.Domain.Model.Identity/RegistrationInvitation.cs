@@ -58,7 +58,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
             }
             else
             {
-                long time = (new DateTime()).Ticks;
+                long time = DateTime.Now.Ticks;
                 if (time >= this.StartingOn.Ticks && time <= this.Until.Ticks)
                 {
                     isAvailable = true;

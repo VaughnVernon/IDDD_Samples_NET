@@ -7,3 +7,5 @@ IDDD_Samples.suo
 /iddd_common/obj/
 /iddd_identityaccess/bin/
 /iddd_identityaccess/obj/
+/src/**/bin
+/src/**/obj
