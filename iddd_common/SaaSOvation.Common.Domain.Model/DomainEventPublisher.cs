@@ -21,7 +21,8 @@ namespace SaaSOvation.Common.Domain.Model
     {
         [ThreadStatic]
         static DomainEventPublisher _instance;
-        static DomainEventPublisher Instance
+        
+        public static DomainEventPublisher Instance
         {
             get
             {
