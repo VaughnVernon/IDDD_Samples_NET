@@ -20,18 +20,18 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
     public class AuthenticationService
     {
         public AuthenticationService(
-                TenantRepository tenantRepository,
-                UserRepository userRepository,
-                EncryptionService encryptionService)
+                ITenantRepository tenantRepository,
+                IUserRepository userRepository,
+                IEncryptionService encryptionService)
         {
             this.encryptionService = encryptionService;
             this.tenantRepository = tenantRepository;
             this.userRepository = userRepository;
         }
 
-        EncryptionService encryptionService;
-        TenantRepository tenantRepository;
-        UserRepository userRepository;
+        readonly IEncryptionService encryptionService;
+        readonly ITenantRepository tenantRepository;
+        readonly IUserRepository userRepository;
 
         public UserDescriptor Authenticate(TenantId tenantId, string username, string password)
         {

@@ -68,7 +68,7 @@ namespace SaaSOvation.AgilePM.Domain.Model.Products
 
         public TenantId TenantId { get; private set; }
 
-        private ISet<ProductBacklogItem> BacklogItems { get; set; }
+        ISet<ProductBacklogItem> BacklogItems { get; set; }
 
         public ICollection<ProductBacklogItem> AllBacklogItems()
         {
@@ -122,7 +122,7 @@ namespace SaaSOvation.AgilePM.Domain.Model.Products
                 BacklogItemType type,
                 StoryPoints storyPoints)
         {
-            BacklogItems.BacklogItem backlogItem =
+            var backlogItem =
                 new BacklogItems.BacklogItem(
                         this.TenantId,
                         this.ProductId,

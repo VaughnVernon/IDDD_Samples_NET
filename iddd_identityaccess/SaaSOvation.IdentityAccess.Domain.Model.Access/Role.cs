@@ -18,7 +18,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Access
     using SaaSOvation.Common.Domain.Model;
     using SaaSOvation.IdentityAccess.Domain.Model.Identity;
 
-    public class Role
+    public class Role : IEquatable<Role>
     {
         public Role(TenantId tenantId, string name, string description, bool supportsNesting)
         {
@@ -44,7 +44,6 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Access
         public bool SupportsNesting { get; private set; }
 
         public TenantId TenantId { get; private set; }
-
         
         public void AssignGroup(Group group, GroupMemberService groupMemberService)
         {
@@ -116,29 +115,24 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Access
                         user.Username));
         }
 
-        public override bool Equals(Object anotherObject)
+        public bool Equals(Role role)
         {
-            var equalObjects = false;
+            if (object.ReferenceEquals(this, role)) return true;
+            if (object.ReferenceEquals(null, role)) return false;
+            return this.TenantId.Equals(role.TenantId) && this.Name.Equals(role.Name);
+        }
 
-            if (anotherObject != null && this.GetType() == anotherObject.GetType())
-            {
-                var typedObject = (Role)anotherObject;
-                equalObjects =
-                    this.TenantId.Equals(typedObject.TenantId) &&
-                    this.Name.Equals(typedObject.Name);
-            }
-
-            return equalObjects;
+        public override bool Equals(object anotherObject)
+        {
+            return Equals(anotherObject as Role);
         }
 
         public override int GetHashCode()
         {
-            int hashCodeValue =
+            return
                 + (18723 * 233)
                 + this.TenantId.GetHashCode()
                 + this.Name.GetHashCode();
-
-            return hashCodeValue;
         }
 
         public override string ToString()

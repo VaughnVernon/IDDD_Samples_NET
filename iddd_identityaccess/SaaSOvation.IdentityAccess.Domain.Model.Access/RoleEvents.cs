@@ -18,7 +18,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Access
     using SaaSOvation.Common.Domain.Model;
     using SaaSOvation.IdentityAccess.Domain.Model.Identity;
 
-    public class GroupAssignedToRole : DomainEvent
+    public class GroupAssignedToRole : IDomainEvent
     {
         public GroupAssignedToRole(TenantId tenantId, string roleName, string groupName)
         {
@@ -40,7 +40,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Access
         public TenantId TenantId;
     }
 
-    public class GroupUnassignedFromRole : DomainEvent
+    public class GroupUnassignedFromRole : IDomainEvent
     {
         public GroupUnassignedFromRole(TenantId tenantId, string roleName, string groupName)
         {
@@ -62,7 +62,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Access
         public TenantId TenantId;
     }
 
-    public class RoleProvisioned : DomainEvent
+    public class RoleProvisioned : IDomainEvent
     {
         public RoleProvisioned(TenantId tenantId, string name)
         {
@@ -81,7 +81,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Access
         public string TenantId { get; private set; }
     }
 
-    public class UserAssignedToRole : DomainEvent
+    public class UserAssignedToRole : IDomainEvent
     {
         public UserAssignedToRole(
             TenantId tenantId,
@@ -118,7 +118,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Access
         public string Username { get; private set; }
     }
 
-    public class UserUnassignedFromRole : DomainEvent
+    public class UserUnassignedFromRole : IDomainEvent
     {
         public UserUnassignedFromRole(TenantId tenantId, string roleName, string username)
         {

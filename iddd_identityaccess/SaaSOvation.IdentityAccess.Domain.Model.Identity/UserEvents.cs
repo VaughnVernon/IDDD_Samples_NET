@@ -17,7 +17,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
     using System;
     using SaaSOvation.Common.Domain.Model;
 
-    public class PersonContactInformationChanged : DomainEvent
+    public class PersonContactInformationChanged : IDomainEvent
     {
         public PersonContactInformationChanged(
                 TenantId tenantId,
@@ -42,7 +42,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
         public string Username { get; private set; }
     }
 
-    public class PersonNameChanged : DomainEvent
+    public class PersonNameChanged : IDomainEvent
     {
         public PersonNameChanged(
                 TenantId tenantId,
@@ -67,7 +67,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
         public string Username { get; private set; }
     }
 
-    public class UserEnablementChanged : DomainEvent
+    public class UserEnablementChanged : IDomainEvent
     {
         public UserEnablementChanged(
                 TenantId tenantId,
@@ -92,7 +92,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
         public string Username { get; private set; }
     }
 
-    public class UserPasswordChanged : DomainEvent
+    public class UserPasswordChanged : IDomainEvent
     {
         public UserPasswordChanged(
                 TenantId tenantId,
@@ -113,7 +113,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
         public string Username { get; private set; }
     }
 
-    public class UserRegistered : DomainEvent
+    public class UserRegistered : IDomainEvent
     {
         public UserRegistered(
                 TenantId tenantId,

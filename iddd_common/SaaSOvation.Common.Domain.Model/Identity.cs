@@ -16,7 +16,7 @@ namespace SaaSOvation.Common.Domain.Model
 {
     using System;
 
-    public abstract class Identity
+    public abstract class Identity : IEquatable<Identity>
     {
         public Identity()
         {
@@ -30,26 +30,21 @@ namespace SaaSOvation.Common.Domain.Model
 
         public string Id { get; private set; }
 
+        public bool Equals(Identity id)
+        {
+            if (object.ReferenceEquals(this, id)) return true;
+            if (object.ReferenceEquals(null, id)) return false;
+            return this.Id.Equals(id.Id);
+        }
+
         public override bool Equals(object anotherObject)
         {
-            bool equalObjects = false;
-
-            if (anotherObject != null && this.GetType() == anotherObject.GetType())
-            {
-                Identity typedObject = (Identity)anotherObject;
-                equalObjects = this.Id.Equals(typedObject.Id);
-            }
-
-            return equalObjects;
+            return Equals(anotherObject as Identity);
         }
 
         public override int GetHashCode()
         {
-            int hashCodeValue =
-                + (this.GetType().GetHashCode() * 907)
-                + this.Id.GetHashCode();
-
-            return hashCodeValue;
+            return (this.GetType().GetHashCode() * 907) + this.Id.GetHashCode();
         }
 
         public override string ToString()

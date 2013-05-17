@@ -19,7 +19,7 @@ namespace SaaSOvation.AgilePM.Domain.Model.Products
     using SaaSOvation.AgilePM.Domain.Model.Products.Releases;
     using SaaSOvation.Common.Domain.Model;
 
-    public class ProductReleaseScheduled : DomainEvent
+    public class ProductReleaseScheduled : IDomainEvent
     {
         public ProductReleaseScheduled(
             TenantId tenantId,

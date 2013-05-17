@@ -42,11 +42,11 @@ namespace SaaSOvation.AgilePM.Domain.Model.Products
 
         public override bool Equals(object anotherObject)
         {
-            bool equalObjects = false;
+            var equalObjects = false;
 
             if (anotherObject != null && this.GetType() == anotherObject.GetType())
             {
-                ProductBacklogItem typedObject = (ProductBacklogItem)anotherObject;
+                var typedObject = (ProductBacklogItem)anotherObject;
                 equalObjects =
                     this.TenantId.Equals(typedObject.TenantId) &&
                     this.ProductId.Equals(typedObject.ProductId) &&

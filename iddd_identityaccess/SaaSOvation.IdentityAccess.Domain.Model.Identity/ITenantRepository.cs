@@ -12,14 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace SaaSOvation.Common.Domain.Model
+namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
 {
     using System;
+    using SaaSOvation.Common.Domain.Model;
 
-    public interface DomainEventSubscriber<T> where T : DomainEvent
+    public interface ITenantRepository
     {
-        void HandleEvent(T domainEvent);
-
-        Type SubscribedToEventType();
+        void Add(Tenant tenant);
+        Tenant TenantOfId(TenantId tenantId);
     }
 }

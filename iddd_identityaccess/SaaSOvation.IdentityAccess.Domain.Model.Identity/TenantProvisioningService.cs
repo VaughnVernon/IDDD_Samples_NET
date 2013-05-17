@@ -21,18 +21,18 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
     public class TenantProvisioningService
     {
         public TenantProvisioningService(
-                TenantRepository tenantRepository,
-                UserRepository userRepository,
-                RoleRepository roleRepository)
+                ITenantRepository tenantRepository,
+                IUserRepository userRepository,
+                IRoleRepository roleRepository)
         {
             this.roleRepository = roleRepository;
             this.tenantRepository = tenantRepository;
             this.userRepository = userRepository;
         }
 
-        readonly RoleRepository roleRepository;
-        readonly TenantRepository tenantRepository;
-        readonly UserRepository userRepository;
+        readonly IRoleRepository roleRepository;
+        readonly ITenantRepository tenantRepository;
+        readonly IUserRepository userRepository;
 
         public Tenant ProvisionTenant(
                 String tenantName,

@@ -20,7 +20,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model
 
     public class DomainRegistry
     {
-        public static EncryptionService EncryptionService
+        public static IEncryptionService EncryptionService
         {
             get
             {

@@ -12,14 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace SaaSOvation.Common.Domain.Model
+namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
 {
     using System;
 
-    public interface DomainEvent
+    public interface IEncryptionService
     {
-        int EventVersion { get; set;  }
-
-        DateTime OccurredOn { get; set; }
+        string EncryptedValue(string plainTextValue);
     }
 }

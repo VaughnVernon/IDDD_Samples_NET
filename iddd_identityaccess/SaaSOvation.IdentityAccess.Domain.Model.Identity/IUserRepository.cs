@@ -15,9 +15,14 @@
 namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
 {
     using System;
+    using SaaSOvation.Common.Domain.Model;
 
-    public interface EncryptionService
+    public interface IUserRepository
     {
-        string EncryptedValue(string plainTextValue);
+        void Add(User user);
+
+        User UserFromAuthenticCredentials(TenantId tenantId, string username, string encryptedPassword);
+
+        User UserWithUsername(TenantId tenantId, string username);
     }
 }

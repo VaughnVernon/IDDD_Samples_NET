@@ -20,18 +20,18 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Access
     public class AuthorizationService
     {
         public AuthorizationService(
-                UserRepository userRepository,
-                GroupRepository groupRepository,
-                RoleRepository roleRepository)
+                IUserRepository userRepository,
+                IGroupRepository groupRepository,
+                IRoleRepository roleRepository)
         {
             this.groupRepository = groupRepository;
             this.roleRepository = roleRepository;
             this.userRepository = userRepository;
         }
 
-        readonly GroupRepository groupRepository;
-        readonly RoleRepository roleRepository;
-        readonly UserRepository userRepository;
+        readonly IGroupRepository groupRepository;
+        readonly IRoleRepository roleRepository;
+        readonly IUserRepository userRepository;
 
         public bool IsUserInRole(TenantId tenantId, string username, string roleName)
         {

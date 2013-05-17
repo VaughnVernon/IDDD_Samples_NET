@@ -19,14 +19,14 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
 
     public class GroupMemberService
     {
-        public GroupMemberService(UserRepository userRepository, GroupRepository groupRepository)
+        public GroupMemberService(IUserRepository userRepository, IGroupRepository groupRepository)
         {
             this.groupRepository = groupRepository;
             this.userRepository = userRepository;
         }
 
-        readonly GroupRepository groupRepository;
-        readonly UserRepository userRepository;
+        readonly IGroupRepository groupRepository;
+        readonly IUserRepository userRepository;
 
         public bool ConfirmUser(Group group, User user)
         {

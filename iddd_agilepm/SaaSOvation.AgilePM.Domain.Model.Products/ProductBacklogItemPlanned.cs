@@ -19,7 +19,7 @@ namespace SaaSOvation.AgilePM.Domain.Model.Products
     using SaaSOvation.AgilePM.Domain.Model.Products.BacklogItems;
     using SaaSOvation.AgilePM.Domain.Model.Tenants;
 
-    public class ProductBacklogItemPlanned : DomainEvent
+    public class ProductBacklogItemPlanned : IDomainEvent
     {
         public ProductBacklogItemPlanned(
             TenantId tenantId,

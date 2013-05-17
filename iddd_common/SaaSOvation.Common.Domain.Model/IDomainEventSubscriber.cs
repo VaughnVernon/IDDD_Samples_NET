@@ -12,13 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
+namespace SaaSOvation.Common.Domain.Model
 {
     using System;
-    using SaaSOvation.Common.Domain.Model;
 
-    public interface GroupRepository
+    public interface IDomainEventSubscriber<T> where T : IDomainEvent
     {
-        Group GroupNamed(TenantId identity, string p);
+        void HandleEvent(T domainEvent);
+        Type SubscribedToEventType();
     }
 }

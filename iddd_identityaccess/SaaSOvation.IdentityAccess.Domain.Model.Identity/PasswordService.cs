@@ -33,17 +33,17 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
         {
             String generatedPassword = null;
 
-            string password = "";
+            var password = "";
 
-            Random random = new Random();
+            var random = new Random();
 
-            bool isStrong = false;
+            var isStrong = false;
 
-            int index = 0;
+            var index = 0;
 
             while (!isStrong)
             {
-                int opt = random.Next(4);
+                var opt = random.Next(4);
 
                 switch (opt)
                 {
@@ -91,7 +91,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
             return this.CalculatePasswordStrength(plainTextPassword) < STRONG_THRESHOLD;
         }
 
-        private int CalculatePasswordStrength(String plainTextPassword)
+        int CalculatePasswordStrength(String plainTextPassword)
         {
             AssertionConcern.AssertArgumentNotNull(plainTextPassword, "Password strength cannot be tested on null.");
 
@@ -106,21 +106,21 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
                 strength += (length - 7);
             }
 
-            int digitCount = 0;
-            int letterCount = 0;
-            int lowerCount = 0;
-            int upperCount = 0;
-            int symbolCount = 0;
+            var digitCount = 0;
+            var letterCount = 0;
+            var lowerCount = 0;
+            var upperCount = 0;
+            var symbolCount = 0;
 
-            for (int idx = 0; idx < length; ++idx)
+            for (var idx = 0; idx < length; ++idx)
             {
-                char ch = plainTextPassword[idx];
+                var ch = plainTextPassword[idx];
 
-                if (Char.IsLetter(ch))
+                if (char.IsLetter(ch))
                 {
                     ++letterCount;
 
-                    if (Char.IsUpper(ch))
+                    if (char.IsUpper(ch))
                     {
                         ++upperCount;
                     }
@@ -129,7 +129,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
                         ++lowerCount;
                     }
                 }
-                else if (Char.IsDigit(ch))
+                else if (char.IsDigit(ch))
                 {
                     ++digitCount;
                 }

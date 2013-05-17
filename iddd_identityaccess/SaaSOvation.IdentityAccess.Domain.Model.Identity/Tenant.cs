@@ -81,7 +81,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
         public RegistrationInvitation OfferRegistrationInvitation(string description)
         {
             AssertionConcern.AssertStateTrue(this.Active, "Tenant is not active.");
-            AssertionConcern.AssertArgumentTrue(this.IsRegistrationAvailableThrough(description), "Invitation already exists.");
+            AssertionConcern.AssertArgumentTrue(IsRegistrationAvailableThrough(description), "Invitation already exists.");
 
             var invitation = new RegistrationInvitation(this.TenantId, new Guid().ToString(), description);
 
@@ -162,6 +162,8 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
         {
             return this.registrationInvitations.FirstOrDefault(x => x.IsIdentifiedBy(invitationIdentifier));
         }
+
+
 
         public override bool Equals(object anotherObject)
         {

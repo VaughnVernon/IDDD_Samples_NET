@@ -12,16 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace SaaSOvation.IdentityAccess.Domain.Model.Access
+namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
 {
     using System;
     using SaaSOvation.Common.Domain.Model;
-    using SaaSOvation.IdentityAccess.Domain.Model.Identity;
 
-    public interface RoleRepository
+    public interface IGroupRepository
     {
-        void Add(Role role);
-
-        Role RoleNamed(TenantId identity, string roleName);
+        Group GroupNamed(TenantId identity, string p);
     }
 }
