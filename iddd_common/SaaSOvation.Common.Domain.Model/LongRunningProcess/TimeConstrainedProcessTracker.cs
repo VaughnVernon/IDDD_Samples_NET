@@ -142,22 +142,17 @@ namespace SaaSOvation.Common.Domain.Model.LongRunningProcess
                     + ", timeoutOccursOn=" + TimeoutOccursOn + ", totalRetriesPermitted=" + TotalRetriesPermitted + "]";
         }
 
-        private void IncrementRetryCount()
+        void IncrementRetryCount()
         {
             this.RetryCount = this.RetryCount + 1;
         }
 
-        private ProcessTimedOut ProcessTimedOutEvent()
+        ProcessTimedOut ProcessTimedOutEvent()
         {
-            ProcessTimedOut processTimedOut = null;
-
             try
             {
-                Type type = Type.GetType(this.ProcessTimedOutEventType);
-
-                processTimedOut = (ProcessTimedOut)Activator.CreateInstance(
-                                        type,
-                                        new Object[] { this.ProcessId });
+                var type = Type.GetType(this.ProcessTimedOutEventType);
+                return (ProcessTimedOut)Activator.CreateInstance(type, new [] { this.ProcessId });
             }
             catch (Exception e)
             {
@@ -165,24 +160,15 @@ namespace SaaSOvation.Common.Domain.Model.LongRunningProcess
                         "Error creating new ProcessTimedOut instance because: "
                         + e.Message);
             }
-
-            return processTimedOut;
         }
 
-        private ProcessTimedOut ProcessTimedOutEventWithRetries()
+        ProcessTimedOut ProcessTimedOutEventWithRetries()
         {
-            ProcessTimedOut processTimedOut = null;
-
             try
             {
-                Type type = Type.GetType(this.ProcessTimedOutEventType);
+                var type = Type.GetType(this.ProcessTimedOutEventType);
 
-                processTimedOut = (ProcessTimedOut)Activator.CreateInstance(
-                                        type,
-                                        new Object[] {
-                                            this.ProcessId,
-                                            this.TotalRetriesPermitted,
-                                            this.RetryCount } );
+                return (ProcessTimedOut)Activator.CreateInstance(type, new object[] { this.ProcessId, this.TotalRetriesPermitted, this.RetryCount } );
             }
             catch (Exception e)
             {
@@ -190,11 +176,9 @@ namespace SaaSOvation.Common.Domain.Model.LongRunningProcess
                         "Error creating new ProcessTimedOut instance because: "
                         + e.Message);
             }
-
-            return processTimedOut;
         }
 
-        private bool TotalRetriesReached()
+        bool TotalRetriesReached()
         {
             return this.RetryCount >= this.TotalRetriesPermitted;
         }

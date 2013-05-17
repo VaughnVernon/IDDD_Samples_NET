@@ -20,8 +20,8 @@ namespace SaaSOvation.Common.Domain.Model
     public class DomainEventPublisher
     {
         [ThreadStatic]
-        private static DomainEventPublisher _instance;
-        public static DomainEventPublisher Instance
+        static DomainEventPublisher _instance;
+        static DomainEventPublisher Instance
         {
             get
             {
@@ -29,12 +29,11 @@ namespace SaaSOvation.Common.Domain.Model
                 {
                     _instance = new DomainEventPublisher();
                 }
-
                 return _instance;
             }
         }
 
-        private DomainEventPublisher()
+        DomainEventPublisher()
         {
             this.publishing = false;
         }

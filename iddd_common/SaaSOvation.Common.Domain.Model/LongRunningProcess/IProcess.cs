@@ -16,7 +16,7 @@ namespace SaaSOvation.Common.Domain.Model.LongRunningProcess
 {
     using System;
 
-    public interface Process
+    public interface IProcess
     {
         long AllowableDuration();
 
