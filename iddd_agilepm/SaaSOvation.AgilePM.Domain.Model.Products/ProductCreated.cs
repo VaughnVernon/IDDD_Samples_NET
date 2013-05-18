@@ -20,7 +20,7 @@ namespace SaaSOvation.AgilePM.Domain.Model.Products
     using SaaSOvation.AgilePM.Domain.Model.Tenants;
     using SaaSOvation.Common.Domain.Model;
 
-    public class ProductCreated : DomainEvent
+    public class ProductCreated : IDomainEvent
     {
         public ProductCreated(
             TenantId tenantId,

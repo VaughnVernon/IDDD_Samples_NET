@@ -8,7 +8,7 @@
     <ProjectGuid>{23B36FF3-B4FE-4765-815E-4943A737BC6D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>iddd_common</RootNamespace>
+    <RootNamespace>SaaSOvation.Common</RootNamespace>
     <AssemblyName>iddd_common</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -42,11 +42,11 @@
   <ItemGroup>
     <Compile Include="SaaSOvation.Common.Domain.Model\AssertionConcern.cs" />
     <Compile Include="SaaSOvation.Common.Domain.Model\Entity.cs" />
-    <Compile Include="SaaSOvation.Common.Domain.Model\DomainEvent.cs" />
+    <Compile Include="SaaSOvation.Common.Domain.Model\IDomainEvent.cs" />
     <Compile Include="SaaSOvation.Common.Domain.Model\DomainEventPublisher.cs" />
-    <Compile Include="SaaSOvation.Common.Domain.Model\DomainEventSubscriber.cs" />
+    <Compile Include="SaaSOvation.Common.Domain.Model\IDomainEventSubscriber.cs" />
     <Compile Include="SaaSOvation.Common.Domain.Model\Identity.cs" />
-    <Compile Include="SaaSOvation.Common.Domain.Model\LongRunningProcess\Process.cs" />
+    <Compile Include="SaaSOvation.Common.Domain.Model\LongRunningProcess\IProcess.cs" />
     <Compile Include="SaaSOvation.Common.Domain.Model\LongRunningProcess\ProcessId.cs" />
     <Compile Include="SaaSOvation.Common.Domain.Model\LongRunningProcess\ProcessTimedOut.cs" />
     <Compile Include="SaaSOvation.Common.Domain.Model\LongRunningProcess\TimeConstrainedProcessTracker.cs" />

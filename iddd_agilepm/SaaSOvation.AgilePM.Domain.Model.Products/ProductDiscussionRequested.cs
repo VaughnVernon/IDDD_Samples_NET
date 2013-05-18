@@ -19,7 +19,7 @@ namespace SaaSOvation.AgilePM.Domain.Model.Products
     using SaaSOvation.AgilePM.Domain.Model.Tenants;
     using SaaSOvation.Common.Domain.Model;
 
-    public class ProductDiscussionRequested : DomainEvent
+    public class ProductDiscussionRequested : IDomainEvent
     {
         public ProductDiscussionRequested(
             TenantId tenantId,

@@ -20,20 +20,18 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Access
     public class AuthorizationService
     {
         public AuthorizationService(
-                UserRepository userRepository,
-                GroupRepository groupRepository,
-                RoleRepository roleRepository)
+                IUserRepository userRepository,
+                IGroupRepository groupRepository,
+                IRoleRepository roleRepository)
         {
-            this.GroupRepository = groupRepository;
-            this.RoleRepository = roleRepository;
-            this.UserRepository = userRepository;
+            this.groupRepository = groupRepository;
+            this.roleRepository = roleRepository;
+            this.userRepository = userRepository;
         }
 
-        private GroupRepository GroupRepository { get; set; }
-
-        private RoleRepository RoleRepository { get; set; }
-
-        private UserRepository UserRepository { get; set; }
+        readonly IGroupRepository groupRepository;
+        readonly IRoleRepository roleRepository;
+        readonly IUserRepository userRepository;
 
         public bool IsUserInRole(TenantId tenantId, string username, string roleName)
         {
@@ -41,8 +39,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Access
             AssertionConcern.AssertArgumentNotEmpty(username, "Username must not be provided.");
             AssertionConcern.AssertArgumentNotEmpty(roleName, "Role name must not be null.");
 
-            User user = this.UserRepository.UserWithUsername(tenantId, username);
-
+            var user = this.userRepository.UserWithUsername(tenantId, username);
             return user == null ? false : this.IsUserInRole(user, roleName);
         }
 
@@ -51,23 +48,15 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Access
             AssertionConcern.AssertArgumentNotNull(user, "User must not be null.");
             AssertionConcern.AssertArgumentNotEmpty(roleName, "Role name must not be null.");
 
-            bool authorized = false;
-
+            var authorized = false;
             if (user.Enabled)
             {
-                Role role = this.RoleRepository.RoleNamed(user.TenantId, roleName);
-
+                var role = this.roleRepository.RoleNamed(user.TenantId, roleName);
                 if (role != null)
                 {
-                    GroupMemberService groupMemberService =
-                            new GroupMemberService(
-                                    this.UserRepository,
-                                    this.GroupRepository);
-
-                    authorized = role.IsInRole(user, groupMemberService);
+                    authorized = role.IsInRole(user, new GroupMemberService(this.userRepository, this.groupRepository));
                 }
             }
-
             return authorized;
         }
     }

@@ -12,12 +12,29 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
-{
-    using System;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
-    public interface EncryptionService
+using SaaSOvation.AgilePM.Domain.Model.Tenants;
+
+namespace SaaSOvation.AgilePM.Domain.Model.Products.Sprints
+{
+    public interface ISprintRepository
     {
-        string EncryptedValue(string plainTextValue);
+        Sprint Get(TenantId tenantId, SprintId sprintId);
+
+        ICollection<Sprint> GetAllProductSprints(TenantId tenantId, ProductId productId);
+
+        SprintId GetNextIdentity();
+
+        void Remove(Sprint sprint);
+
+        void RemoveAll(IEnumerable<Sprint> sprints);
+
+        void Save(Sprint sprint);
+
+        void SaveAll(IEnumerable<Sprint> sprints);
     }
 }

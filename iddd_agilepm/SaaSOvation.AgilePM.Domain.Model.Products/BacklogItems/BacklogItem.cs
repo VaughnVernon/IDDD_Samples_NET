@@ -33,28 +33,34 @@ namespace SaaSOvation.AgilePM.Domain.Model.Products.BacklogItems
             this.BacklogItemId = backlogItemId;
             this.Category = category;
             this.ProductId = productId;
-            this.Status = backlogItemStatus;
+            this.status = backlogItemStatus;
             this.StoryPoints = storyPoints;
             this.Summary = summary;
             this.TenantId = tenantId;
             this.Type = type;
         }
 
-        public BacklogItemId BacklogItemId { get; private set; }
-
-        public string Category { get; private set; }
+        public TenantId TenantId { get; private set; }
 
         public ProductId ProductId { get; private set; }
 
-        private BacklogItemStatus Status;
-
-        public StoryPoints StoryPoints { get; private set; }
+        public BacklogItemId BacklogItemId { get; private set; }
 
         public string Summary { get; private set; }
 
-        public TenantId TenantId { get; private set; }
+        public string Category { get; private set; }
 
         public BacklogItemType Type { get; private set; }
+
+        BacklogItemStatus status;
+
+        public StoryPoints StoryPoints { get; private set; }
+
+        
+
+        
+
+        
 
 
     }

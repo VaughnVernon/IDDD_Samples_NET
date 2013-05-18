@@ -50,7 +50,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
 
         public bool IsAvailable()
         {
-            bool isAvailable = false;
+            var isAvailable = false;
 
             if (this.StartingOn == DateTime.MinValue && this.Until == DateTime.MinValue)
             {
@@ -58,7 +58,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
             }
             else
             {
-                long time = (new DateTime()).Ticks;
+                var time = (new DateTime()).Ticks;
                 if (time >= this.StartingOn.Ticks && time <= this.Until.Ticks)
                 {
                     isAvailable = true;
@@ -68,9 +68,9 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
             return isAvailable;
         }
 
-        public bool IsIdentifiedBy(String invitationIdentifier)
+        public bool IsIdentifiedBy(string invitationIdentifier)
         {
-            bool isIdentified = this.InvitationId.Equals(invitationIdentifier);
+            var isIdentified = this.InvitationId.Equals(invitationIdentifier);
 
             if (!isIdentified && this.Description != null)
             {
@@ -134,11 +134,11 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
 
         public override bool Equals(object anotherObject)
         {
-            bool equalObjects = false;
+            var equalObjects = false;
 
             if (anotherObject != null && this.GetType() == anotherObject.GetType())
             {
-                RegistrationInvitation typedObject = (RegistrationInvitation) anotherObject;
+                var typedObject = (RegistrationInvitation) anotherObject;
                 equalObjects =
                     this.TenantId.Equals(typedObject.TenantId) &&
                     this.InvitationId.Equals(typedObject.InvitationId);
@@ -149,12 +149,10 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
 
         public override int GetHashCode()
         {
-            int hashCodeValue =
+            return
                 + (6325 * 233)
                 + this.TenantId.GetHashCode()
                 + this.InvitationId.GetHashCode();
-
-            return hashCodeValue;
         }
 
         public override string ToString()

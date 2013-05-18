@@ -18,10 +18,9 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Access
     using SaaSOvation.Common.Domain.Model;
     using SaaSOvation.IdentityAccess.Domain.Model.Identity;
 
-    public interface RoleRepository
+    public interface IRoleRepository
     {
         void Add(Role role);
-
         Role RoleNamed(TenantId identity, string roleName);
     }
 }

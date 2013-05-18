@@ -17,7 +17,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
     using System;
     using SaaSOvation.Common.Domain.Model;
 
-    public class GroupGroupAdded : DomainEvent
+    public class GroupGroupAdded : IDomainEvent
     {
         public GroupGroupAdded(TenantId tenantId, string groupName, string nestedGroupName)
         {
@@ -39,7 +39,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
         public string TenantId { get; private set; }
     }
 
-    public class GroupGroupRemoved : DomainEvent
+    public class GroupGroupRemoved : IDomainEvent
     {
         public GroupGroupRemoved(TenantId tenantId, string groupName, string nestedGroupName)
         {
@@ -61,7 +61,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
         public string TenantId { get; private set; }
     }
 
-    public class GroupUserAdded : DomainEvent
+    public class GroupUserAdded : IDomainEvent
     {
         public GroupUserAdded(TenantId tenantId, string groupName, string username)
         {
@@ -83,7 +83,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
         public string Username { get; private set; }
     }
 
-    public class GroupUserRemoved : DomainEvent
+    public class GroupUserRemoved : IDomainEvent
     {
         public GroupUserRemoved(TenantId tenantId, string groupName, string username)
         {

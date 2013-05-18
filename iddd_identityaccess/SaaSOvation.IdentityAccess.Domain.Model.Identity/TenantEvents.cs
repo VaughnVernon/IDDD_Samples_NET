@@ -17,7 +17,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
     using System;
     using SaaSOvation.Common.Domain.Model;
 
-    public class TenantAdministratorRegistered : DomainEvent
+    public class TenantAdministratorRegistered : IDomainEvent
     {
         public TenantAdministratorRegistered(
             TenantId tenantId,
@@ -48,7 +48,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
         public string TenantId { get; private set; }
     }
 
-    public class GroupProvisioned : DomainEvent
+    public class GroupProvisioned : IDomainEvent
     {
         public GroupProvisioned(TenantId tenantId, string name)
         {
@@ -67,7 +67,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
         public string TenantId { get; private set; }
     }
 
-    public class TenantActivated : DomainEvent
+    public class TenantActivated : IDomainEvent
     {
         public TenantActivated(TenantId tenantId)
         {
@@ -83,7 +83,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
         public string TenantId { get; private set; }
     }
 
-    public class TenantDeactivated : DomainEvent
+    public class TenantDeactivated : IDomainEvent
     {
         public TenantDeactivated(TenantId tenantId)
         {
@@ -99,7 +99,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
         public string TenantId { get; private set; }
     }
 
-    public class TenantProvisioned : DomainEvent
+    public class TenantProvisioned : IDomainEvent
     {
         public TenantProvisioned(TenantId tenantId)
         {

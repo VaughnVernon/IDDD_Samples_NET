@@ -106,14 +106,12 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
 
         public override int GetHashCode()
         {
-            int hashCodeValue =
+            return
                 + (73213 * 173)
                 + this.EmailAddress.GetHashCode()
                 + this.PostalAddress.GetHashCode()
                 + this.PrimaryTelephone.GetHashCode()
                 + (this.SecondaryTelephone == null ? 0:this.SecondaryTelephone.GetHashCode());
-
-            return hashCodeValue;
         }
 
         public override string ToString()
@@ -141,7 +139,8 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
         {
         }
 
-        private string _address;
+        string _address;
+        
         public string Address
         {
             get

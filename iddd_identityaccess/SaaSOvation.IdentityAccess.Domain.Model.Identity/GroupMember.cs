@@ -42,11 +42,9 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
             get
             {
                 return this._type;
-            }
-            
+            }            
             private set
             {
-                AssertionConcern.AssertArgumentNotNull(value, "Type must be provided");
                 this._type = value;
             }
         }

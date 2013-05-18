@@ -17,7 +17,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
     using System;
     using SaaSOvation.Common.Domain.Model;
 
-    public interface GroupRepository
+    public interface IGroupRepository
     {
         Group GroupNamed(TenantId identity, string p);
     }

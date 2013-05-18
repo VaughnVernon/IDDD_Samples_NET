@@ -17,10 +17,12 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
     using System;
     using SaaSOvation.Common.Domain.Model;
 
-    public interface TenantRepository
+    public interface IUserRepository
     {
-        void Add(Tenant tenant);
+        void Add(User user);
 
-        Tenant TenantOfId(TenantId tenantId);
+        User UserFromAuthenticCredentials(TenantId tenantId, string username, string encryptedPassword);
+
+        User UserWithUsername(TenantId tenantId, string username);
     }
 }

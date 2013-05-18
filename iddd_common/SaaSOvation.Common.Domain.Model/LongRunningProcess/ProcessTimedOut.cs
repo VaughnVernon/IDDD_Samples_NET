@@ -16,7 +16,7 @@ namespace SaaSOvation.Common.Domain.Model.LongRunningProcess
 {
     using System;
 
-    public class ProcessTimedOut : DomainEvent
+    public class ProcessTimedOut : IDomainEvent
     {
         public ProcessTimedOut(
                 string tenantId,

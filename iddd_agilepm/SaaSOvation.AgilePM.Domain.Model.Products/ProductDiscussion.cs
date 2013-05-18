@@ -15,20 +15,18 @@
 namespace SaaSOvation.AgilePM.Domain.Model.Products
 {
     using System;
+    using SaaSOvation.Common.Domain.Model;
     using SaaSOvation.AgilePM.Domain.Model.Discussions;
 
-    public class ProductDiscussion
+    public class ProductDiscussion : ValueObject
     {
         public static ProductDiscussion FromAvailability(
                 DiscussionAvailability availability)
         {
             if (availability == DiscussionAvailability.Ready)
-            {
                 throw new InvalidOperationException("Cannot be created ready.");
-            }
 
-            DiscussionDescriptor descriptor =
-                    new DiscussionDescriptor(DiscussionDescriptor.UNDEFINED_ID);
+            var descriptor = new DiscussionDescriptor(DiscussionDescriptor.UNDEFINED_ID);
 
             return new ProductDiscussion(descriptor, availability);
         }
@@ -53,13 +51,9 @@ namespace SaaSOvation.AgilePM.Domain.Model.Products
         public ProductDiscussion NowReady(DiscussionDescriptor descriptor)
         {
             if (descriptor == null || descriptor.IsUndefined())
-            {
-                throw new InvalidOperationException("The discussion descriptor must be defined.");
-            }
+                throw new ArgumentException("The discussion descriptor must be defined.");
             if (this.Availability != DiscussionAvailability.Requested)
-            {
                 throw new InvalidOperationException("The discussion must be requested first.");
-            }
 
             return new ProductDiscussion(descriptor, DiscussionAvailability.Ready);
         }

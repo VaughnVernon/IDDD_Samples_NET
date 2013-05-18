@@ -20,23 +20,17 @@ namespace SaaSOvation.IdentityAccess.Port.Adapter.Security
     using SaaSOvation.IdentityAccess.Domain.Model.Identity;
     using SaaSOvation.Common.Domain.Model;
 
-    public class MD5EncryptionService : EncryptionService
+    public class MD5EncryptionService : IEncryptionService
     {
-        public MD5EncryptionService()
-        {
-        }
-
         public string EncryptedValue(string plainTextValue)
         {
-            AssertionConcern.AssertArgumentNotEmpty(
-                    plainTextValue,
-                    "Plain text value to encrypt must be provided.");
+            AssertionConcern.AssertArgumentNotEmpty(plainTextValue, "Plain text value to encrypt must be provided.");
 
-            StringBuilder encryptedValue = new StringBuilder();
+            var encryptedValue = new StringBuilder();
 
-            MD5 hasher = MD5.Create();
+            var hasher = MD5.Create();
 
-            byte[] data = hasher.ComputeHash(Encoding.Default.GetBytes(plainTextValue));
+            var data = hasher.ComputeHash(Encoding.Default.GetBytes(plainTextValue));
 
             for (int dataIndex = 0; dataIndex < data.Length; dataIndex++)
             {

@@ -20,7 +20,7 @@ namespace SaaSOvation.AgilePM.Domain.Model.Products
     using SaaSOvation.Common.Domain.Model;
     using SaaSOvation.AgilePM.Domain.Model.Products.Sprints;
 
-    public class ProductSprintScheduled : DomainEvent
+    public class ProductSprintScheduled : IDomainEvent
     {
         public ProductSprintScheduled(
             TenantId tenantId,

@@ -16,10 +16,9 @@ namespace SaaSOvation.Common.Domain.Model
 {
     using System;
 
-    public interface DomainEventSubscriber<T> where T : DomainEvent
+    public interface IDomainEvent
     {
-        void HandleEvent(T domainEvent);
-
-        Type SubscribedToEventType();
+        int EventVersion { get; set;  }
+        DateTime OccurredOn { get; set; }
     }
 }
