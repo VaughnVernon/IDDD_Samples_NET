@@ -35,8 +35,8 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
         readonly IUserRepository userRepository;
 
         public Tenant ProvisionTenant(
-                String tenantName,
-                String tenantDescription,
+                string tenantName,
+                string tenantDescription,
                 FullName administorName,
                 EmailAddress emailAddress,
                 PostalAddress postalAddress,
@@ -55,7 +55,6 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
                 DomainEventPublisher.Instance.Publish(new TenantProvisioned(tenant.TenantId));
 
                 return tenant;
-
             }
             catch (Exception e)
             {

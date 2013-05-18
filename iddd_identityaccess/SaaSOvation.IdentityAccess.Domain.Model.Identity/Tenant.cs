@@ -31,15 +31,15 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
             this.TenantId = new TenantId();
         }
 
-        public bool Active { get; private set; }
-
-        public string Description { get; private set; }
+        public TenantId TenantId { get; private set; }
 
         public string Name { get; private set; }
 
-        public TenantId TenantId { get; private set; }
+        public bool Active { get; private set; }
 
-        ISet<RegistrationInvitation> registrationInvitations;
+        public string Description { get; private set; }
+        
+        readonly ISet<RegistrationInvitation> registrationInvitations;
 
         public void Activate()
         {

@@ -56,10 +56,12 @@
     <Compile Include="SaaSOvation.AgilePM.Domain.Model.Products\ProductDiscussionRequested.cs" />
     <Compile Include="SaaSOvation.AgilePM.Domain.Model.Products\ProductReleaseScheduled.cs" />
     <Compile Include="SaaSOvation.AgilePM.Domain.Model.Products\ProductSprintScheduled.cs" />
+    <Compile Include="SaaSOvation.AgilePM.Domain.Model.Products\Releases\IReleaseRepository.cs" />
     <Compile Include="SaaSOvation.AgilePM.Domain.Model.Products\Releases\ReleaseId.cs" />
     <Compile Include="SaaSOvation.AgilePM.Domain.Model.Products\Releases\ScheduledBacklogItem.cs" />
     <Compile Include="SaaSOvation.AgilePM.Domain.Model.Products\Releases\Release.cs" />
     <Compile Include="SaaSOvation.AgilePM.Domain.Model.Products\Sprints\CommittedBacklogItem.cs" />
+    <Compile Include="SaaSOvation.AgilePM.Domain.Model.Products\Sprints\ISprintRepository.cs" />
     <Compile Include="SaaSOvation.AgilePM.Domain.Model.Products\Sprints\SprintId.cs" />
     <Compile Include="SaaSOvation.AgilePM.Domain.Model.Products\Sprints\Sprint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

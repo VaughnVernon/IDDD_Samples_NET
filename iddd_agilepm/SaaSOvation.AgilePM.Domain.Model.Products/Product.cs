@@ -25,7 +25,7 @@ namespace SaaSOvation.AgilePM.Domain.Model.Products
     using SaaSOvation.AgilePM.Domain.Model.Tenants;
     using SaaSOvation.Common.Domain.Model;
 
-    public class Product : Entity
+    public class Product : Entity, IEquatable<Product>
     {
         public Product(
                 TenantId tenantId,
@@ -54,25 +54,27 @@ namespace SaaSOvation.AgilePM.Domain.Model.Products
                         this.Discussion.Availability));
         }
 
+        readonly ISet<ProductBacklogItem> backlogItems;
+
+        public TenantId TenantId { get; private set; } 
+        
+        public ProductId ProductId { get; private set; }
+
+        public ProductOwnerId ProductOwnerId { get; private set; }
+
+        
+
         public string Description { get; private set; }
 
         public ProductDiscussion Discussion { get; private set; }
 
         public string DiscussionInitiationId { get; private set; }
 
-        public string Name { get; private set; }
-
-        public ProductId ProductId { get; private set; }
-
-        public ProductOwnerId ProductOwnerId { get; private set; }
-
-        public TenantId TenantId { get; private set; }
-
-        ISet<ProductBacklogItem> BacklogItems { get; set; }
+        public string Name { get; private set; }               
 
         public ICollection<ProductBacklogItem> AllBacklogItems()
         {
-            return new ReadOnlyCollection<ProductBacklogItem>(new List<ProductBacklogItem>(this.BacklogItems));
+            return new ReadOnlyCollection<ProductBacklogItem>(new List<ProductBacklogItem>(this.backlogItems));
         }
 
         public void ChangeProductOwner(ProductOwner productOwner)
@@ -152,7 +154,7 @@ namespace SaaSOvation.AgilePM.Domain.Model.Products
             AssertionConcern.AssertArgumentEquals(this.TenantId, backlogItem.TenantId, "The product and backlog item must have same tenant.");
             AssertionConcern.AssertArgumentEquals(this.ProductId, backlogItem.ProductId, "The backlog item must belong to product.");
 
-            int ordering = this.BacklogItems.Count + 1;
+            int ordering = this.backlogItems.Count + 1;
 
             ProductBacklogItem productBacklogItem =
                     new ProductBacklogItem(
@@ -161,12 +163,12 @@ namespace SaaSOvation.AgilePM.Domain.Model.Products
                             backlogItem.BacklogItemId,
                             ordering);
 
-            this.BacklogItems.Add(productBacklogItem);
+            this.backlogItems.Add(productBacklogItem);
         }
 
         public void ReorderFrom(BacklogItemId id, int ordering)
         {
-            foreach (ProductBacklogItem productBacklogItem in this.BacklogItems)
+            foreach (var productBacklogItem in this.backlogItems)
             {
                 productBacklogItem.ReorderFrom(id, ordering);
             }
@@ -261,35 +263,31 @@ namespace SaaSOvation.AgilePM.Domain.Model.Products
             }
         }
 
-        public override bool Equals(Object anotherObject)
+        public bool Equals(Product other)
         {
-            bool equalObjects = false;
+            if (object.ReferenceEquals(this, other)) return true;
+            if (object.ReferenceEquals(null, other)) return false;
+            return this.TenantId.Equals(other.TenantId)
+                && this.ProductId.Equals(other.ProductId);
+        }
 
-            if (anotherObject != null && this.GetType() == anotherObject.GetType())
-            {
-                Product typedObject = (Product)anotherObject;
-                equalObjects =
-                    this.TenantId.Equals(typedObject.TenantId) &&
-                    this.ProductId.Equals(typedObject.ProductId);
-            }
-
-            return equalObjects;
+        public override bool Equals(object anotherObject)
+        {
+            return Equals(anotherObject as Product);
         }
 
         public override int GetHashCode()
         {
-            int hashCodeValue =
+            return 
                 + (2335 * 3)
                 + this.TenantId.GetHashCode()
                 + this.ProductId.GetHashCode();
-
-            return hashCodeValue;
         }
 
         public override string ToString()
         {
             return "Product [tenantId=" + TenantId + ", productId=" + ProductId
-                    + ", backlogItems=" + BacklogItems + ", description="
+                    + ", backlogItems=" + backlogItems + ", description="
                     + Description + ", discussion=" + Discussion
                     + ", discussionInitiationId=" + DiscussionInitiationId
                     + ", name=" + Name + ", productOwnerId=" + ProductOwnerId + "]";

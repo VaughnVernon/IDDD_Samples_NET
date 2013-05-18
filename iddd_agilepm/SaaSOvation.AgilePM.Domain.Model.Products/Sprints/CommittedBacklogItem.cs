@@ -15,11 +15,61 @@
 namespace SaaSOvation.AgilePM.Domain.Model.Products.Sprints
 {
     using System;
+    using SaaSOvation.AgilePM.Domain.Model.Tenants;
+    using SaaSOvation.Common.Domain.Model;
 
-    public class CommittedBacklogItem
+    public class CommittedBacklogItem : Entity, IEquatable<CommittedBacklogItem>
     {
-        public CommittedBacklogItem()
+        public CommittedBacklogItem(TenantId tenantId, SprintId sprintId, BacklogItemId backlogItemId, int ordering = 0)
         {
+            this.TenantId = tenantId;
+            this.SprintId = sprintId;
+            this.BacklogItemId = backlogItemId;
+            this.Ordering = ordering;
+        }
+
+        public TenantId TenantId { get; private set; }
+
+        public SprintId SprintId { get; private set; }
+
+        public BacklogItemId BacklogItemId { get; private set; }
+
+        public int Ordering { get; private set; }
+
+        public void ReOrderFrom(BacklogItemId id, int orderOfPriority)
+        {
+            if (this.BacklogItemId.Equals(id))
+            {
+                this.Ordering = orderOfPriority;
+            }
+            else if (this.Ordering >= orderOfPriority)
+            {
+                this.Ordering = this.Ordering + 1;
+            }
+        }
+
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as CommittedBacklogItem);
+        }
+
+        public bool Equals(CommittedBacklogItem other)
+        {
+            if (object.ReferenceEquals(this, other)) return true;
+            if (object.ReferenceEquals(null, other)) return false;
+
+            return this.TenantId.Equals(other.TenantId)
+                && this.SprintId.Equals(other.SprintId)
+                && this.BacklogItemId.Equals(other.BacklogItemId);
+        }
+
+        public override int GetHashCode()
+        {
+            return
+                + (282891 * 53)
+                + this.TenantId.GetHashCode()
+                + this.SprintId.GetHashCode()
+                + this.BacklogItemId.GetHashCode();
         }
     }
 }

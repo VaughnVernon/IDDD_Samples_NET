@@ -15,9 +15,10 @@
 namespace SaaSOvation.AgilePM.Domain.Model.Products
 {
     using System;
+    using SaaSOvation.Common.Domain.Model;
     using SaaSOvation.AgilePM.Domain.Model.Discussions;
 
-    public class ProductDiscussion
+    public class ProductDiscussion : ValueObject
     {
         public static ProductDiscussion FromAvailability(
                 DiscussionAvailability availability)
