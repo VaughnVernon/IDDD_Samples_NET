@@ -18,7 +18,7 @@ namespace SaaSOvation.AgilePM.Domain.Model.Teams
     using SaaSOvation.AgilePM.Domain.Model.Tenants;
     using SaaSOvation.Common.Domain.Model;
 
-    public class Member
+    public class Member : Entity
     {
         protected Member(
             TenantId tenantId,

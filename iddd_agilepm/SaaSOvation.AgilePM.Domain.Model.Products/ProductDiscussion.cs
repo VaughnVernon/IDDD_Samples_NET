@@ -57,5 +57,11 @@ namespace SaaSOvation.AgilePM.Domain.Model.Products
 
             return new ProductDiscussion(descriptor, DiscussionAvailability.Ready);
         }
+
+        protected override System.Collections.Generic.IEnumerable<object> GetEqualityComponents()
+        {
+            yield return this.Availability;
+            yield return this.Descriptor;
+        }
     }
 }
