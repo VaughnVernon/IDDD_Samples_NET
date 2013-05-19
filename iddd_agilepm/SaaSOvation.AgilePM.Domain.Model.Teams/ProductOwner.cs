@@ -33,36 +33,17 @@ namespace SaaSOvation.AgilePM.Domain.Model.Teams
 
         public ProductOwnerId ProductOwnerId { get; private set; }
 
-        public override bool Equals(object anotherObject)
-        {
-            bool equalObjects = false;
-
-            if (anotherObject != null && this.GetType() == anotherObject.GetType())
-            {
-                ProductOwner typedObject = (ProductOwner)anotherObject;
-                equalObjects =
-                    this.TenantId.Equals(typedObject.TenantId) &&
-                    this.Username.Equals(typedObject.Username);
-            }
-
-            return equalObjects;
-        }
-
-        public override int GetHashCode()
-        {
-            int hashCodeValue =
-                + (71121 * 79)
-                + this.TenantId.GetHashCode()
-                + this.Username.GetHashCode();
-
-            return hashCodeValue;
-        }
-
         public override string ToString()
         {
             return "ProductOwner [productOwnerId()=" + ProductOwnerId + ", emailAddress()=" + EmailAddress + ", isEnabled()="
                     + Enabled + ", firstName()=" + FirstName + ", lastName()=" + LastName + ", tenantId()=" + TenantId
                     + ", username()=" + Username + "]";
+        }
+
+        protected override System.Collections.Generic.IEnumerable<object> GetIdentityComponents()
+        {
+            yield return this.TenantId;
+            yield return this.Username;
         }
     }
 }

@@ -36,18 +36,7 @@ namespace SaaSOvation.Common.Domain.Model
 
         public override int GetHashCode()
         {
-            return CombineHashCodes(GetEqualityComponents());
-        }
-
-        int CombineHashCodes(IEnumerable<object> objs)
-        {
-            unchecked
-            {
-                var hash = 17;
-                foreach (var obj in objs)
-                    hash = hash * 23 + (obj != null ? obj.GetHashCode() : 0);
-                return hash;
-            }
+            return HashCodeHelper.CombineHashCodes(GetEqualityComponents());
         }
     }
 }

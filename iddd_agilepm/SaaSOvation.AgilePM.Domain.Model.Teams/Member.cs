@@ -18,36 +18,117 @@ namespace SaaSOvation.AgilePM.Domain.Model.Teams
     using SaaSOvation.AgilePM.Domain.Model.Tenants;
     using SaaSOvation.Common.Domain.Model;
 
-    public class Member : Entity
+    public abstract class Member : CompositeIdEntity
     {
-        protected Member(
+        public Member(
             TenantId tenantId,
-            string username,
+            string userName,
             string firstName,
             string lastName,
             string emailAddress,
             DateTime initializedOn)
         {
+            AssertionConcern.AssertArgumentNotNull(tenantId, "The tenant id must be provided.");
+
+            this.TenantId = tenantId;
             this.EmailAddress = emailAddress;
             this.Enabled = true;
             this.FirstName = firstName;
             this.LastName = lastName;
-            this.ChangeTracker = new MemberChangeTracker(initializedOn, initializedOn, initializedOn);
+            this.changeTracker = new MemberChangeTracker(initializedOn, initializedOn, initializedOn);
         }
 
-        public string EmailAddress { get; private set; }
-
-        public bool Enabled { get; private set; }
-
-        public string FirstName { get; private set; }
-
-        public string LastName { get; private set; }
+        string userName;
+        string emailAddress;        
+        string firstName;
+        string lastName;
 
         public TenantId TenantId { get; private set; }
 
-        public string Username { get; private set; }
+        public string Username
+        {
+            get { return this.userName; }
+            private set
+            {
+                AssertionConcern.AssertArgumentNotEmpty(value, "The username must be provided.");
+                AssertionConcern.AssertArgumentLength(value, 250, "The username must be 250 characters or less.");
+                this.userName = value;
+            }
+        }
 
-        protected MemberChangeTracker ChangeTracker { get; private set; }
+        public string EmailAddress
+        {
+            get { return this.emailAddress; }
+            private set
+            {
+                if (value != null)
+                    AssertionConcern.AssertArgumentLength(emailAddress, 100, "Email address must be 100 characters or less.");
+                this.emailAddress = value;
+            }
+        }        
 
+        public string FirstName
+        {
+            get { return this.firstName; }
+            private set
+            {
+                if (value != null)
+                    AssertionConcern.AssertArgumentLength(value, 50, "First name must be 50 characters or less.");
+                this.firstName = value;
+            }
+        }
+
+        public string LastName
+        {
+            get { return this.lastName; }
+            private set
+            {
+                if (value != null)
+                    AssertionConcern.AssertArgumentLength(value, 50, "Last name must be 50 characters or less.");
+                this.lastName = value;
+            }
+        }
+
+        public bool Enabled { get; private set; }
+
+        MemberChangeTracker changeTracker;
+
+        public void ChangeEmailAddress(string emailAddress, DateTime asOfDate)
+        {
+            if (this.changeTracker.CanChangeEmailAddress(asOfDate) 
+                && !this.EmailAddress.Equals(emailAddress))
+            {
+                this.EmailAddress = emailAddress;
+                this.changeTracker = this.changeTracker.EmailAddressChangedOn(asOfDate);
+            }
+        }
+
+        public void ChangeName(string firstName, string lastName, DateTime asOfDate)
+        {
+            if (this.changeTracker.CanChangeName(asOfDate))
+            {
+                this.FirstName = firstName;
+                this.LastName = lastName;
+                this.changeTracker = this.changeTracker.NameChangedOn(asOfDate);
+            }
+        }
+
+        public void Disable(DateTime asOfDate)
+        {
+            if (this.changeTracker.CanToggleEnabling(asOfDate))
+            {
+                this.Enabled = false;
+                this.changeTracker = this.changeTracker.EnablingOn(asOfDate);
+            }
+        }
+
+        public void Enable(DateTime asOfDate)
+        {
+            if (this.changeTracker.CanToggleEnabling(asOfDate))
+            {
+                this.Enabled = true;
+                this.changeTracker = this.changeTracker.EnablingOn(asOfDate);
+            }
+        }
     }
 }
