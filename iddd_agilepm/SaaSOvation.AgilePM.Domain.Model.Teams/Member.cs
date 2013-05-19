@@ -18,7 +18,7 @@ namespace SaaSOvation.AgilePM.Domain.Model.Teams
     using SaaSOvation.AgilePM.Domain.Model.Tenants;
     using SaaSOvation.Common.Domain.Model;
 
-    public abstract class Member : CompositeIdEntity
+    public abstract class Member : EntityWithCompositeId
     {
         public Member(
             TenantId tenantId,

@@ -30,9 +30,12 @@ namespace SaaSOvation.AgilePM.Domain.Model.Discussions
 
         public string Id { get; private set; }
 
-        public bool IsUndefined()
+        public bool IsUndefined
         {
-            return this.Id.Equals(UNDEFINED_ID);
+            get
+            {
+                return this.Id.Equals(UNDEFINED_ID);
+            }
         }
 
         public override string ToString()

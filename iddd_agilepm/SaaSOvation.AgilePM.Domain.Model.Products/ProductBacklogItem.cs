@@ -17,6 +17,7 @@ namespace SaaSOvation.AgilePM.Domain.Model.Products
     using System;
     using SaaSOvation.Common.Domain.Model;
     using SaaSOvation.AgilePM.Domain.Model.Tenants;
+    using SaaSOvation.AgilePM.Domain.Model.Products.BacklogItems;
 
     public class ProductBacklogItem : Entity, IEquatable<ProductBacklogItem>
     {
