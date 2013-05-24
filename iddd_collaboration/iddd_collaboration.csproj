@@ -41,6 +41,31 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SaaSOvation.Collaboration.Domain.Model.Calendars\Alarm.cs" />
+    <Compile Include="SaaSOvation.Collaboration.Domain.Model.Calendars\AlarmUnitsType.cs" />
+    <Compile Include="SaaSOvation.Collaboration.Domain.Model.Calendars\CalendarCreated.cs" />
+    <Compile Include="SaaSOvation.Collaboration.Domain.Model.Calendars\CalendarDescriptionChanged.cs" />
+    <Compile Include="SaaSOvation.Collaboration.Domain.Model.Calendars\CalendarEntry.cs" />
+    <Compile Include="SaaSOvation.Collaboration.Domain.Model.Calendars\CalendarEntryDescriptionChanged.cs" />
+    <Compile Include="SaaSOvation.Collaboration.Domain.Model.Calendars\CalendarEntryId.cs" />
+    <Compile Include="SaaSOvation.Collaboration.Domain.Model.Calendars\CalendarEntryParticipantInvited.cs" />
+    <Compile Include="SaaSOvation.Collaboration.Domain.Model.Calendars\CalendarEntryParticipantUninvited.cs" />
+    <Compile Include="SaaSOvation.Collaboration.Domain.Model.Calendars\CalendarEntryRelocated.cs" />
+    <Compile Include="SaaSOvation.Collaboration.Domain.Model.Calendars\CalendarEntryRescheduled.cs" />
+    <Compile Include="SaaSOvation.Collaboration.Domain.Model.Calendars\CalendarEntryScheduled.cs" />
+    <Compile Include="SaaSOvation.Collaboration.Domain.Model.Calendars\CalendarId.cs" />
+    <Compile Include="SaaSOvation.Collaboration.Domain.Model.Calendars\CalendarIdentityService.cs" />
+    <Compile Include="SaaSOvation.Collaboration.Domain.Model.Calendars\CalendarRenamed.cs" />
+    <Compile Include="SaaSOvation.Collaboration.Domain.Model.Calendars\CalendarShared.cs" />
+    <Compile Include="SaaSOvation.Collaboration.Domain.Model.Calendars\CalendarSharer.cs" />
+    <Compile Include="SaaSOvation.Collaboration.Domain.Model.Calendars\CalendarUnshared.cs" />
+    <Compile Include="SaaSOvation.Collaboration.Domain.Model.Calendars\Calendar.cs" />
+    <Compile Include="SaaSOvation.Collaboration.Domain.Model.Calendars\DateRange.cs" />
+    <Compile Include="SaaSOvation.Collaboration.Domain.Model.Forums\DiscussionClosed.cs" />
+    <Compile Include="SaaSOvation.Collaboration.Domain.Model.Calendars\ICalendarEntryRepository.cs" />
+    <Compile Include="SaaSOvation.Collaboration.Domain.Model.Calendars\ICalendarRepository.cs" />
+    <Compile Include="SaaSOvation.Collaboration.Domain.Model.Calendars\RepeatType.cs" />
+    <Compile Include="SaaSOvation.Collaboration.Domain.Model.Calendars\Repetition.cs" />
     <Compile Include="SaaSOvation.Collaboration.Domain.Model.Collaborators\Author.cs" />
     <Compile Include="SaaSOvation.Collaboration.Domain.Model.Collaborators\Collaborator .cs" />
     <Compile Include="SaaSOvation.Collaboration.Domain.Model.Collaborators\Creator.cs" />
@@ -48,11 +73,34 @@
     <Compile Include="SaaSOvation.Collaboration.Domain.Model.Collaborators\Moderator.cs" />
     <Compile Include="SaaSOvation.Collaboration.Domain.Model.Collaborators\Owner.cs" />
     <Compile Include="SaaSOvation.Collaboration.Domain.Model.Collaborators\Participant.cs" />
+    <Compile Include="SaaSOvation.Collaboration.Domain.Model.Forums\Discussion.cs" />
+    <Compile Include="SaaSOvation.Collaboration.Domain.Model.Forums\DiscussionId.cs" />
+    <Compile Include="SaaSOvation.Collaboration.Domain.Model.Forums\DiscussionReopened.cs" />
+    <Compile Include="SaaSOvation.Collaboration.Domain.Model.Forums\DiscussionStarted.cs" />
+    <Compile Include="SaaSOvation.Collaboration.Domain.Model.Forums\Forum.cs" />
+    <Compile Include="SaaSOvation.Collaboration.Domain.Model.Forums\ForumClosed.cs" />
+    <Compile Include="SaaSOvation.Collaboration.Domain.Model.Forums\ForumDescriptionChanged.cs" />
+    <Compile Include="SaaSOvation.Collaboration.Domain.Model.Forums\ForumId.cs" />
+    <Compile Include="SaaSOvation.Collaboration.Domain.Model.Forums\ForumIdentityService.cs" />
+    <Compile Include="SaaSOvation.Collaboration.Domain.Model.Forums\ForumModeratorChanged.cs" />
+    <Compile Include="SaaSOvation.Collaboration.Domain.Model.Forums\ForumReopened.cs" />
+    <Compile Include="SaaSOvation.Collaboration.Domain.Model.Forums\ForumStarted.cs" />
+    <Compile Include="SaaSOvation.Collaboration.Domain.Model.Forums\ForumSubjectChanged.cs" />
+    <Compile Include="SaaSOvation.Collaboration.Domain.Model.Forums\IDiscussionRepository.cs" />
+    <Compile Include="SaaSOvation.Collaboration.Domain.Model.Forums\IForumRepository.cs" />
+    <Compile Include="SaaSOvation.Collaboration.Domain.Model.Forums\IPostRepository.cs" />
+    <Compile Include="SaaSOvation.Collaboration.Domain.Model.Forums\Post.cs" />
+    <Compile Include="SaaSOvation.Collaboration.Domain.Model.Forums\PostContentAltered.cs" />
+    <Compile Include="SaaSOvation.Collaboration.Domain.Model.Forums\PostedToDiscussion.cs" />
+    <Compile Include="SaaSOvation.Collaboration.Domain.Model.Forums\PostId.cs" />
     <Compile Include="SaaSOvation.Collaboration.Domain.Model.Tenants\Tenant.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="SaaSOvation.Collaboration.Domain.Model.Calendars\" />
-    <Folder Include="SaaSOvation.Collaboration.Domain.Model.Forums\" />
+    <ProjectReference Include="..\iddd_common\iddd_common.csproj">
+      <Project>{23b36ff3-b4fe-4765-815e-4943a737bc6d}</Project>
+      <Name>iddd_common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

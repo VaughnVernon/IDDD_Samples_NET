@@ -12,15 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using SaaSOvation.Common.Domain.Model;
+
 namespace SaaSOvation.Collaboration.Domain.Model.Collaborators
 {
     using System;
 
-    public abstract class Collaborator : IComparable<Collaborator>
+    public abstract class Collaborator : ValueObject, IComparable<Collaborator>
     {
-        protected Collaborator()
-        {
-        }
+        protected Collaborator() { }
 
         protected Collaborator(string identity, string name, string emailAddress)
         {
@@ -35,45 +35,23 @@ namespace SaaSOvation.Collaboration.Domain.Model.Collaborators
 
         public int CompareTo(Collaborator collaborator)
         {
-            var diff = String.Compare(Identity, collaborator.Identity, StringComparison.Ordinal);
-
+            var diff = string.Compare(this.Identity, collaborator.Identity, StringComparison.Ordinal);
             if (diff == 0)
             {
-                diff = String.Compare(EmailAddress, collaborator.EmailAddress, StringComparison.Ordinal);
-
+                diff = string.Compare(this.EmailAddress, collaborator.EmailAddress, StringComparison.Ordinal);
                 if (diff == 0)
                 {
-                    diff = String.Compare(Name, collaborator.Name, StringComparison.Ordinal);
+                    diff = string.Compare(this.Name, collaborator.Name, StringComparison.Ordinal);
                 }
             }
-
             return diff;
         }
 
-        public override bool Equals(object anObject)
+        protected override System.Collections.Generic.IEnumerable<object> GetEqualityComponents()
         {
-            var equalObjects = false;
-
-            if (anObject != null && GetType() == anObject.GetType())
-            {
-                var typedObject = (Collaborator)anObject;
-                equalObjects =
-                    EmailAddress.Equals(typedObject.EmailAddress) &&
-                    Identity.Equals(typedObject.Identity) &&
-                    Name.Equals(typedObject.Name);
-            }
-
-            return equalObjects;
-        }
-
-        public override int GetHashCode()
-        {
-            var hash = 57691 * GetHashPrimeValue()
-                       + Identity.GetHashCode()
-                       + Name.GetHashCode()
-                       + EmailAddress.GetHashCode();
-
-            return hash;
+            yield return this.EmailAddress;
+            yield return this.Identity;
+            yield return this.Name;
         }
 
         public override string ToString()
@@ -81,7 +59,5 @@ namespace SaaSOvation.Collaboration.Domain.Model.Collaborators
             return GetType().Name +
                " [emailAddress=" + EmailAddress + ", identity=" + Identity + ", Name=" + Name + "]";
         }
-
-        protected abstract int GetHashPrimeValue();
     }
 }

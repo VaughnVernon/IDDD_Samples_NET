@@ -20,10 +20,5 @@ namespace SaaSOvation.Collaboration.Domain.Model.Collaborators
             : base(identity, name, emailAddress)
         {
         }
-
-        protected override int GetHashPrimeValue()
-        {
-            return 59;
-        }
     }
 }
