@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Application\AccessApplicationService.cs" />
     <Compile Include="Application\Commands\ActivateTenantCommand.cs" />
+    <Compile Include="Application\Commands\AddGroupToGroupCommand.cs" />
     <Compile Include="Application\Commands\AddUserToGroupCommand.cs" />
     <Compile Include="Application\Commands\AssignUserToGroupCommand.cs" />
     <Compile Include="Application\Commands\AssignUserToRoleCommand.cs" />
@@ -61,6 +62,7 @@
     <Compile Include="Application\Commands\RegisterUserCommand.cs" />
     <Compile Include="Application\Commands\RemoveGroupFromGroupCommand.cs" />
     <Compile Include="Application\Commands\RemoveUserFromGroupCommand.cs" />
+    <Compile Include="Application\IdentityApplicationService.cs" />
     <Compile Include="Domain\Access\AuthorizationService.cs" />
     <Compile Include="Domain\Access\Role.cs" />
     <Compile Include="Domain\Access\RoleEvents.cs" />

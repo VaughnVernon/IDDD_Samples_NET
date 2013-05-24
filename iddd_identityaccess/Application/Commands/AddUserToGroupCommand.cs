@@ -11,17 +11,15 @@ namespace SaaSOvation.IdentityAccess.Application.Commands
         {
         }
 
-        public AddUserToGroupCommand(string tenantId, string childGroupName, string parentGroupName)
+        public AddUserToGroupCommand(string tenantId, string groupName, string userNmae)
         {
             this.TenantId = tenantId;
-            this.ChildGroupName = childGroupName;
-            this.ParentGroupName = parentGroupName;
+            this.GroupName = groupName;
+            this.Username = userNmae;
         }
 
         public string TenantId { get; set; }
-
-        public string ChildGroupName { get; set; }
-
-        public string ParentGroupName { get; set; }
+        public string GroupName { get; set; }
+        public string Username { get; set; }
     }
 }

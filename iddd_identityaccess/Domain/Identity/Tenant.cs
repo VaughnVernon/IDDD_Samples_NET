@@ -101,12 +101,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Identity
             return group;
         }
 
-        public Role ProvisionRole(string name, string description)
-        {
-            return ProvisionRole(name, description, false);
-        }
-
-        Role ProvisionRole(string name, string description, bool supportsNesting)
+        public Role ProvisionRole(string name, string description, bool supportsNesting = false)
         {
             AssertionConcern.AssertStateTrue(this.Active, "Tenant is not active.");
 

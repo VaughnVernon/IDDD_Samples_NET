@@ -20,5 +20,6 @@ namespace SaaSOvation.IdentityAccess.Domain.Identity
     public interface IGroupRepository
     {
         Group GroupNamed(TenantId identity, string p);
+        void Add(Group group);
     }
 }
