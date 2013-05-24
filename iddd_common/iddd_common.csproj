@@ -42,11 +42,13 @@
   <ItemGroup>
     <Compile Include="SaaSOvation.Common.Domain.Model\AssertionConcern.cs" />
     <Compile Include="SaaSOvation.Common.Domain.Model\Entity.cs" />
+    <Compile Include="SaaSOvation.Common.Domain.Model\EventSourcedRootEntity.cs" />
     <Compile Include="SaaSOvation.Common.Domain.Model\HashCodeHelper.cs" />
     <Compile Include="SaaSOvation.Common.Domain.Model\IDomainEvent.cs" />
     <Compile Include="SaaSOvation.Common.Domain.Model\DomainEventPublisher.cs" />
     <Compile Include="SaaSOvation.Common.Domain.Model\IDomainEventSubscriber.cs" />
     <Compile Include="SaaSOvation.Common.Domain.Model\Identity.cs" />
+    <Compile Include="SaaSOvation.Common.Domain.Model\IIdentity.cs" />
     <Compile Include="SaaSOvation.Common.Domain.Model\LongRunningProcess\IProcess.cs" />
     <Compile Include="SaaSOvation.Common.Domain.Model\LongRunningProcess\ProcessId.cs" />
     <Compile Include="SaaSOvation.Common.Domain.Model\LongRunningProcess\ProcessTimedOut.cs" />

@@ -14,13 +14,11 @@
 
 namespace SaaSOvation.Collaboration.Domain.Model.Tenants
 {
-    public sealed class Tenant
+    public sealed class Tenant : SaaSOvation.Common.Domain.Model.Identity
     {
         public Tenant(string id)
+            : base(id)
         {
-            this.Id = id;
         }
-
-        public string Id { get; private set; }
     }
 }
