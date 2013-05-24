@@ -16,7 +16,7 @@ namespace SaaSOvation.Common.Domain.Model
 {
     using System;
 
-    public abstract class Identity : IEquatable<Identity>
+    public abstract class Identity : IEquatable<Identity>, IIdentity
     {
         public Identity()
         {
