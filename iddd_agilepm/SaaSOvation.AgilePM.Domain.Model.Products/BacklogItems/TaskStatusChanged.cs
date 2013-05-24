@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,16 +7,14 @@ using SaaSOvation.Common.Domain.Model;
 
 namespace SaaSOvation.AgilePM.Domain.Model.Products.BacklogItems
 {
-    public class BacklogItemStoryPointsAssigned : IDomainEvent
+    public class TaskStatusChanged : IDomainEvent
     {
-        public BacklogItemStoryPointsAssigned(Tenants.TenantId tenantId, BacklogItemId backlogItemId, StoryPoints storyPoints)
+        public TaskStatusChanged(Tenants.TenantId tenantId, BacklogItemId backlogItemId, TaskId taskId, TaskStatus status)
         {
             this.TenantId = tenantId;
-            this.EventVersion = 1;
-            this.OccurredOn = DateTime.UtcNow;
-
             this.BacklogItemId = backlogItemId;
-            this.StoryPoints = storyPoints;
+            this.TaskId = taskId;
+            this.Status = status;
         }
 
         public Tenants.TenantId TenantId { get; private set; }
@@ -24,6 +22,7 @@ namespace SaaSOvation.AgilePM.Domain.Model.Products.BacklogItems
         public DateTime OccurredOn { get; set; }
 
         public BacklogItemId BacklogItemId { get; private set; }
-        public StoryPoints StoryPoints { get; private set; }
+        public TaskId TaskId { get; private set; }
+        public TaskStatus Status { get; private set; }
     }
 }

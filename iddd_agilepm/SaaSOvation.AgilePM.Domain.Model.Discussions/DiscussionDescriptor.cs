@@ -14,7 +14,7 @@
 
 namespace SaaSOvation.AgilePM.Domain.Model.Discussions
 {
-    public class DiscussionDescriptor
+    public class DiscussionDescriptor : SaaSOvation.Common.Domain.Model.ValueObject
     {
         public const string UNDEFINED_ID = "UNDEFINED";
 
@@ -30,36 +30,22 @@ namespace SaaSOvation.AgilePM.Domain.Model.Discussions
 
         public string Id { get; private set; }
 
-        public bool IsUndefined()
+        public bool IsUndefined
         {
-            return this.Id.Equals(UNDEFINED_ID);
-        }
-
-        public override bool Equals(object anotherObject)
-        {
-            bool equalObjects = false;
-
-            if (anotherObject != null && this.GetType() == anotherObject.GetType())
+            get
             {
-                DiscussionDescriptor typedObject = (DiscussionDescriptor)anotherObject;
-                equalObjects = this.Id.Equals(typedObject.Id);
+                return this.Id.Equals(UNDEFINED_ID);
             }
-
-            return equalObjects;
-        }
-
-        public override int GetHashCode()
-        {
-            int hashCodeValue =
-                + (72881 * 101)
-                + this.Id.GetHashCode();
-
-            return hashCodeValue;
         }
 
         public override string ToString()
         {
             return "DiscussionDescriptor [id=" + Id + "]";
+        }
+
+        protected override System.Collections.Generic.IEnumerable<object> GetEqualityComponents()
+        {
+            yield return this.Id;
         }
     }
 }

@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace SaaSOvation.AgilePM.Domain.Model.Tenants
+namespace SaaSOvation.AgilePM.Domain.Model.Products.Sprints
 {
     using SaaSOvation.Common.Domain.Model;
 

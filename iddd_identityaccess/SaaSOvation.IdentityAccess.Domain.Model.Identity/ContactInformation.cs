@@ -87,33 +87,6 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
                    telephone);
         }
 
-        public override bool Equals(Object anotherObject)
-        {
-            bool equalObjects = false;
-
-            if (anotherObject != null && this.GetType() == anotherObject.GetType()) {
-                ContactInformation typedObject = (ContactInformation) anotherObject;
-                equalObjects =
-                    this.EmailAddress.Equals(typedObject.EmailAddress) &&
-                    this.PostalAddress.Equals(typedObject.PostalAddress) &&
-                    this.PrimaryTelephone.Equals(typedObject.PrimaryTelephone) &&
-                    ((this.SecondaryTelephone == null && typedObject.SecondaryTelephone == null) ||
-                     (this.SecondaryTelephone != null && this.SecondaryTelephone.Equals(typedObject.SecondaryTelephone)));
-            }
-
-            return equalObjects;
-        }
-
-        public override int GetHashCode()
-        {
-            return
-                + (73213 * 173)
-                + this.EmailAddress.GetHashCode()
-                + this.PostalAddress.GetHashCode()
-                + this.PrimaryTelephone.GetHashCode()
-                + (this.SecondaryTelephone == null ? 0:this.SecondaryTelephone.GetHashCode());
-        }
-
         public override string ToString()
         {
             return "ContactInformation [emailAddress=" + EmailAddress
@@ -121,9 +94,17 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
                     + ", primaryTelephone=" + PrimaryTelephone
                     + ", secondaryTelephone=" + SecondaryTelephone + "]";
         }
+
+        protected override System.Collections.Generic.IEnumerable<object> GetEqualityComponents()
+        {
+            yield return this.EmailAddress;
+            yield return this.PostalAddress;
+            yield return this.PrimaryTelephone;
+            yield return this.SecondaryTelephone;
+        }
     }
 
-    public class EmailAddress
+    public class EmailAddress : ValueObject
     {
         public EmailAddress(String address)
         {
@@ -147,7 +128,6 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
             {
                 return this._address;
             }
-
             set
             {
                 AssertionConcern.AssertArgumentNotEmpty(value, "The email address is required.");
@@ -161,34 +141,18 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
             }
         }
 
-        public override bool Equals(Object anotherObject)
-        {
-            bool equalObjects = false;
-
-            if (anotherObject != null && this.GetType() == anotherObject.GetType()) {
-                EmailAddress typedObject = (EmailAddress) anotherObject;
-                equalObjects = this.Address.Equals(typedObject.Address);
-            }
-
-            return equalObjects;
-        }
-
-        public override int GetHashCode()
-        {
-            int hashCodeValue =
-                + (17861 * 179)
-                + this.Address.GetHashCode();
-
-            return hashCodeValue;
-        }
-
         public override string ToString()
         {
             return "EmailAddress [address=" + Address + "]";
         }
+
+        protected override System.Collections.Generic.IEnumerable<object> GetEqualityComponents()
+        {
+            yield return _address.ToUpper();
+        }
     }
 
-    public class PostalAddress
+    public class PostalAddress : ValueObject
     {
         public PostalAddress(
                 String streetAddress,
@@ -223,37 +187,6 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
 
         public string StreetAddress { get; private set; }
 
-        public override bool Equals(Object anotherObject)
-        {
-            bool equalObjects = false;
-
-            if (anotherObject != null && this.GetType() == anotherObject.GetType())
-            {
-                PostalAddress typedObject = (PostalAddress) anotherObject;
-                equalObjects =
-                    this.StreetAddress.Equals(typedObject.StreetAddress) &&
-                    this.City.Equals(typedObject.City) &&
-                    this.StateProvince.Equals(typedObject.StateProvince) &&
-                    this.PostalCode.Equals(typedObject.PostalCode) &&
-                    this.CountryCode.Equals(typedObject.CountryCode);
-            }
-
-            return equalObjects;
-        }
-
-        public override int GetHashCode()
-        {
-            int hashCodeValue =
-                + (31589 * 227)
-                + this.StreetAddress.GetHashCode()
-                + this.City.GetHashCode()
-                + this.StateProvince.GetHashCode()
-                + this.PostalCode.GetHashCode()
-                + this.CountryCode.GetHashCode();
-
-            return hashCodeValue;
-        }
-
         public override string ToString()
         {
             return "PostalAddress [streetAddress=" + StreetAddress
@@ -261,9 +194,18 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
                     + ", postalCode=" + PostalCode
                     + ", countryCode=" + CountryCode + "]";
         }
+
+        protected override System.Collections.Generic.IEnumerable<object> GetEqualityComponents()
+        {
+            yield return this.StreetAddress;
+            yield return this.City;
+            yield return this.StateProvince;
+            yield return this.PostalCode;
+            yield return this.CountryCode;
+        }
     }
 
-    public class Telephone
+    public class Telephone : ValueObject
     {
         public Telephone(String number)
         {
@@ -279,7 +221,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
         {
         }
 
-        private string _number;
+        string _number;
         public string Number
         {
             get
@@ -300,31 +242,14 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
             }
         }
 
-        public override bool Equals(Object anotherObject)
-        {
-            bool equalObjects = false;
-
-            if (anotherObject != null && this.GetType() == anotherObject.GetType())
-            {
-                Telephone typedObject = (Telephone)anotherObject;
-                equalObjects = this.Number.Equals(typedObject.Number);
-            }
-
-            return equalObjects;
-        }
-
-        public override int GetHashCode()
-        {
-            int hashCodeValue =
-                + (35137 * 239)
-                + this.Number.GetHashCode();
-
-            return hashCodeValue;
-        }
-
         public override string ToString()
         {
             return "Telephone [number=" + Number + "]";
+        }
+
+        protected override System.Collections.Generic.IEnumerable<object> GetEqualityComponents()
+        {
+            yield return this.Number;
         }
     }
 }

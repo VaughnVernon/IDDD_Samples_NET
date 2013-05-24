@@ -16,49 +16,56 @@ namespace SaaSOvation.AgilePM.Domain.Model.Teams
 {
     using System;
 
-    public class MemberChangeTracker
+    using SaaSOvation.Common.Domain.Model;
+
+    public class MemberChangeTracker : ValueObject
     {
         internal MemberChangeTracker(DateTime enablingOn, DateTime nameChangedOn, DateTime emailAddressChangedOn)
         {
-            this.EmailAddressChangedOnDate = emailAddressChangedOn;
-            this.EnablingOnDate = enablingOn;
-            this.NameChangedOnDate = nameChangedOn;
+            this.emailAddressChangedOnDate = emailAddressChangedOn;
+            this.enablingOnDate = enablingOn;
+            this.nameChangedOnDate = nameChangedOn;
         }
 
-        private DateTime EnablingOnDate { get; set; }
-
-        private DateTime NameChangedOnDate { get; set; }
-
-        private DateTime EmailAddressChangedOnDate { get; set; }
+        readonly DateTime enablingOnDate;
+        readonly DateTime nameChangedOnDate;
+        readonly DateTime emailAddressChangedOnDate;
 
         public bool CanChangeEmailAddress(DateTime asOfDateTime)
         {
-            return this.EmailAddressChangedOnDate < asOfDateTime;
+            return this.emailAddressChangedOnDate < asOfDateTime;
         }
 
         public bool CanChangeName(DateTime asOfDateTime)
         {
-            return this.NameChangedOnDate < asOfDateTime;
+            return this.nameChangedOnDate < asOfDateTime;
         }
 
         public bool CanToggleEnabling(DateTime asOfDateTime)
         {
-            return this.EnablingOnDate < asOfDateTime;
+            return this.enablingOnDate < asOfDateTime;
         }
 
         public MemberChangeTracker EmailAddressChangedOn(DateTime asOfDateTime)
         {
-            return new MemberChangeTracker(this.EnablingOnDate, this.NameChangedOnDate, asOfDateTime);
+            return new MemberChangeTracker(this.enablingOnDate, this.nameChangedOnDate, asOfDateTime);
         }
 
         public MemberChangeTracker EnablingOn(DateTime asOfDateTime)
         {
-            return new MemberChangeTracker(asOfDateTime, this.NameChangedOnDate, this.EmailAddressChangedOnDate);
+            return new MemberChangeTracker(asOfDateTime, this.nameChangedOnDate, this.emailAddressChangedOnDate);
         }
 
         public MemberChangeTracker NameChangedOn(DateTime asOfDateTime)
         {
-            return new MemberChangeTracker(this.EnablingOnDate, asOfDateTime, this.EmailAddressChangedOnDate);
+            return new MemberChangeTracker(this.enablingOnDate, asOfDateTime, this.emailAddressChangedOnDate);
+        }
+
+        protected override System.Collections.Generic.IEnumerable<object> GetEqualityComponents()
+        {
+            yield return this.enablingOnDate;
+            yield return this.nameChangedOnDate;
+            yield return this.emailAddressChangedOnDate;
         }
     }
 }

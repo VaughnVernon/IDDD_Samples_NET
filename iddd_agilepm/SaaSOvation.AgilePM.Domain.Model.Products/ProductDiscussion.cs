@@ -31,10 +31,9 @@ namespace SaaSOvation.AgilePM.Domain.Model.Products
             return new ProductDiscussion(descriptor, availability);
         }
 
-        public ProductDiscussion(
-                DiscussionDescriptor descriptor,
-                DiscussionAvailability availability)
+        public ProductDiscussion(DiscussionDescriptor descriptor, DiscussionAvailability availability)
         {
+            AssertionConcern.AssertArgumentNotNull(descriptor, "The descriptor must be provided.");
             this.Availability = availability;
             this.Descriptor = descriptor;
         }
@@ -50,12 +49,17 @@ namespace SaaSOvation.AgilePM.Domain.Model.Products
 
         public ProductDiscussion NowReady(DiscussionDescriptor descriptor)
         {
-            if (descriptor == null || descriptor.IsUndefined())
+            if (descriptor == null || descriptor.IsUndefined)
                 throw new ArgumentException("The discussion descriptor must be defined.");
             if (this.Availability != DiscussionAvailability.Requested)
                 throw new InvalidOperationException("The discussion must be requested first.");
-
             return new ProductDiscussion(descriptor, DiscussionAvailability.Ready);
+        }
+
+        protected override System.Collections.Generic.IEnumerable<object> GetEqualityComponents()
+        {
+            yield return this.Availability;
+            yield return this.Descriptor;
         }
     }
 }

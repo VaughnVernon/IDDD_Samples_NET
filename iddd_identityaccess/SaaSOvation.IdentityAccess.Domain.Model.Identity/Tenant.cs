@@ -31,6 +31,8 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
             this.TenantId = new TenantId();
         }
 
+        public int Id { get; set; }
+
         public TenantId TenantId { get; private set; }
 
         public string Name { get; private set; }
