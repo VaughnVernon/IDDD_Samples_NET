@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{68FD7D5F-2837-4B55-918F-C13247899667}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SaaSOvation.Collaboration</RootNamespace>
+    <AssemblyName>SaaSOvation.Collaboration</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Domain\Calendars\Alarm.cs" />
+    <Compile Include="Domain\Calendars\AlarmUnitsType.cs" />
+    <Compile Include="Domain\Calendars\CalendarCreated.cs" />
+    <Compile Include="Domain\Calendars\CalendarDescriptionChanged.cs" />
+    <Compile Include="Domain\Calendars\CalendarEntry.cs" />
+    <Compile Include="Domain\Calendars\CalendarEntryDescriptionChanged.cs" />
+    <Compile Include="Domain\Calendars\CalendarEntryId.cs" />
+    <Compile Include="Domain\Calendars\CalendarEntryParticipantInvited.cs" />
+    <Compile Include="Domain\Calendars\CalendarEntryParticipantUninvited.cs" />
+    <Compile Include="Domain\Calendars\CalendarEntryRelocated.cs" />
+    <Compile Include="Domain\Calendars\CalendarEntryRescheduled.cs" />
+    <Compile Include="Domain\Calendars\CalendarEntryScheduled.cs" />
+    <Compile Include="Domain\Calendars\CalendarId.cs" />
+    <Compile Include="Domain\Calendars\CalendarIdentityService.cs" />
+    <Compile Include="Domain\Calendars\CalendarRenamed.cs" />
+    <Compile Include="Domain\Calendars\CalendarShared.cs" />
+    <Compile Include="Domain\Calendars\CalendarSharer.cs" />
+    <Compile Include="Domain\Calendars\CalendarUnshared.cs" />
+    <Compile Include="Domain\Calendars\Calendar.cs" />
+    <Compile Include="Domain\Calendars\DateRange.cs" />
+    <Compile Include="Domain\Forums\DiscussionClosed.cs" />
+    <Compile Include="Domain\Calendars\ICalendarEntryRepository.cs" />
+    <Compile Include="Domain\Calendars\ICalendarRepository.cs" />
+    <Compile Include="Domain\Calendars\RepeatType.cs" />
+    <Compile Include="Domain\Calendars\Repetition.cs" />
+    <Compile Include="Domain\Collaborators\Author.cs" />
+    <Compile Include="Domain\Collaborators\Collaborator .cs" />
+    <Compile Include="Domain\Collaborators\Creator.cs" />
+    <Compile Include="Domain\Collaborators\ICollaboratorService.cs" />
+    <Compile Include="Domain\Collaborators\Moderator.cs" />
+    <Compile Include="Domain\Collaborators\Owner.cs" />
+    <Compile Include="Domain\Collaborators\Participant.cs" />
+    <Compile Include="Domain\Forums\Discussion.cs" />
+    <Compile Include="Domain\Forums\DiscussionId.cs" />
+    <Compile Include="Domain\Forums\DiscussionReopened.cs" />
+    <Compile Include="Domain\Forums\DiscussionStarted.cs" />
+    <Compile Include="Domain\Forums\Forum.cs" />
+    <Compile Include="Domain\Forums\ForumClosed.cs" />
+    <Compile Include="Domain\Forums\ForumDescriptionChanged.cs" />
+    <Compile Include="Domain\Forums\ForumId.cs" />
+    <Compile Include="Domain\Forums\ForumIdentityService.cs" />
+    <Compile Include="Domain\Forums\ForumModeratorChanged.cs" />
+    <Compile Include="Domain\Forums\ForumReopened.cs" />
+    <Compile Include="Domain\Forums\ForumStarted.cs" />
+    <Compile Include="Domain\Forums\ForumSubjectChanged.cs" />
+    <Compile Include="Domain\Forums\IDiscussionRepository.cs" />
+    <Compile Include="Domain\Forums\IForumRepository.cs" />
+    <Compile Include="Domain\Forums\IPostRepository.cs" />
+    <Compile Include="Domain\Forums\Post.cs" />
+    <Compile Include="Domain\Forums\PostContentAltered.cs" />
+    <Compile Include="Domain\Forums\PostedToDiscussion.cs" />
+    <Compile Include="Domain\Forums\PostId.cs" />
+    <Compile Include="Domain\Tenants\Tenant.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\iddd_common\Common.csproj">
+      <Project>{23b36ff3-b4fe-4765-815e-4943a737bc6d}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
