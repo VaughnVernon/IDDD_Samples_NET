@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace SaaSOvation.IdentityAccess.Port.Adapter.Security
+namespace SaaSOvation.IdentityAccess.Infrastructure
 {
     using System;
     using System.Security.Cryptography;
