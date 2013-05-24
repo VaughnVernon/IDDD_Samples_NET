@@ -50,6 +50,8 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
         {
         }
 
+        public int Id { get; set; }
+
         public bool Enabled
         {
             get

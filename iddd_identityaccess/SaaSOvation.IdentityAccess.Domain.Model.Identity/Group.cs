@@ -35,6 +35,8 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
             this.GroupMembers = new HashSet<GroupMember>();
         }
 
+        public int Id { get; set; }
+
         public string Description { get; private set; }
 
         public string Name { get; private set; }

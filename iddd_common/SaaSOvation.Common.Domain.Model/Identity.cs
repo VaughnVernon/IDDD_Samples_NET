@@ -28,7 +28,9 @@ namespace SaaSOvation.Common.Domain.Model
             this.Id = id;
         }
 
-        public string Id { get; private set; }
+        // currently for Entity Framework, set must be protected, not private.
+        // will be fixed in EF 6.
+        public string Id { get; protected set; }
 
         public bool Equals(Identity id)
         {

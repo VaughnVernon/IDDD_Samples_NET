@@ -46,7 +46,6 @@
     <Compile Include="SaaSOvation.IdentityAccess.Domain.Model.Access\IRoleRepository.cs" />
     <Compile Include="SaaSOvation.IdentityAccess.Domain.Model.Identity\AuthenticationService.cs" />
     <Compile Include="SaaSOvation.IdentityAccess.Domain.Model.Identity\ContactInformation.cs" />
-    <None Include="SaaSOvation.IdentityAccess.Domain.Model.Identity\Tenant.cs.bak" />
     <Compile Include="SaaSOvation.IdentityAccess.Domain.Model.Identity\Enablement.cs" />
     <Compile Include="SaaSOvation.IdentityAccess.Domain.Model.Identity\IEncryptionService.cs" />
     <Compile Include="SaaSOvation.IdentityAccess.Domain.Model.Identity\FullName.cs" />

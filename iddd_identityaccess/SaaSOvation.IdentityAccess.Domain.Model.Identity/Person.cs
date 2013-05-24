@@ -26,6 +26,8 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
             this.TenantId = tenantId;
         }
 
+        public int Id { get; set; }
+
         public ContactInformation ContactInformation { get; private set; }
 
         public EmailAddress EmailAddress

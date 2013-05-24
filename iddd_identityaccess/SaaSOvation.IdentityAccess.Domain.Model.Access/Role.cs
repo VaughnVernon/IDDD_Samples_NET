@@ -37,6 +37,8 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Access
             return new Group(this.TenantId, groupName, "Role backing group for: " + this.Name);
         }
 
+        public int Id { get; set; }
+
         public string Description { get; private set; }
 
         public string Name { get; private set; }
