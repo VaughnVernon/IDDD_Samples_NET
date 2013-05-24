@@ -53,9 +53,11 @@
     <Compile Include="Domain\LongRunningProcess\ProcessId.cs" />
     <Compile Include="Domain\LongRunningProcess\ProcessTimedOut.cs" />
     <Compile Include="Domain\LongRunningProcess\TimeConstrainedProcessTracker.cs" />
+    <Compile Include="Notifications\NotificationLogId.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Domain\ValueObject.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
