@@ -62,7 +62,9 @@
     <Compile Include="Application\Commands\RegisterUserCommand.cs" />
     <Compile Include="Application\Commands\RemoveGroupFromGroupCommand.cs" />
     <Compile Include="Application\Commands\RemoveUserFromGroupCommand.cs" />
+    <Compile Include="Application\IdentityAccessEventProcessor.cs" />
     <Compile Include="Application\IdentityApplicationService.cs" />
+    <Compile Include="Application\NotificationApplicationService.cs" />
     <Compile Include="Domain\Access\AuthorizationService.cs" />
     <Compile Include="Domain\Access\Role.cs" />
     <Compile Include="Domain\Access\RoleEvents.cs" />
@@ -92,7 +94,7 @@
     <Compile Include="Domain\Identity\IUserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Domain\DomainRegistry.cs" />
-    <Compile Include="Infrastructure\MD5EncryptionService.cs" />
+    <Compile Include="Infrastructure\Services\MD5EncryptionService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\iddd_common\Common.csproj">
@@ -100,7 +102,9 @@
       <Name>Common</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Infrastructure\Persistence\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

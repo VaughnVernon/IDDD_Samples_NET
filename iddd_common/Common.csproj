@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.5\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -53,11 +56,21 @@
     <Compile Include="Domain\LongRunningProcess\ProcessId.cs" />
     <Compile Include="Domain\LongRunningProcess\ProcessTimedOut.cs" />
     <Compile Include="Domain\LongRunningProcess\TimeConstrainedProcessTracker.cs" />
+    <Compile Include="Events\EventSerializer.cs" />
+    <Compile Include="Events\IEventStore.cs" />
+    <Compile Include="Events\StoredEvent.cs" />
+    <Compile Include="Notifications\INotificationPublisher.cs" />
+    <Compile Include="Notifications\Notification.cs" />
+    <Compile Include="Notifications\NotificationLog.cs" />
+    <Compile Include="Notifications\NotificationLogFactory.cs" />
     <Compile Include="Notifications\NotificationLogId.cs" />
+    <Compile Include="Notifications\NotificationLogInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Domain\ValueObject.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

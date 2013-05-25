@@ -26,7 +26,7 @@ namespace SaaSOvation.IdentityAccess.Domain
                 // this is not a desirable dependency since it
                 // references port adapters, but it doesn't
                 // require an IoC container
-                return new Infrastructure.MD5EncryptionService();
+                return new Infrastructure.Services.MD5EncryptionService();
             }
         }
 
