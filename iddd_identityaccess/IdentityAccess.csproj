@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FE7CF2BC-5070-4CC7-AB31-4E7F12AA65BF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SaaSOvation.IdentityAccess</RootNamespace>
+    <AssemblyName>SaaSOvation.IdentityAccess</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Application\AccessApplicationService.cs" />
+    <Compile Include="Application\Commands\ActivateTenantCommand.cs" />
+    <Compile Include="Application\Commands\AddGroupToGroupCommand.cs" />
+    <Compile Include="Application\Commands\AddUserToGroupCommand.cs" />
+    <Compile Include="Application\Commands\AssignUserToGroupCommand.cs" />
+    <Compile Include="Application\Commands\AssignUserToRoleCommand.cs" />
+    <Compile Include="Application\Commands\AuthenticateUserCommand.cs" />
+    <Compile Include="Application\Commands\ChangeContactInfoCommand.cs" />
+    <Compile Include="Application\Commands\ChangeEmailAddressCommand.cs" />
+    <Compile Include="Application\Commands\ChangePostalAddressCommand.cs" />
+    <Compile Include="Application\Commands\ChangePrimaryTelephoneCommand.cs" />
+    <Compile Include="Application\Commands\ChangeSecondaryTelephoneCommand.cs" />
+    <Compile Include="Application\Commands\ChangeUserPasswordCommand.cs" />
+    <Compile Include="Application\Commands\ChangeUserPersonalNameCommand.cs" />
+    <Compile Include="Application\Commands\DeactivateTenantCommand.cs" />
+    <Compile Include="Application\Commands\DefineUserEnablementCommand.cs" />
+    <Compile Include="Application\Commands\ProvisionGroupCommand.cs" />
+    <Compile Include="Application\Commands\ProvisionRoleCommand.cs" />
+    <Compile Include="Application\Commands\ProvisionTenantCommand.cs" />
+    <Compile Include="Application\Commands\RegisterUserCommand.cs" />
+    <Compile Include="Application\Commands\RemoveGroupFromGroupCommand.cs" />
+    <Compile Include="Application\Commands\RemoveUserFromGroupCommand.cs" />
+    <Compile Include="Application\IdentityAccessEventProcessor.cs" />
+    <Compile Include="Application\IdentityApplicationService.cs" />
+    <Compile Include="Application\NotificationApplicationService.cs" />
+    <Compile Include="Domain\Access\AuthorizationService.cs" />
+    <Compile Include="Domain\Access\Role.cs" />
+    <Compile Include="Domain\Access\RoleEvents.cs" />
+    <Compile Include="Domain\Access\IRoleRepository.cs" />
+    <Compile Include="Domain\Identity\AuthenticationService.cs" />
+    <Compile Include="Domain\Identity\ContactInformation.cs" />
+    <Compile Include="Domain\Identity\Enablement.cs" />
+    <Compile Include="Domain\Identity\IEncryptionService.cs" />
+    <Compile Include="Domain\Identity\FullName.cs" />
+    <Compile Include="Domain\Identity\Group.cs" />
+    <Compile Include="Domain\Identity\GroupEvents.cs" />
+    <Compile Include="Domain\Identity\GroupMember.cs" />
+    <Compile Include="Domain\Identity\GroupMemberService.cs" />
+    <Compile Include="Domain\Identity\IGroupRepository.cs" />
+    <Compile Include="Domain\Identity\InvitationDescriptor.cs" />
+    <Compile Include="Domain\Identity\PasswordService.cs" />
+    <Compile Include="Domain\Identity\Person.cs" />
+    <Compile Include="Domain\Identity\RegistrationInvitation.cs" />
+    <Compile Include="Domain\Identity\Tenant.cs" />
+    <Compile Include="Domain\Identity\TenantEvents.cs" />
+    <Compile Include="Domain\Identity\TenantId.cs" />
+    <Compile Include="Domain\Identity\TenantProvisioningService.cs" />
+    <Compile Include="Domain\Identity\ITenantRepository.cs" />
+    <Compile Include="Domain\Identity\User.cs" />
+    <Compile Include="Domain\Identity\UserDescriptor.cs" />
+    <Compile Include="Domain\Identity\UserEvents.cs" />
+    <Compile Include="Domain\Identity\IUserRepository.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Domain\DomainRegistry.cs" />
+    <Compile Include="Infrastructure\Services\MD5EncryptionService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\iddd_common\Common.csproj">
+      <Project>{23B36FF3-B4FE-4765-815E-4943A737BC6D}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Infrastructure\Persistence\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

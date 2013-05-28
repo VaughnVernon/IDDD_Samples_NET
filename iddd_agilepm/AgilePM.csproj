@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{81B36F86-19C3-4B19-8BBF-492ADA991886}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SaaSOvation.AgilePM</RootNamespace>
+    <AssemblyName>SaaSOvation.AgilePM</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Domain\Discussions\DiscussionDescriptor.cs" />
+    <Compile Include="Domain\Products\BacklogItems\BacklogItem.cs" />
+    <Compile Include="Domain\Discussions\DiscussionAvailability.cs" />
+    <Compile Include="Domain\Products\BacklogItems\BacklogItemCategoryChanged.cs" />
+    <Compile Include="Domain\Products\BacklogItems\BacklogItemCommitted.cs" />
+    <Compile Include="Domain\Products\BacklogItems\BacklogItemDiscussion.cs" />
+    <Compile Include="Domain\Products\BacklogItems\BacklogItemDiscussionInitiated.cs" />
+    <Compile Include="Domain\Products\BacklogItems\BacklogItemDiscussionRequested.cs" />
+    <Compile Include="Domain\Products\BacklogItems\BacklogItemMarkedAsRemoved.cs" />
+    <Compile Include="Domain\Products\BacklogItems\BacklogItemScheduled.cs" />
+    <Compile Include="Domain\Products\BacklogItems\BacklogItemStatus.cs" />
+    <Compile Include="Domain\Products\BacklogItems\BacklogItemStatusChanged.cs" />
+    <Compile Include="Domain\Products\BacklogItems\BacklogItemStoryPointsAssigned.cs" />
+    <Compile Include="Domain\Products\BacklogItems\BacklogItemStoryTold.cs" />
+    <Compile Include="Domain\Products\BacklogItems\BacklogItemSummarized.cs" />
+    <Compile Include="Domain\Products\BacklogItems\BacklogItemType.cs" />
+    <Compile Include="Domain\Products\BacklogItems\BacklogItemId.cs" />
+    <Compile Include="Domain\Products\BacklogItems\BacklogItemTypeChanged.cs" />
+    <Compile Include="Domain\Products\BacklogItems\BacklogItemUncommitted.cs" />
+    <Compile Include="Domain\Products\BacklogItems\BacklogItemUnscheduled.cs" />
+    <Compile Include="Domain\Products\BacklogItems\BusinessPriority.cs" />
+    <Compile Include="Domain\Products\BacklogItems\BusinessPriorityAssigned.cs" />
+    <Compile Include="Domain\Products\BacklogItems\BusinessPriorityRatings.cs" />
+    <Compile Include="Domain\Products\BacklogItems\BusinessPriorityTotals.cs" />
+    <Compile Include="Domain\Products\BacklogItems\EstimationLogEntry.cs" />
+    <Compile Include="Domain\Products\BacklogItems\StoryPoints.cs" />
+    <Compile Include="Domain\Products\BacklogItems\Task.cs" />
+    <Compile Include="Domain\Products\BacklogItems\TaskDefined.cs" />
+    <Compile Include="Domain\Products\BacklogItems\TaskDescribed.cs" />
+    <Compile Include="Domain\Products\BacklogItems\TaskHoursRemainingEstimated.cs" />
+    <Compile Include="Domain\Products\BacklogItems\TaskId.cs" />
+    <Compile Include="Domain\Products\BacklogItems\TaskRemoved.cs" />
+    <Compile Include="Domain\Products\BacklogItems\TaskRenamed.cs" />
+    <Compile Include="Domain\Products\BacklogItems\TaskStatus.cs" />
+    <Compile Include="Domain\Products\BacklogItems\TaskStatusChanged.cs" />
+    <Compile Include="Domain\Products\BacklogItems\TaskVolunteerAssigned.cs" />
+    <Compile Include="Domain\Products\Product.cs" />
+    <Compile Include="Domain\Products\ProductBacklogItem.cs" />
+    <Compile Include="Domain\Products\ProductBacklogItemPlanned.cs" />
+    <Compile Include="Domain\Products\ProductCreated.cs" />
+    <Compile Include="Domain\Products\ProductDiscussion.cs" />
+    <Compile Include="Domain\Products\ProductDiscussionInitiated.cs" />
+    <Compile Include="Domain\Products\ProductDiscussionRequested.cs" />
+    <Compile Include="Domain\Products\ProductReleaseScheduled.cs" />
+    <Compile Include="Domain\Products\ProductSprintScheduled.cs" />
+    <Compile Include="Domain\Products\Releases\IReleaseRepository.cs" />
+    <Compile Include="Domain\Products\Releases\ReleaseId.cs" />
+    <Compile Include="Domain\Products\Releases\ScheduledBacklogItem.cs" />
+    <Compile Include="Domain\Products\Releases\Release.cs" />
+    <Compile Include="Domain\Products\Sprints\CommittedBacklogItem.cs" />
+    <Compile Include="Domain\Products\Sprints\ISprintRepository.cs" />
+    <Compile Include="Domain\Products\Sprints\SprintId.cs" />
+    <Compile Include="Domain\Products\Sprints\Sprint.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Domain\Products\ProductId.cs" />
+    <Compile Include="Domain\Teams\IProductOwnerRepository.cs" />
+    <Compile Include="Domain\Teams\ITeamMemberRepository.cs" />
+    <Compile Include="Domain\Teams\ITeamRepository.cs" />
+    <Compile Include="Domain\Teams\Member.cs" />
+    <Compile Include="Domain\Teams\MemberChangeTracker.cs" />
+    <Compile Include="Domain\Teams\ProductOwner.cs" />
+    <Compile Include="Domain\Teams\ProductOwnerId.cs" />
+    <Compile Include="Domain\Teams\Team.cs" />
+    <Compile Include="Domain\Teams\TeamMember.cs" />
+    <Compile Include="Domain\Teams\TeamMemberId.cs" />
+    <Compile Include="Domain\Tenants\TenantId.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\iddd_common\Common.csproj">
+      <Project>{23B36FF3-B4FE-4765-815E-4943A737BC6D}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
