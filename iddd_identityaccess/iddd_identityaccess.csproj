@@ -55,7 +55,6 @@
     <Compile Include="SaaSOvation.IdentityAccess.Domain.Model.Identity\GroupMemberService.cs" />
     <Compile Include="SaaSOvation.IdentityAccess.Domain.Model.Identity\IGroupRepository.cs" />
     <Compile Include="SaaSOvation.IdentityAccess.Domain.Model.Identity\InvitationDescriptor.cs" />
-    <Compile Include="SaaSOvation.IdentityAccess.Domain.Model.Identity\MyEntity.cs" />
     <Compile Include="SaaSOvation.IdentityAccess.Domain.Model.Identity\PasswordService.cs" />
     <Compile Include="SaaSOvation.IdentityAccess.Domain.Model.Identity\Person.cs" />
     <Compile Include="SaaSOvation.IdentityAccess.Domain.Model.Identity\RegistrationInvitation.cs" />
