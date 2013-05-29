@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using SaaSOvation.IdentityAccess.Domain.Identity;
-using SaaSOvation.IdentityAccess.Domain.Access;
+using SaaSOvation.IdentityAccess.Domain.Model.Identity;
+using SaaSOvation.IdentityAccess.Domain.Model.Access;
 using SaaSOvation.IdentityAccess.Application.Commands;
 
 namespace SaaSOvation.IdentityAccess.Application

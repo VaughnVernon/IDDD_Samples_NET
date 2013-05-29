@@ -17,7 +17,7 @@ namespace SaaSOvation.IdentityAccess.Infrastructure.Services
     using System;
     using System.Security.Cryptography;
     using System.Text;
-    using SaaSOvation.IdentityAccess.Domain.Identity;
+    using SaaSOvation.IdentityAccess.Domain.Model.Identity;
     using SaaSOvation.Common.Domain;
 
     public class MD5EncryptionService : IEncryptionService
