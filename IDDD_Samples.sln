@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "iddd_common\Common.csproj", "{23B36FF3-B4FE-4765-815E-4943A737BC6D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgilePM", "iddd_agilepm\AgilePM.csproj", "{81B36F86-19C3-4B19-8BBF-492ADA991886}"
