@@ -53,6 +53,7 @@
     <Compile Include="Domain.Model\Identity.cs" />
     <Compile Include="Domain.Model\IIdentity.cs" />
     <Compile Include="Domain.Model\LongRunningProcess\IProcess.cs" />
+    <Compile Include="Domain.Model\LongRunningProcess\ITimeConstrainedProcessTrackerRepository.cs" />
     <Compile Include="Domain.Model\LongRunningProcess\ProcessId.cs" />
     <Compile Include="Domain.Model\LongRunningProcess\ProcessTimedOut.cs" />
     <Compile Include="Domain.Model\LongRunningProcess\TimeConstrainedProcessTracker.cs" />

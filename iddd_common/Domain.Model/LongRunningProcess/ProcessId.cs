@@ -14,8 +14,20 @@
 
 namespace SaaSOvation.Common.Domain.Model.LongRunningProcess
 {
+    using System;
+
     public class ProcessId : Identity
     {
+        public static ProcessId ExistingProcessId(string id)
+        {
+            return new ProcessId(id);
+        }
+
+        public static ProcessId NewProcessId()
+        {
+            return new ProcessId(Guid.NewGuid().ToString());
+        }
+
         public ProcessId(string id)
             : base(id)
         {
