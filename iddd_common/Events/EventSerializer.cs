@@ -5,7 +5,7 @@ using System.Text;
 
 using Newtonsoft.Json;
 
-using SaaSOvation.Common.Domain;
+using SaaSOvation.Common.Domain.Model;
 
 namespace SaaSOvation.Common.Events
 {

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SaaSOvation.Collaboration.Domain.Model.Forums
 {
-    public class DiscussionId : SaaSOvation.Common.Domain.Identity
+    public class DiscussionId : SaaSOvation.Common.Domain.Model.Identity
     {
         public DiscussionId(string id)
             : base(id)

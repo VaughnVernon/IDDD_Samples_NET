@@ -16,7 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SaaSOvation.Common.Domain
+namespace SaaSOvation.Common.Domain.Model
 {
     public abstract class ValueObject
     {

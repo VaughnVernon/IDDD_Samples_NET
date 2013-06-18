@@ -17,7 +17,7 @@ namespace SaaSOvation.AgilePM.Domain.Model.Products.Releases
     using System;
     using SaaSOvation.AgilePM.Domain.Model.Tenants;
     using SaaSOvation.AgilePM.Domain.Model.Products.BacklogItems;
-    using SaaSOvation.Common.Domain;
+    using SaaSOvation.Common.Domain.Model;
 
     public class ScheduledBacklogItem : Entity, IEquatable<ScheduledBacklogItem>
     {

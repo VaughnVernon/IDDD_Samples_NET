@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SaaSOvation.Common.Notifications
 {
-    public class NotificationLogId : Domain.ValueObject
+    public class NotificationLogId : Domain.Model.ValueObject
     {
         public static string GetEncoded(NotificationLogId notificationLogId)
         {

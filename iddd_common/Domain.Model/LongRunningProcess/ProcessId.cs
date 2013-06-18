@@ -12,13 +12,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace SaaSOvation.Common.Domain
+namespace SaaSOvation.Common.Domain.Model.LongRunningProcess
 {
-    using System;
-
-    public interface IDomainEvent
+    public class ProcessId : Identity
     {
-        int EventVersion { get; set;  }
-        DateTime OccurredOn { get; set; }
+        public ProcessId(string id)
+            : base(id)
+        {
+        }
+
+        public ProcessId()
+            : base()
+        {
+        }
     }
 }

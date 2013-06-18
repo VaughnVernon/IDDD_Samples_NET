@@ -14,7 +14,7 @@
 
 namespace SaaSOvation.AgilePM.Domain.Model.Products.Sprints
 {
-    using SaaSOvation.Common.Domain;
+    using SaaSOvation.Common.Domain.Model;
 
     public class SprintId : Identity
     {

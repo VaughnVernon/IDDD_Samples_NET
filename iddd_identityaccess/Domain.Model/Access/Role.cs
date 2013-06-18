@@ -15,7 +15,7 @@
 namespace SaaSOvation.IdentityAccess.Domain.Model.Access
 {
     using System;
-    using SaaSOvation.Common.Domain;
+    using SaaSOvation.Common.Domain.Model;
     using SaaSOvation.IdentityAccess.Domain.Model.Identity;
 
     public class Role : IEquatable<Role>

@@ -14,7 +14,7 @@
 
 namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
 {
-    using SaaSOvation.Common.Domain;
+    using SaaSOvation.Common.Domain.Model;
 
     public class TenantId : Identity
     {

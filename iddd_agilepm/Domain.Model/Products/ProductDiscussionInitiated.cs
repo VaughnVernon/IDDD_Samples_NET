@@ -15,7 +15,7 @@
 namespace SaaSOvation.AgilePM.Domain.Model.Products
 {
     using SaaSOvation.AgilePM.Domain.Model.Tenants;
-    using SaaSOvation.Common.Domain;
+    using SaaSOvation.Common.Domain.Model;
     using System;
     
     public class ProductDiscussionInitiated : IDomainEvent

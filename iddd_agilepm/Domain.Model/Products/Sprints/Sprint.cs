@@ -18,7 +18,7 @@ namespace SaaSOvation.AgilePM.Domain.Model.Products.Sprints
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     
-    using SaaSOvation.Common.Domain;
+    using SaaSOvation.Common.Domain.Model;
 
     using SaaSOvation.AgilePM.Domain.Model.Tenants;
     using SaaSOvation.AgilePM.Domain.Model.Products.BacklogItems;

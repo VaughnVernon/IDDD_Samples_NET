@@ -16,7 +16,7 @@ namespace SaaSOvation.AgilePM.Domain.Model.Teams
 {
     using System;
 
-    using SaaSOvation.Common.Domain;
+    using SaaSOvation.Common.Domain.Model;
 
     public class MemberChangeTracker : ValueObject
     {

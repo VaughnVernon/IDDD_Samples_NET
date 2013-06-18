@@ -14,7 +14,7 @@
 
 namespace SaaSOvation.Collaboration.Domain.Model.Tenants
 {
-    public sealed class Tenant : SaaSOvation.Common.Domain.Identity
+    public sealed class Tenant : SaaSOvation.Common.Domain.Model.Identity
     {
         public Tenant(string id)
             : base(id)

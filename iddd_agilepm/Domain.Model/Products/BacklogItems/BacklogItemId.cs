@@ -14,7 +14,7 @@
 
 namespace SaaSOvation.AgilePM.Domain.Model.Products.BacklogItems
 {
-    using SaaSOvation.Common.Domain;
+    using SaaSOvation.Common.Domain.Model;
 
     public class BacklogItemId : Identity
     {

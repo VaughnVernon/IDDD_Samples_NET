@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 using SaaSOvation.Common.Events;
-using SaaSOvation.Common.Domain;
+using SaaSOvation.Common.Domain.Model;
 
 namespace SaaSOvation.IdentityAccess.Application
 {
