@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SaaSOvation.Collaboration.Domain.Model.Calendars
 {
-    public class CalendarId : SaaSOvation.Common.Domain.Identity
+    public class CalendarId : SaaSOvation.Common.Domain.Model.Identity
     {
         public CalendarId() { }
 

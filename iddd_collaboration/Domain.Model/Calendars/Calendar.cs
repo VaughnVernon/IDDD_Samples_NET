@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
-using SaaSOvation.Common.Domain;
+using SaaSOvation.Common.Domain.Model;
 using SaaSOvation.Collaboration.Domain.Model.Tenants;
 using SaaSOvation.Collaboration.Domain.Model.Collaborators;
 

@@ -12,13 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace SaaSOvation.Common.Domain
+namespace SaaSOvation.Common.Domain.Model
 {
     using System;
 
-    public interface IDomainEvent
+    public interface IDomainEventSubscriber<T> where T : IDomainEvent
     {
-        int EventVersion { get; set;  }
-        DateTime OccurredOn { get; set; }
+        void HandleEvent(T domainEvent);
+        Type SubscribedToEventType();
     }
 }

@@ -14,7 +14,7 @@
 
 namespace SaaSOvation.AgilePM.Domain.Model.Discussions
 {
-    public class DiscussionDescriptor : SaaSOvation.Common.Domain.ValueObject
+    public class DiscussionDescriptor : SaaSOvation.Common.Domain.Model.ValueObject
     {
         public const string UNDEFINED_ID = "UNDEFINED";
 

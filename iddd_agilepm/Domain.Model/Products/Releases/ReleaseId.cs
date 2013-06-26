@@ -14,7 +14,7 @@
 
 namespace SaaSOvation.AgilePM.Domain.Model.Products.Releases
 {
-    using SaaSOvation.Common.Domain;
+    using SaaSOvation.Common.Domain.Model;
 
     public class ReleaseId : Identity
     {

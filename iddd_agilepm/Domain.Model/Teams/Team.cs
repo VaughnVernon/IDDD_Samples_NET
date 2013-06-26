@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 
 using SaaSOvation.AgilePM.Domain.Model.Tenants;
-using SaaSOvation.Common.Domain;
+using SaaSOvation.Common.Domain.Model;
 
 namespace SaaSOvation.AgilePM.Domain.Model.Teams
 {

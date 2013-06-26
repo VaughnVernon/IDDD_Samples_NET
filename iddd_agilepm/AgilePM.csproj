@@ -40,6 +40,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application\ApplicationServiceLifeCycle.cs" />
+    <Compile Include="Application\Notifications\NotificationApplicationService.cs" />
+    <Compile Include="Application\Processes\ProcessApplicationService.cs" />
+    <Compile Include="Application\Products\BacklogItems\BacklogItemApplicationService.cs" />
+    <Compile Include="Application\Products\InitiateDiscussionCommand.cs" />
+    <Compile Include="Application\Products\NewProductCommand.cs" />
+    <Compile Include="Application\Products\ProductApplicationService.cs" />
+    <Compile Include="Application\Products\RequestProductDiscussionCommand.cs" />
+    <Compile Include="Application\Products\RetryProductDiscussionRequestCommand.cs" />
+    <Compile Include="Application\Products\StartDiscussionInitiationCommand.cs" />
+    <Compile Include="Application\Products\TimeOutProductDiscussionRequestCommand.cs" />
+    <Compile Include="Application\Sprints\CommitBacklogItemToSprintCommand.cs" />
+    <Compile Include="Application\Sprints\SprintApplicationService.cs" />
+    <Compile Include="Application\Teams\ChangeTeamMemberEmailAddressCommand.cs" />
+    <Compile Include="Application\Teams\ChangeTeamMemberNameCommand.cs" />
+    <Compile Include="Application\Teams\DisableMemberCommand.cs" />
+    <Compile Include="Application\Teams\DisableProductOwnerCommand.cs" />
+    <Compile Include="Application\Teams\DisableTeamMemberCommand.cs" />
+    <Compile Include="Application\Teams\EnableMemberCommand.cs" />
+    <Compile Include="Application\Teams\EnableProductOwnerCommand.cs" />
+    <Compile Include="Application\Teams\EnableTeamMemberCommand.cs" />
+    <Compile Include="Application\Teams\TeamApplicationService.cs" />
     <Compile Include="Domain.Model\Discussions\DiscussionDescriptor.cs" />
     <Compile Include="Domain.Model\Products\BacklogItems\BacklogItem.cs" />
     <Compile Include="Domain.Model\Discussions\DiscussionAvailability.cs" />
@@ -65,6 +87,7 @@
     <Compile Include="Domain.Model\Products\BacklogItems\BusinessPriorityRatings.cs" />
     <Compile Include="Domain.Model\Products\BacklogItems\BusinessPriorityTotals.cs" />
     <Compile Include="Domain.Model\Products\BacklogItems\EstimationLogEntry.cs" />
+    <Compile Include="Domain.Model\Products\BacklogItems\IBacklogItemRepository.cs" />
     <Compile Include="Domain.Model\Products\BacklogItems\StoryPoints.cs" />
     <Compile Include="Domain.Model\Products\BacklogItems\Task.cs" />
     <Compile Include="Domain.Model\Products\BacklogItems\TaskDefined.cs" />
@@ -76,6 +99,7 @@
     <Compile Include="Domain.Model\Products\BacklogItems\TaskStatus.cs" />
     <Compile Include="Domain.Model\Products\BacklogItems\TaskStatusChanged.cs" />
     <Compile Include="Domain.Model\Products\BacklogItems\TaskVolunteerAssigned.cs" />
+    <Compile Include="Domain.Model\Products\IProductRepository.cs" />
     <Compile Include="Domain.Model\Products\Product.cs" />
     <Compile Include="Domain.Model\Products\ProductBacklogItem.cs" />
     <Compile Include="Domain.Model\Products\ProductBacklogItemPlanned.cs" />
@@ -83,6 +107,7 @@
     <Compile Include="Domain.Model\Products\ProductDiscussion.cs" />
     <Compile Include="Domain.Model\Products\ProductDiscussionInitiated.cs" />
     <Compile Include="Domain.Model\Products\ProductDiscussionRequested.cs" />
+    <Compile Include="Domain.Model\Products\ProductDiscussionRequestTimedOut.cs" />
     <Compile Include="Domain.Model\Products\ProductReleaseScheduled.cs" />
     <Compile Include="Domain.Model\Products\ProductSprintScheduled.cs" />
     <Compile Include="Domain.Model\Products\Releases\IReleaseRepository.cs" />

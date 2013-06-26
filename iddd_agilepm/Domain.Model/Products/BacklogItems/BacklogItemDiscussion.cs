@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using SaaSOvation.Common.Domain;
+using SaaSOvation.Common.Domain.Model;
 using SaaSOvation.AgilePM.Domain.Model.Discussions;
 
 namespace SaaSOvation.AgilePM.Domain.Model.Products.BacklogItems

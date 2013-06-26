@@ -12,13 +12,30 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace SaaSOvation.Common.Domain
+namespace SaaSOvation.Common.Domain.Model.LongRunningProcess
 {
     using System;
 
-    public interface IDomainEventSubscriber<T> where T : IDomainEvent
+    public class ProcessId : Identity
     {
-        void HandleEvent(T domainEvent);
-        Type SubscribedToEventType();
+        public static ProcessId ExistingProcessId(string id)
+        {
+            return new ProcessId(id);
+        }
+
+        public static ProcessId NewProcessId()
+        {
+            return new ProcessId(Guid.NewGuid().ToString());
+        }
+
+        public ProcessId(string id)
+            : base(id)
+        {
+        }
+
+        public ProcessId()
+            : base()
+        {
+        }
     }
 }

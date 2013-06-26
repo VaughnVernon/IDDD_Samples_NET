@@ -17,7 +17,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using SaaSOvation.Common.Domain;
+    using SaaSOvation.Common.Domain.Model;
     using SaaSOvation.IdentityAccess.Domain.Model.Access;
 
     public class Tenant

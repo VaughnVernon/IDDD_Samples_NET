@@ -43,19 +43,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Domain\AssertionConcern.cs" />
-    <Compile Include="Domain\Entity.cs" />
-    <Compile Include="Domain\EventSourcedRootEntity.cs" />
-    <Compile Include="Domain\HashCodeHelper.cs" />
-    <Compile Include="Domain\IDomainEvent.cs" />
-    <Compile Include="Domain\DomainEventPublisher.cs" />
-    <Compile Include="Domain\IDomainEventSubscriber.cs" />
-    <Compile Include="Domain\Identity.cs" />
-    <Compile Include="Domain\IIdentity.cs" />
-    <Compile Include="Domain\LongRunningProcess\IProcess.cs" />
-    <Compile Include="Domain\LongRunningProcess\ProcessId.cs" />
-    <Compile Include="Domain\LongRunningProcess\ProcessTimedOut.cs" />
-    <Compile Include="Domain\LongRunningProcess\TimeConstrainedProcessTracker.cs" />
+    <Compile Include="Domain.Model\AssertionConcern.cs" />
+    <Compile Include="Domain.Model\Entity.cs" />
+    <Compile Include="Domain.Model\EventSourcedRootEntity.cs" />
+    <Compile Include="Domain.Model\HashCodeHelper.cs" />
+    <Compile Include="Domain.Model\IDomainEvent.cs" />
+    <Compile Include="Domain.Model\DomainEventPublisher.cs" />
+    <Compile Include="Domain.Model\IDomainEventSubscriber.cs" />
+    <Compile Include="Domain.Model\Identity.cs" />
+    <Compile Include="Domain.Model\IIdentity.cs" />
+    <Compile Include="Domain.Model\LongRunningProcess\IProcess.cs" />
+    <Compile Include="Domain.Model\LongRunningProcess\ITimeConstrainedProcessTrackerRepository.cs" />
+    <Compile Include="Domain.Model\LongRunningProcess\ProcessId.cs" />
+    <Compile Include="Domain.Model\LongRunningProcess\ProcessTimedOut.cs" />
+    <Compile Include="Domain.Model\LongRunningProcess\TimeConstrainedProcessTracker.cs" />
     <Compile Include="Events\EventSerializer.cs" />
     <Compile Include="Events\IEventStore.cs" />
     <Compile Include="Events\StoredEvent.cs" />
@@ -66,7 +67,7 @@
     <Compile Include="Notifications\NotificationLogId.cs" />
     <Compile Include="Notifications\NotificationLogInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Domain\ValueObject.cs" />
+    <Compile Include="Domain.Model\ValueObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

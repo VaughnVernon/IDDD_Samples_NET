@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using SaaSOvation.Common.Domain;
+using SaaSOvation.Common.Domain.Model;
 
 namespace SaaSOvation.Common.Notifications
 {

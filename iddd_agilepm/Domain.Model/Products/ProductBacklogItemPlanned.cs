@@ -15,7 +15,7 @@
 namespace SaaSOvation.AgilePM.Domain.Model.Products
 {
     using System;
-    using SaaSOvation.Common.Domain;
+    using SaaSOvation.Common.Domain.Model;
     using SaaSOvation.AgilePM.Domain.Model.Products.BacklogItems;
     using SaaSOvation.AgilePM.Domain.Model.Tenants;
 

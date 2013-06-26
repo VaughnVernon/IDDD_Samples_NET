@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using SaaSOvation.Common.Domain;
+using SaaSOvation.Common.Domain.Model;
 
 namespace SaaSOvation.Collaboration.Domain.Model.Collaborators
 {

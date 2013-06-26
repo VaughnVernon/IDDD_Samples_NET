@@ -15,7 +15,7 @@
 namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
 {
     using System;
-    using SaaSOvation.Common.Domain;
+    using SaaSOvation.Common.Domain.Model;
     using System.Collections.Generic;
 
     public class Group

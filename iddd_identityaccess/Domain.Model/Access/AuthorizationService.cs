@@ -14,7 +14,7 @@
 
 namespace SaaSOvation.IdentityAccess.Domain.Model.Access
 {
-    using SaaSOvation.Common.Domain;
+    using SaaSOvation.Common.Domain.Model;
     using SaaSOvation.IdentityAccess.Domain.Model.Identity;
 
     public class AuthorizationService
