@@ -17,7 +17,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
     using System;
     using SaaSOvation.Common.Domain.Model;
 
-    public class Person
+    public class Person : EntityWithCompositeId
     {
         public Person(TenantId tenantId, FullName name, ContactInformation contactInformation)
         {
@@ -26,7 +26,45 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
             this.TenantId = tenantId;
         }
 
-        public ContactInformation ContactInformation { get; private set; }
+        protected Person() { }
+
+        TenantId tenantId;
+
+        public TenantId TenantId
+        {
+            get { return this.tenantId; }
+            internal set 
+            {
+                AssertionConcern.AssertArgumentNotNull(value, "The tenantId is required.");
+                this.tenantId = value;
+            }
+        }
+
+        FullName name;
+
+        public FullName Name
+        {
+            get { return this.name; }
+            private set
+            {
+                AssertionConcern.AssertArgumentNotNull(value, "The person name is required.");
+                this.name = value;
+            }
+        }
+
+        public User User { get; internal set; }
+
+        ContactInformation contactInformation;
+
+        public ContactInformation ContactInformation
+        {
+            get { return this.contactInformation; }
+            private set
+            {
+                AssertionConcern.AssertArgumentNotNull(value, "The person contact information is required.");
+                this.contactInformation = value;
+            }
+        }
 
         public EmailAddress EmailAddress
         {
@@ -35,12 +73,6 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
                 return this.ContactInformation.EmailAddress;
             }
         }
-
-        public FullName Name { get; private set; }
-
-        public TenantId TenantId { get; internal set; }
-
-        public User User { get; internal set; }
 
         public void ChangeContactInformation(ContactInformation contactInformation)
         {
@@ -66,28 +98,10 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
                         this.Name));
         }
 
-        public override bool Equals(object anotherObject)
+        protected override System.Collections.Generic.IEnumerable<object> GetIdentityComponents()
         {
-            bool equalObjects = false;
-
-            if (anotherObject != null && this.GetType() == anotherObject.GetType()) {
-                Person typedObject = (Person) anotherObject;
-                equalObjects =
-                        this.TenantId.Equals(typedObject.TenantId) &&
-                        this.User.Username.Equals(typedObject.User.Username);
-            }
-
-            return equalObjects;
-        }
-
-        public override int GetHashCode()
-        {
-            int hashCodeValue =
-                + (90113 * 223)
-                + this.TenantId.GetHashCode()
-                + this.User.Username.GetHashCode();
-
-            return hashCodeValue;
+            yield return this.TenantId;
+            yield return this.User.Username;
         }
 
         public override string ToString()

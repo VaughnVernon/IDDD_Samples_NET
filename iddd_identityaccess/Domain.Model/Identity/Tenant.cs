@@ -17,19 +17,30 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
     using System;
     using System.Collections.Generic;
     using System.Linq;
+
     using SaaSOvation.Common.Domain.Model;
     using SaaSOvation.IdentityAccess.Domain.Model.Access;
 
-    public class Tenant
+    public class Tenant : EntityWithCompositeId
     {
-        public Tenant(string name, string description, bool active)
+        public Tenant(TenantId tenantId, string name, string description, bool active)
         {
-            this.Active = active;
-            this.Description = description;
+            AssertionConcern.AssertArgumentNotNull(tenantId, "TenentId is required.");
+
+            AssertionConcern.AssertArgumentNotEmpty(name, "The tenant name is required.");
+            AssertionConcern.AssertArgumentLength(name, 1, 100, "The name must be 100 characters or less.");
+
+            AssertionConcern.AssertArgumentNotEmpty(description, "The tenant description is required.");
+            AssertionConcern.AssertArgumentLength(description, 1, 100, "The name description be 100 characters or less.");
+
+            this.TenantId = tenantId;
             this.Name = name;
+            this.Description = description;            
+            this.Active = active;
             this.registrationInvitations = new HashSet<RegistrationInvitation>();
-            this.TenantId = new TenantId();
         }
+
+        protected Tenant() { }
 
         public TenantId TenantId { get; private set; }
 
@@ -74,7 +85,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
         public bool IsRegistrationAvailableThrough(string invitationIdentifier)
         {
             AssertionConcern.AssertStateTrue(this.Active, "Tenant is not active.");
-            var invitation = InvitationOf(invitationIdentifier);
+            var invitation = GetInvitation(invitationIdentifier);
             return invitation == null ? false : invitation.IsAvailable();
         }
 
@@ -115,7 +126,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
         public RegistrationInvitation RedefineRegistrationInvitationAs(string invitationIdentifier)
         {
             AssertionConcern.AssertStateTrue(this.Active, "Tenant is not active.");
-            var invitation = InvitationOf(invitationIdentifier);
+            var invitation = GetInvitation(invitationIdentifier);
             if (invitation != null)
             {
                 invitation.RedefineAs().OpenEnded();
@@ -138,7 +149,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
 
         public void WithdrawInvitation(string invitationIdentifier)
         {
-            var invitation = InvitationOf(invitationIdentifier);
+            var invitation = GetInvitation(invitationIdentifier);
             if (invitation != null)
             {
                 this.registrationInvitations.Remove(invitation);
@@ -153,32 +164,15 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
                 .ToList();
         }
 
-        RegistrationInvitation InvitationOf(string invitationIdentifier)
+        RegistrationInvitation GetInvitation(string invitationIdentifier)
         {
             return this.registrationInvitations.FirstOrDefault(x => x.IsIdentifiedBy(invitationIdentifier));
         }
 
-
-
-        public override bool Equals(object anotherObject)
+        protected override IEnumerable<object> GetIdentityComponents()
         {
-            var equalObjects = false;
-            if (anotherObject != null && this.GetType() == anotherObject.GetType())
-            {
-                var typedObject = (Tenant)anotherObject;
-                equalObjects =
-                    this.TenantId.Equals(typedObject.TenantId) &&
-                    this.Name.Equals(typedObject.Name);
-            }
-            return equalObjects;
-        }
-
-        public override int GetHashCode()
-        {
-            return
-                +(48123 * 257)
-                + this.TenantId.GetHashCode()
-                + this.Name.GetHashCode();
+            yield return this.TenantId;
+            yield return this.Name;
         }
 
         public override string ToString()

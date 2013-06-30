@@ -46,7 +46,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
             try
             {
                 // must be active to register admin
-                var tenant = new Tenant(tenantName, tenantDescription, true);
+                var tenant = new Tenant(this.tenantRepository.GetNextIdentity(), tenantName, tenantDescription, true);
 
                 this.tenantRepository.Add(tenant);
 

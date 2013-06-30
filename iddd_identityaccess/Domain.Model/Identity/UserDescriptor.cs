@@ -14,7 +14,9 @@
 
 namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
 {
-    public class UserDescriptor
+    using SaaSOvation.Common.Domain.Model;
+
+    public class UserDescriptor : ValueObject
     {
         public static UserDescriptor NullDescriptorInstance()
         {
@@ -28,9 +30,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
             this.Username = username;
         }
 
-        private UserDescriptor()
-        {
-        }
+        UserDescriptor() { }
 
         public string EmailAddress { get; private set; }
 
@@ -38,30 +38,11 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
 
         public string Username { get; private set; }
 
-        public override bool Equals(object anotherObject)
+        protected override System.Collections.Generic.IEnumerable<object> GetEqualityComponents()
         {
-            bool equalObjects = false;
-
-            if (anotherObject != null && this.GetType() == anotherObject.GetType()) {
-                UserDescriptor typedObject = (UserDescriptor) anotherObject;
-                equalObjects =
-                        this.EmailAddress.Equals(typedObject.EmailAddress) &&
-                        this.TenantId.Equals(typedObject.TenantId) &&
-                        this.Username.Equals(typedObject.Username);
-            }
-
-            return equalObjects;
-        }
-
-        public override int GetHashCode()
-        {
-            int hashCodeValue =
-                + (9429 * 263)
-                + this.EmailAddress.GetHashCode()
-                + this.TenantId.GetHashCode()
-                + this.Username.GetHashCode();
-
-            return hashCodeValue;
+            yield return this.EmailAddress;
+            yield return this.TenantId;
+            yield return this.Username;
         }
 
         public override string ToString()

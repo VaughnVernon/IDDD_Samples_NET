@@ -18,7 +18,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Access
     using SaaSOvation.Common.Domain.Model;
     using SaaSOvation.IdentityAccess.Domain.Model.Identity;
 
-    public class Role : IEquatable<Role>
+    public class Role : EntityWithCompositeId
     {
         public Role(TenantId tenantId, string name, string description, bool supportsNesting)
         {
@@ -28,6 +28,8 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Access
             this.TenantId = tenantId;
             this.group = CreateInternalGroup();
         }
+
+        protected Role() { }
 
         readonly Group group;
 
@@ -115,24 +117,10 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Access
                         user.Username));
         }
 
-        public bool Equals(Role role)
+        protected override System.Collections.Generic.IEnumerable<object> GetIdentityComponents()
         {
-            if (object.ReferenceEquals(this, role)) return true;
-            if (object.ReferenceEquals(null, role)) return false;
-            return this.TenantId.Equals(role.TenantId) && this.Name.Equals(role.Name);
-        }
-
-        public override bool Equals(object anotherObject)
-        {
-            return Equals(anotherObject as Role);
-        }
-
-        public override int GetHashCode()
-        {
-            return
-                + (18723 * 233)
-                + this.TenantId.GetHashCode()
-                + this.Name.GetHashCode();
+            yield return this.TenantId;
+            yield return this.Name;
         }
 
         public override string ToString()

@@ -31,7 +31,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
         public bool ConfirmUser(Group group, User user)
         {
             var confirmedUser = this.userRepository.UserWithUsername(group.TenantId, user.Username);
-            var userConfirmed = confirmedUser == null || !confirmedUser.Enabled;
+            var userConfirmed = confirmedUser == null || !confirmedUser.IsEnabled;
             return userConfirmed;
         }
 
@@ -39,7 +39,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
         {
             var isMember = false;
 
-            foreach (var member in group.GroupMembers.Where(x => x.IsGroup()))
+            foreach (var member in group.GroupMembers.Where(x => x.IsGroup))
             {
                 if (memberGroup.Equals(member))
                 {
@@ -65,7 +65,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
 
         public bool IsUserInNestedGroup(Group group, User user)
         {
-            foreach (var member in group.GroupMembers.Where(x => x.IsGroup()))
+            foreach (var member in group.GroupMembers.Where(x => x.IsGroup))
             {
                 var nestedGroup = this.groupRepository.GroupNamed(member.TenantId, member.Name);
                 if (nestedGroup != null)

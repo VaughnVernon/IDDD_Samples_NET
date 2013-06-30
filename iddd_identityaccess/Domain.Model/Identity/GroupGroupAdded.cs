@@ -17,16 +17,25 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
     using System;
     using SaaSOvation.Common.Domain.Model;
 
-    public interface ITenantRepository
+    public class GroupGroupAdded : IDomainEvent
     {
-        TenantId GetNextIdentity();
+        public GroupGroupAdded(TenantId tenantId, string groupName, string nestedGroupName)
+        {
+            this.EventVersion = 1;
+            this.GroupName = groupName;
+            this.NestedGroupName = nestedGroupName;
+            this.OccurredOn = DateTime.Now;
+            this.TenantId = tenantId.Id;
+        }
 
-        void Remove(Tenant tenant);
+        public int EventVersion { get; set; }
 
-        void Add(Tenant tenant);
+        public string GroupName { get; private set; }
 
-        Tenant Get(TenantId tenantId);
+        public string NestedGroupName { get; private set; }
 
-        Tenant GetByName(string name);
+        public DateTime OccurredOn { get; set; }
+
+        public string TenantId { get; private set; }
     }
 }
