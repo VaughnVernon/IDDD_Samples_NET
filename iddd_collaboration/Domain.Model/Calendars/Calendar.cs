@@ -42,6 +42,11 @@ namespace SaaSOvation.Collaboration.Domain.Model.Calendars
         string description;
         HashSet<CalendarSharer> sharedWith;
 
+        public CalendarId CalendarId
+        {
+            get { return this.calendarId; }
+        }
+
         public ReadOnlyCollection<CalendarSharer> AllSharedWith
         {
             get { return new ReadOnlyCollection<CalendarSharer>(this.sharedWith.ToArray()); }
