@@ -17,23 +17,26 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
     using System;
     using SaaSOvation.Common.Domain.Model;
 
-    public class User
+    public class User : EntityWithCompositeId
     {
-        internal User(
+        public User(
                 TenantId tenantId,
                 string username,
                 string password,
                 Enablement enablement,
                 Person person)
-
-            : this()
         {
+            AssertionConcern.AssertArgumentNotNull(tenantId, "The tenantId is required.");
+            AssertionConcern.AssertArgumentNotNull(person, "The person is required.");
+            AssertionConcern.AssertArgumentNotEmpty(username, "The username is required.");
+            AssertionConcern.AssertArgumentLength(username, 3, 250, "The username must be 3 to 250 characters.");
+
             this.Enablement = enablement;
             this.Person = person;
             this.TenantId = tenantId;
             this.Username = username;
 
-            this.ProtectPassword("", password);
+            ProtectPassword("", password);
 
             person.User = this;
 
@@ -46,13 +49,11 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
                         person.ContactInformation.EmailAddress));
         }
 
-        internal User()
-        {
-        }
+        protected User() { }
 
-        public int Id { get; set; }
+        public TenantId TenantId { get; private set; }
 
-        public bool Enabled
+        public bool IsEnabled
         {
             get
             {
@@ -60,13 +61,21 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
             }
         }
 
-        public Enablement Enablement { get; private set; }
+        Enablement enablement;
 
-        public string Password { get; internal set; }
+        public Enablement Enablement
+        {
+            get { return this.enablement; }
+            private set
+            {
+                AssertionConcern.AssertArgumentNotNull(value, "The enablement is required.");
+                this.enablement = value;
+            }
+        }
+
+        public string Password { get; private set; }
 
         public Person Person { get; private set; }
-
-        public TenantId TenantId { get; private set; }
 
         public UserDescriptor UserDescriptor
         {
@@ -119,61 +128,17 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
                         this.Enablement));
         }
 
-        public bool IsEnabled()
-        {
-            return this.Enablement.IsEnablementEnabled();
-        }
-
-        public override bool Equals(object anotherObject)
-        {
-            bool equalobjects = false;
-
-            if (anotherObject != null && this.GetType() == anotherObject.GetType())
-            {
-                User typedobject = (User) anotherObject;
-                equalobjects =
-                    this.TenantId.Equals(typedobject.TenantId) &&
-                    this.Username.Equals(typedobject.Username);
-            }
-
-            return equalobjects;
-        }
-
-        public override int GetHashCode()
-        {
-            int hashCodeValue =
-                + (45217 * 269)
-                + this.TenantId.GetHashCode()
-                + this.Username.GetHashCode();
-
-            return hashCodeValue;
-        }
-
-        public override string ToString()
-        {
-            return "User [tenantId=" + TenantId + ", username=" + Username
-                    + ", person=" + Person + ", enablement=" + Enablement + "]";
-        }
-
         internal GroupMember ToGroupMember()
         {
-            GroupMember groupMember =
-                new GroupMember(
+            return new GroupMember(
                         this.TenantId,
                         this.Username,
                         GroupMemberType.User);
-
-            return groupMember;
         }
 
         string AsEncryptedValue(string plainTextPassword)
         {
-            string encryptedValue =
-                DomainRegistry
-                    .EncryptionService
-                    .EncryptedValue(plainTextPassword);
-
-            return encryptedValue;
+            return DomainRegistry.EncryptionService.EncryptedValue(plainTextPassword);
         }
 
         void ProtectPassword(string currentPassword, string changedPassword)
@@ -185,6 +150,18 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
             AssertionConcern.AssertArgumentNotEquals(this.Username, changedPassword, "The username and password must not be the same.");
 
             this.Password = AsEncryptedValue(changedPassword);
+        }
+
+        protected override System.Collections.Generic.IEnumerable<object> GetIdentityComponents()
+        {
+            yield return this.TenantId;
+            yield return this.Username;
+        }
+
+        public override string ToString()
+        {
+            return "User [tenantId=" + TenantId + ", username=" + Username
+                    + ", person=" + Person + ", enablement=" + Enablement + "]";
         }
     }
 }

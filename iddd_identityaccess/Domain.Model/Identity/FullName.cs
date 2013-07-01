@@ -30,9 +30,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
         {
         }
 
-        internal FullName()
-        {
-        }
+        protected FullName() { }
 
 
         public string FirstName { get; private set; }

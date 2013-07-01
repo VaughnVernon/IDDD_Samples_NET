@@ -68,7 +68,7 @@ namespace SaaSOvation.IdentityAccess.Application
         public void ProvisionRole(ProvisionRoleCommand command)
         {
             var tenantId = new TenantId(command.TenantId);
-            var tenant = this.tenantRepository.TenantOfId(tenantId);
+            var tenant = this.tenantRepository.Get(tenantId);
             var role = tenant.ProvisionRole(command.RoleName, command.Description, command.SupportsNesting);
             this.roleRepository.Add(role);
         }

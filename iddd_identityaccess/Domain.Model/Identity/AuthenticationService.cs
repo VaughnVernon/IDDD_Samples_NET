@@ -41,13 +41,13 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
 
             var userDescriptor = UserDescriptor.NullDescriptorInstance();
 
-            var tenant = this.tenantRepository.TenantOfId(tenantId);
+            var tenant = this.tenantRepository.Get(tenantId);
 
             if (tenant != null && tenant.Active)
             {
                 var encryptedPassword = this.encryptionService.EncryptedValue(password);
                 var user = this.userRepository.UserFromAuthenticCredentials(tenantId, username, encryptedPassword);
-                if (user != null && user.Enabled)
+                if (user != null && user.IsEnabled)
                 {
                     userDescriptor = user.UserDescriptor;
                 }

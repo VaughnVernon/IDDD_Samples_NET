@@ -221,7 +221,7 @@ namespace SaaSOvation.IdentityAccess.Application
 
         public Tenant GetTenant(string tenantId)
         {
-            return this.tenantRepository.TenantOfId(new TenantId(tenantId));
+            return this.tenantRepository.Get(new TenantId(tenantId));
         }
 
         Tenant GetExistingTenant(string tenantId)

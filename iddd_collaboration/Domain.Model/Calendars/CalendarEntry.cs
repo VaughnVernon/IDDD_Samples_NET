@@ -39,7 +39,7 @@ namespace SaaSOvation.Collaboration.Domain.Model.Calendars
             AssertTimeSpans(repetition, timeSpan);
 
             Apply(new CalendarEntryScheduled(tenant, calendarId, calendarEntryId, description, location, owner, timeSpan, repetition, alarm, invitees));
-        }
+        }        
 
         Tenant tenant;
         CalendarId calendarId;
@@ -51,6 +51,11 @@ namespace SaaSOvation.Collaboration.Domain.Model.Calendars
         Repetition repetition;
         Alarm alarm;
         HashSet<Participant> invitees;
+
+        public CalendarEntryId CalendarEntryId
+        {
+            get { return this.CalendarEntryId; }
+        }
 
         void AssertTimeSpans(Repetition repetition, DateRange timeSpan)
         {

@@ -19,7 +19,14 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
 
     public interface ITenantRepository
     {
+        TenantId GetNextIdentity();
+
+        void Remove(Tenant tenant);
+
         void Add(Tenant tenant);
-        Tenant TenantOfId(TenantId tenantId);
+
+        Tenant Get(TenantId tenantId);
+
+        Tenant GetByName(string name);
     }
 }

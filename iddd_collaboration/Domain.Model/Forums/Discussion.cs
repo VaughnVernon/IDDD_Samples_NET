@@ -15,14 +15,7 @@ namespace SaaSOvation.Collaboration.Domain.Model.Forums
             : base(eventStream, streamVersion)
         {
         }
-
-        Tenant tenantId; 
-        ForumId forumId; 
-        DiscussionId discussionId; 
-        Author author; 
-        string subject;
-        string exclusiveOwner;        
-
+    
         public Discussion(Tenant tenantId, ForumId forumId, DiscussionId discussionId, Author author, string subject, string exclusiveOwner = null)
         {
             AssertionConcern.AssertArgumentNotNull(tenantId, "The tenant must be provided.");
@@ -44,8 +37,18 @@ namespace SaaSOvation.Collaboration.Domain.Model.Forums
             this.exclusiveOwner = e.ExclusiveOwner;
         }
 
-
+        Tenant tenantId;
+        ForumId forumId;
+        DiscussionId discussionId;
+        Author author;
+        string subject;
+        string exclusiveOwner;    
         bool closed;
+
+        public DiscussionId DiscussionId
+        {
+            get { return this.discussionId; }
+        }
 
         void AssertClosed()
         {
@@ -81,7 +84,7 @@ namespace SaaSOvation.Collaboration.Domain.Model.Forums
         }
 
 
-        public void Reopen()
+        public void ReOpen()
         {
             AssertClosed();
             Apply(new DiscussionReopened(this.tenantId, this.forumId, this.discussionId, this.exclusiveOwner));

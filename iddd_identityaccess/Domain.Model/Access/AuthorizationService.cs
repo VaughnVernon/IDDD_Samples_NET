@@ -49,7 +49,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Access
             AssertionConcern.AssertArgumentNotEmpty(roleName, "Role name must not be null.");
 
             var authorized = false;
-            if (user.Enabled)
+            if (user.IsEnabled)
             {
                 var role = this.roleRepository.RoleNamed(user.TenantId, roleName);
                 if (role != null)

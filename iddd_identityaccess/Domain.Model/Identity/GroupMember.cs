@@ -17,72 +17,48 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
     using System;
     using SaaSOvation.Common.Domain.Model;
 
-    public enum GroupMemberType { Group, User }
-
-    public class GroupMember
+    public class GroupMember : ValueObject
     {
         internal GroupMember(TenantId tenantId, string name, GroupMemberType type)
         {
+            AssertionConcern.AssertArgumentNotNull(tenantId, "The tenantId must be provided.");
+            AssertionConcern.AssertArgumentNotEmpty(name, "Member name is required.");
+            AssertionConcern.AssertArgumentLength(name, 1, 100, "Member name must be 100 characters or less.");
+
             this.Name = name;
             this.TenantId = tenantId;
             this.Type = type;
         }
 
-        internal GroupMember()
-        {
-        }
-
-        public string Name { get; private set; }
+        protected GroupMember() { }
 
         public TenantId TenantId { get; private set; }
 
-        private GroupMemberType _type;
-        public GroupMemberType Type
+        public string Name { get; private set; }
+
+        public GroupMemberType Type { get; private set; }
+
+        public bool IsGroup
         {
             get
             {
-                return this._type;
-            }            
-            private set
+                return this.Type == GroupMemberType.Group;
+            }
+        }
+
+        public bool IsUser
+        {
+            get
             {
-                this._type = value;
+                return this.Type == GroupMemberType.User;
             }
         }
 
-        public bool IsGroup()
+        protected override System.Collections.Generic.IEnumerable<object> GetEqualityComponents()
         {
-            return this.Type == GroupMemberType.Group;
-        }
-
-        public bool IsUser()
-        {
-            return this.Type == GroupMemberType.User;
-        }
-
-        public override bool Equals(object anotherObject)
-        {
-            bool equalObjects = false;
-
-            if (anotherObject != null && this.GetType() == anotherObject.GetType()) {
-                GroupMember typedObject = (GroupMember) anotherObject;
-                equalObjects =
-                    this.TenantId.Equals(typedObject.TenantId) &&
-                    this.Name.Equals(typedObject.Name) &&
-                    this.Type.Equals(typedObject.Type);
-            }
-
-            return equalObjects;
-        }
-
-        public override int GetHashCode()
-        {
-            int hashCodeValue =
-                + (21941 * 197)
-                + this.TenantId.GetHashCode()
-                + this.Name.GetHashCode()
-                + this.Type.GetHashCode();
-
-            return hashCodeValue;
+            yield return this.TenantId;
+            yield return this.Name;
+            yield return this.Type;
         }
 
         public override string ToString()

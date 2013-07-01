@@ -18,14 +18,14 @@ namespace SaaSOvation.Collaboration.Domain.Model.Collaborators
 
     public interface ICollaboratorService
     {
-        Author AuthorFrom(Tenant tenant, string identity);
+        Author GetAuthorFrom(Tenant tenant, string identity);
 
-        Creator CreatorFrom(Tenant tenant, string identity);
+        Creator GetCreatorFrom(Tenant tenant, string identity);
 
-        Moderator ModeratorFrom(Tenant tenant, string identity);
+        Moderator GetModeratorFrom(Tenant tenant, string identity);
 
-        Owner OwnerFrom(Tenant enant, string identity);
+        Owner GetOwnerFrom(Tenant enant, string identity);
 
-        Participant ParticipantFrom(Tenant tenant, string identity);
+        Participant GetParticipantFrom(Tenant tenant, string identity);
     }
 }

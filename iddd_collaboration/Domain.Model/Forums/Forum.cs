@@ -16,14 +16,6 @@ namespace SaaSOvation.Collaboration.Domain.Model.Forums
         {
         }
 
-        Tenant tenantId; 
-        ForumId forumId; 
-        Creator creator; 
-        Moderator moderator; 
-        string subject; 
-        string description; 
-        string exclusiveOwner;
-
         public Forum(Tenant tenantId, ForumId forumId, Creator creator, Moderator moderator, string subject, string description, string exclusiveOwner)
         {
             AssertionConcern.AssertArgumentNotNull(tenantId, "The tenant must be provided.");
@@ -47,8 +39,19 @@ namespace SaaSOvation.Collaboration.Domain.Model.Forums
             this.exclusiveOwner = e.ExclusiveOwner;
         }
 
-
+        Tenant tenantId;
+        ForumId forumId;
+        Creator creator;
+        Moderator moderator;
+        string subject;
+        string description;
+        string exclusiveOwner;
         bool closed;
+
+        public ForumId ForumId
+        {
+            get { return this.forumId; }
+        }
 
         void AssertOpen()
         {
@@ -101,7 +104,7 @@ namespace SaaSOvation.Collaboration.Domain.Model.Forums
         }
 
 
-        void Close()
+        public void Close()
         {
             AssertOpen();
             Apply(new ForumClosed(this.tenantId, this.forumId, this.exclusiveOwner));

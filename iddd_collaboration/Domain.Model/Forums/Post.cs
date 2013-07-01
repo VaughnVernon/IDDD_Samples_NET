@@ -25,6 +25,16 @@ namespace SaaSOvation.Collaboration.Domain.Model.Forums
         string bodyText; 
         PostId replyToPostId;
 
+        public ForumId ForumId
+        {
+            get { return this.forumId; }
+        }
+
+        public PostId PostId
+        {
+            get { return this.postId; }
+        }
+
         public Post(Tenant tenantId, ForumId forumId, DiscussionId discussionId, PostId postId, Author author, string subject, string bodyText, PostId replyToPostId = null)
         {
             AssertionConcern.AssertArgumentNotNull(tenantId, "The tenant must be provided.");
@@ -67,12 +77,7 @@ namespace SaaSOvation.Collaboration.Domain.Model.Forums
             this.subject = e.Subject;
             this.bodyText = e.BodyText;
         }
-
-
-        public ForumId ForumId
-        {
-            get { return this.forumId; }
-        }
+        
 
         protected override IEnumerable<object> GetIdentityComponents()
         {

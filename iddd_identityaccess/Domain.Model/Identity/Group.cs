@@ -15,10 +15,11 @@
 namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
 {
     using System;
-    using SaaSOvation.Common.Domain.Model;
     using System.Collections.Generic;
 
-    public class Group
+    using SaaSOvation.Common.Domain.Model;
+
+    public class Group : EntityWithCompositeId
     {
         public const string ROLE_GROUP_PREFIX = "ROLE-INTERNAL-GROUP: ";
 
@@ -30,20 +31,26 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
             this.TenantId = tenantId;
         }
 
-        internal Group()
+        protected Group()
         {
             this.GroupMembers = new HashSet<GroupMember>();
         }
 
-        public int Id { get; set; }
-
-        public string Description { get; private set; }
+        public TenantId TenantId { get; private set; }
 
         public string Name { get; private set; }
 
-        public TenantId TenantId { get; private set; }
+        public string Description { get; private set; }
 
-        internal ISet<GroupMember> GroupMembers { get; set; }
+        public ISet<GroupMember> GroupMembers { get; private set; }
+
+        bool IsInternalGroup
+        {
+            get
+            {
+                return this.Name.StartsWith(ROLE_GROUP_PREFIX);
+            }
+        }
 
         public void AddGroup(Group group, GroupMemberService groupMemberService)
         {
@@ -51,7 +58,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
             AssertionConcern.AssertArgumentEquals(this.TenantId, group.TenantId, "Wrong tenant for this group.");
             AssertionConcern.AssertArgumentFalse(groupMemberService.IsMemberGroup(group, this.ToGroupMember()), "Group recurrsion.");
 
-            if (this.GroupMembers.Add(group.ToGroupMember()) && !this.IsInternalGroup())
+            if (this.GroupMembers.Add(group.ToGroupMember()) && !this.IsInternalGroup)
             {
                 DomainEventPublisher
                     .Instance
@@ -66,9 +73,9 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
         {
             AssertionConcern.AssertArgumentNotNull(user, "User must not be null.");
             AssertionConcern.AssertArgumentEquals(this.TenantId, user.TenantId, "Wrong tenant for this group.");
-            AssertionConcern.AssertArgumentTrue(user.Enabled, "User is not enabled.");
+            AssertionConcern.AssertArgumentTrue(user.IsEnabled, "User is not enabled.");
 
-            if (this.GroupMembers.Add(user.ToGroupMember()) && !this.IsInternalGroup())
+            if (this.GroupMembers.Add(user.ToGroupMember()) && !this.IsInternalGroup)
             {
                 DomainEventPublisher
                     .Instance
@@ -83,7 +90,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
         {
             AssertionConcern.AssertArgumentNotNull(user, "User must not be null.");
             AssertionConcern.AssertArgumentEquals(this.TenantId, user.TenantId, "Wrong tenant for this group.");
-            AssertionConcern.AssertArgumentTrue(user.Enabled, "User is not enabled.");
+            AssertionConcern.AssertArgumentTrue(user.IsEnabled, "User is not enabled.");
 
             var isMember = this.GroupMembers.Contains(user.ToGroupMember());
 
@@ -105,7 +112,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
             AssertionConcern.AssertArgumentEquals(this.TenantId, group.TenantId, "Wrong tenant for this group.");
 
             // not a nested remove, only direct member
-            if (this.GroupMembers.Remove(group.ToGroupMember()) && !this.IsInternalGroup())
+            if (this.GroupMembers.Remove(group.ToGroupMember()) && !this.IsInternalGroup)
             {
                 DomainEventPublisher
                     .Instance
@@ -122,7 +129,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
             AssertionConcern.AssertArgumentEquals(this.TenantId, user.TenantId, "Wrong tenant for this group.");
 
             // not a nested remove, only direct member
-            if (this.GroupMembers.Remove(user.ToGroupMember()) && !this.IsInternalGroup())
+            if (this.GroupMembers.Remove(user.ToGroupMember()) && !this.IsInternalGroup)
             {
                 DomainEventPublisher
                     .Instance
@@ -133,49 +140,20 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
             }
         }
 
-        public override bool Equals(object anotherObject)
-        {
-            bool equalObjects = false;
-
-            if (anotherObject != null && this.GetType() == anotherObject.GetType())
-            {
-                Group typedObject = (Group) anotherObject;
-                equalObjects =
-                    this.TenantId.Equals(typedObject.TenantId) &&
-                    this.Name.Equals(typedObject.Name);
-            }
-
-            return equalObjects;
-        }
-
-        public override int GetHashCode()
-        {
-            int hashCodeValue =
-                + (2061 * 193)
-                + this.TenantId.GetHashCode()
-                + this.Name.GetHashCode();
-
-            return hashCodeValue;
-        }
-
-        public override string ToString()
-        {
-            return "Group [description=" + Description + ", name=" + Name + ", tenantId=" + TenantId + "]";
-        }
-
         internal GroupMember ToGroupMember()
         {
             return new GroupMember(this.TenantId, this.Name, GroupMemberType.Group);
         }
 
-        private bool IsInternalGroup()
+        protected override IEnumerable<object> GetIdentityComponents()
         {
-            return this.IsInternalGroup(this.Name);
+            yield return this.TenantId;
+            yield return this.Name;
         }
 
-        private bool IsInternalGroup(String name)
+        public override string ToString()
         {
-            return name.StartsWith(ROLE_GROUP_PREFIX);
+            return "Group [description=" + Description + ", name=" + Name + ", tenantId=" + TenantId + "]";
         }
     }
 }
