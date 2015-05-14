@@ -12,8 +12,11 @@
     <AssemblyName>SaaSOvation.Collaboration</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
+<<<<<<< HEAD
     <NuGetPackageImportStamp>4c5a0288</NuGetPackageImportStamp>
+=======
+    <TargetFrameworkProfile />
+>>>>>>> vs2013
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
