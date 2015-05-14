@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("iddd_identityaccess")]
-[assembly: AssemblyCopyright("Copyright ©  2013")]
+[assembly: AssemblyCopyright("Copyright © 2012,2013 Vaughn Vernon")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
