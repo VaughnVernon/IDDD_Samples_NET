@@ -76,6 +76,7 @@
     <Compile Include="Domain.Model\ValueObject.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="IDDD.Common.nuspec" />
     <None Include="packages.config" />
     <None Include="Settings.StyleCop" />
   </ItemGroup>
