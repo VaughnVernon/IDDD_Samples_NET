@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "iddd_common\Common.csproj", "{23B36FF3-B4FE-4765-815E-4943A737BC6D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgilePM", "iddd_agilepm\AgilePM.csproj", "{81B36F86-19C3-4B19-8BBF-492ADA991886}"
@@ -17,23 +19,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CollaborationContext", "Col
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{ED8C936A-7015-4129-AE44-F1344FCF3827}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iddd_identityaccess_data_layer", "iddd_identityaccess_data_layer\iddd_identityaccess_data_layer.csproj", "{00232588-9C88-42F6-873F-60F249AB60EF}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataModelTests", "DataModelTests\DataModelTests.csproj", "{00E181F6-6B98-4849-849B-4262A3E9CE90}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{47240157-A01F-4D0C-8E23-E140DA470EDD}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E0E28583-1AC7-4874-9350-66F57848D963}"
 	ProjectSection(SolutionItems) = preProject
-		IDDD_Samples.vsmdi = IDDD_Samples.vsmdi
-		Local.testsettings = Local.testsettings
-		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+		Settings.StyleCop = Settings.StyleCop
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisualDesignToolHook", "VisualDesignToolHook\VisualDesignToolHook.csproj", "{462D570D-6D79-4183-88CF-ED88FB3388AA}"
-EndProject
 Global
-	GlobalSection(TestCaseManagementSettings) = postSolution
-		CategoryFile = IDDD_Samples.vsmdi
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -55,18 +46,6 @@ Global
 		{FE7CF2BC-5070-4CC7-AB31-4E7F12AA65BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE7CF2BC-5070-4CC7-AB31-4E7F12AA65BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE7CF2BC-5070-4CC7-AB31-4E7F12AA65BF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{00232588-9C88-42F6-873F-60F249AB60EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{00232588-9C88-42F6-873F-60F249AB60EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{00232588-9C88-42F6-873F-60F249AB60EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{00232588-9C88-42F6-873F-60F249AB60EF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{00E181F6-6B98-4849-849B-4262A3E9CE90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{00E181F6-6B98-4849-849B-4262A3E9CE90}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{00E181F6-6B98-4849-849B-4262A3E9CE90}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{00E181F6-6B98-4849-849B-4262A3E9CE90}.Release|Any CPU.Build.0 = Release|Any CPU
-		{462D570D-6D79-4183-88CF-ED88FB3388AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{462D570D-6D79-4183-88CF-ED88FB3388AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{462D570D-6D79-4183-88CF-ED88FB3388AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{462D570D-6D79-4183-88CF-ED88FB3388AA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -76,7 +55,8 @@ Global
 		{81B36F86-19C3-4B19-8BBF-492ADA991886} = {C382BC55-00D9-4A8D-A038-47912EEBC6D6}
 		{68FD7D5F-2837-4B55-918F-C13247899667} = {4CE6B745-D696-4327-9513-9E9EC3354BE2}
 		{FE7CF2BC-5070-4CC7-AB31-4E7F12AA65BF} = {24F1B8E8-2FB0-4962-A55E-D248912498AF}
-		{00E181F6-6B98-4849-849B-4262A3E9CE90} = {24F1B8E8-2FB0-4962-A55E-D248912498AF}
-		{00232588-9C88-42F6-873F-60F249AB60EF} = {24F1B8E8-2FB0-4962-A55E-D248912498AF}
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = IDDD_Samples.vsmdi
 	EndGlobalSection
 EndGlobal
