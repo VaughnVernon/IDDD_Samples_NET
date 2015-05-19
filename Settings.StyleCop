@@ -1,0 +1,235 @@
+<StyleCopSettings Version="105">
+	<GlobalSettings>
+		<BooleanProperty Name="ViolationsAsErrors">True</BooleanProperty>
+		<CollectionProperty Name="DeprecatedWords">
+			<Value>preprocessor, pre-processor</Value>
+			<Value>shortlived, short-lived</Value>
+		</CollectionProperty>
+		<CollectionProperty Name="RecognizedWords">
+			<Value>ajaxy</Value>
+			<Value>asax</Value>
+			<Value>ascx</Value>
+			<Value>asmx</Value>
+			<Value>aspx</Value>
+			<Value>bootstrapper</Value>
+			<Value>Captcha</Value>
+			<Value>codebehind</Value>
+			<Value>codebehinds</Value>
+			<Value>Cms</Value>
+			<Value>csv</Value>
+			<Value>div</Value>
+			<Value>dll</Value>
+			<Value>expando</Value>
+			<Value>fieldset</Value>
+			<Value>FormBuilder</Value>
+			<Value>FormControls</Value>
+			<Value>Geonetric</Value>
+			<Value>Geonetric's</Value>
+			<Value>Github</Value>
+			<Value>Healthwise</Value>
+			<Value>href</Value>
+			<Value>iframe</Value>
+			<Value>iframes</Value>
+			<Value>img</Value>
+			<Value>js</Value>
+			<Value>mceEditor</Value>
+			<Value>Krames</Value>
+			<Value>Lanap</Value>
+			<Value>Linq</Value>
+			<Value>Microdata</Value>
+			<Value>Microsoft</Value>
+			<Value>Microsoft's</Value>
+			<Value>msdn</Value>
+			<Value>li</Value>
+			<Value>lookahead</Value>
+			<Value>lookaheads</Value>
+			<Value>lookbehind</Value>
+			<Value>lookbehinds</Value>
+			<Value>nullable</Value>
+			<Value>Owin</Value>
+			<Value>pagebrowser</Value>
+			<Value>Pageview</Value>
+			<Value>postback</Value>
+			<Value>postbacks</Value>
+			<Value>pseudo</Value>
+			<Value>Redis</Value>
+			<Value>rel</Value>
+			<Value>RESTful</Value>
+			<Value>rowset</Value>
+			<Value>runat</Value>
+			<Value>sharding</Value>
+			<Value>src</Value>
+			<Value>Staywell</Value>
+			<Value>testbed</Value>
+			<Value>textarea</Value>
+			<Value>Tful</Value>
+			<Value>ul</Value>
+			<Value>validationexpression</Value>
+			<Value>VitalSite</Value>
+			<Value>vitalsite</Value>
+			<Value>whatwg</Value>
+		</CollectionProperty>
+	</GlobalSettings>
+	<Parsers>
+		<Parser ParserId="StyleCop.CSharp.CsParser">
+			<ParserSettings>
+				<CollectionProperty Name="GeneratedFileFilters">
+					<Value>\.g\.cs$</Value>
+					<Value>\.generated\.cs$</Value>
+					<Value>\.g\.i\.cs$</Value>
+					<Value>CompanyInfo\.cs$</Value>
+					<Value>ProductInfo\.cs$</Value>
+				</CollectionProperty>
+			</ParserSettings>
+		</Parser>
+	</Parsers>
+	<Analyzers>
+		<Analyzer AnalyzerId="StyleCop.CSharp.DocumentationRules">
+			<Rules>
+				<Rule Name="ElementsMustBeDocumented">
+					<RuleSettings>
+						<BooleanProperty Name="Enabled">False</BooleanProperty>
+					</RuleSettings>
+				</Rule>
+				<Rule Name="PartialElementsMustBeDocumented">
+					<RuleSettings>
+						<BooleanProperty Name="Enabled">False</BooleanProperty>
+					</RuleSettings>
+				</Rule>
+				<Rule Name="PartialElementDocumentationMustHaveSummary">
+					<RuleSettings>
+						<BooleanProperty Name="Enabled">False</BooleanProperty>
+					</RuleSettings>
+				</Rule>
+				<Rule Name="PartialElementDocumentationMustHaveSummaryText">
+					<RuleSettings>
+						<BooleanProperty Name="Enabled">False</BooleanProperty>
+					</RuleSettings>
+				</Rule>
+				<Rule Name="ElementParametersMustBeDocumented">
+					<RuleSettings>
+						<BooleanProperty Name="Enabled">False</BooleanProperty>
+					</RuleSettings>
+				</Rule>
+				<Rule Name="GenericTypeParametersMustBeDocumented">
+					<RuleSettings>
+						<BooleanProperty Name="Enabled">False</BooleanProperty>
+					</RuleSettings>
+				</Rule>
+				<Rule Name="GenericTypeParametersMustBeDocumentedPartialClass">
+					<RuleSettings>
+						<BooleanProperty Name="Enabled">False</BooleanProperty>
+					</RuleSettings>
+				</Rule>
+				<Rule Name="FileMustHaveHeader">
+					<RuleSettings>
+						<BooleanProperty Name="Enabled">False</BooleanProperty>
+					</RuleSettings>
+				</Rule>
+				<Rule Name="FileHeaderMustShowCopyright">
+					<RuleSettings>
+						<BooleanProperty Name="Enabled">False</BooleanProperty>
+					</RuleSettings>
+				</Rule>
+				<Rule Name="FileHeaderMustHaveCopyrightText">
+					<RuleSettings>
+						<BooleanProperty Name="Enabled">False</BooleanProperty>
+					</RuleSettings>
+				</Rule>
+				<Rule Name="FileHeaderMustContainFileName">
+					<RuleSettings>
+						<BooleanProperty Name="Enabled">False</BooleanProperty>
+					</RuleSettings>
+				</Rule>
+				<Rule Name="FileHeaderFileNameDocumentationMustMatchFileName">
+					<RuleSettings>
+						<BooleanProperty Name="Enabled">False</BooleanProperty>
+					</RuleSettings>
+				</Rule>
+				<Rule Name="FileHeaderMustHaveValidCompanyText">
+					<RuleSettings>
+						<BooleanProperty Name="Enabled">False</BooleanProperty>
+					</RuleSettings>
+				</Rule>
+			</Rules>
+			<AnalyzerSettings />
+		</Analyzer>
+		<Analyzer AnalyzerId="StyleCop.CSharp.MaintainabilityRules">
+			<Rules>
+				<Rule Name="StatementMustNotUseUnnecessaryParenthesis">
+					<RuleSettings>
+						<BooleanProperty Name="Enabled">False</BooleanProperty>
+					</RuleSettings>
+				</Rule>
+			</Rules>
+			<AnalyzerSettings />
+		</Analyzer>
+		<Analyzer AnalyzerId="StyleCop.CSharp.NamingRules">
+			<AnalyzerSettings>
+				<CollectionProperty Name="Hungarian">
+					<Value>as</Value>
+					<Value>cc</Value>
+					<Value>db</Value>
+					<Value>do</Value>
+					<Value>hw</Value>
+					<Value>id</Value>
+					<Value>if</Value>
+					<Value>in</Value>
+					<Value>io</Value>
+					<Value>ip</Value>
+					<Value>is</Value>
+					<Value>my</Value>
+					<Value>no</Value>
+					<Value>on</Value>
+					<Value>to</Value>
+					<Value>ui</Value>
+					<Value>vs</Value>
+				</CollectionProperty>
+			</AnalyzerSettings>
+		</Analyzer>
+		<Analyzer AnalyzerId="StyleCop.CSharp.OrderingRules">
+			<Rules>
+				<Rule Name="ElementsMustAppearInTheCorrectOrder">
+					<RuleSettings>
+						<BooleanProperty Name="Enabled">True</BooleanProperty>
+					</RuleSettings>
+				</Rule>
+				<Rule Name="ElementsMustBeOrderedByAccess">
+					<RuleSettings>
+						<BooleanProperty Name="Enabled">True</BooleanProperty>
+					</RuleSettings>
+				</Rule>
+				<Rule Name="ConstantsMustAppearBeforeFields">
+					<RuleSettings>
+						<BooleanProperty Name="Enabled">True</BooleanProperty>
+					</RuleSettings>
+				</Rule>
+				<Rule Name="StaticElementsMustAppearBeforeInstanceElements">
+					<RuleSettings>
+						<BooleanProperty Name="Enabled">True</BooleanProperty>
+					</RuleSettings>
+				</Rule>
+			</Rules>
+			<AnalyzerSettings />
+		</Analyzer>
+		<Analyzer AnalyzerId="StyleCop.CSharp.SpacingRules">
+			<Rules>
+				<Rule Name="TabsMustNotBeUsed">
+					<RuleSettings>
+						<BooleanProperty Name="Enabled">False</BooleanProperty>
+					</RuleSettings>
+				</Rule>
+			</Rules>
+			<AnalyzerSettings />
+		</Analyzer>
+	</Analyzers>
+	<SourceFileList>
+		<SourceFile>CompanyInfo.cs</SourceFile>
+		<SourceFile>ProductInfo.cs</SourceFile>
+		<Settings>
+			<GlobalSettings>
+				<BooleanProperty Name="RulesEnabledByDefault">False</BooleanProperty>
+			</GlobalSettings>
+		</Settings>
+	</SourceFileList>
+</StyleCopSettings>
