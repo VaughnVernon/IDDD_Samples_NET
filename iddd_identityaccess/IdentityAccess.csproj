@@ -123,6 +123,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="IDDD.IdentityAccess.nuspec" />
     <None Include="packages.config" />
     <None Include="Settings.StyleCop" />
   </ItemGroup>

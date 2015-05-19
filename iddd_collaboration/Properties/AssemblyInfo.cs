@@ -21,7 +21,7 @@ using System.Runtime.InteropServices;
 //      Revision
 //
 // Synchronize these with the values in the nuspec file.
-[assembly: AssemblyVersion("1.0.*")]
+[assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 

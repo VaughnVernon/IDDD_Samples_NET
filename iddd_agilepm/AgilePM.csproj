@@ -140,6 +140,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="IDDD.AgilePM.nuspec" />
     <None Include="packages.config" />
     <None Include="Settings.StyleCop" />
   </ItemGroup>

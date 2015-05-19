@@ -119,6 +119,7 @@
     <Compile Include="Domain.Model\Tenants\Tenant.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="IDDD.Collaboration.nuspec" />
     <None Include="packages.config" />
     <None Include="Settings.StyleCop" />
   </ItemGroup>
