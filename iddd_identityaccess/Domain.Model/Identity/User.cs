@@ -14,154 +14,220 @@
 
 namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
 {
-    using System;
-    using SaaSOvation.Common.Domain.Model;
+	using System;
+	using System.Collections.Generic;
 
-    public class User : EntityWithCompositeId
-    {
-        public User(
-                TenantId tenantId,
-                string username,
-                string password,
-                Enablement enablement,
-                Person person)
-        {
-            AssertionConcern.AssertArgumentNotNull(tenantId, "The tenantId is required.");
-            AssertionConcern.AssertArgumentNotNull(person, "The person is required.");
-            AssertionConcern.AssertArgumentNotEmpty(username, "The username is required.");
-            AssertionConcern.AssertArgumentLength(username, 3, 250, "The username must be 3 to 250 characters.");
+	using SaaSOvation.Common.Domain.Model;
 
-            this.Enablement = enablement;
-            this.Person = person;
-            this.TenantId = tenantId;
-            this.Username = username;
+	[CLSCompliant(true)]
+	public class User : EntityWithCompositeId
+	{
+		#region [ Fields and Constructor Overloads ]
 
-            ProtectPassword("", password);
+		private Enablement userEnablement;
 
-            person.User = this;
+		/// <summary>
+		/// Initializes a new instance of the <see cref="User"/> class
+		/// and publishes a <see cref="UserRegistered"/> event.
+		/// </summary>
+		/// <param name="tenantId">
+		/// Initial value of the <see cref="TenantId"/> property.
+		/// </param>
+		/// <param name="username">
+		/// Initial value of the <see cref="Username"/> property.
+		/// </param>
+		/// <param name="password">
+		/// Initial value of the <see cref="Password"/> property.
+		/// </param>
+		/// <param name="enablement">
+		/// Initial value of the <see cref="Enablement"/> property.
+		/// </param>
+		/// <param name="person">
+		/// Initial value of the <see cref="Person"/> property.
+		/// </param>
+		public User(
+			TenantId tenantId,
+			string username,
+			string password,
+			Enablement enablement,
+			Person person)
+		{
+			AssertionConcern.AssertArgumentNotNull(tenantId, "The tenantId is required.");
+			AssertionConcern.AssertArgumentNotNull(person, "The person is required.");
+			AssertionConcern.AssertArgumentNotEmpty(username, "The username is required.");
+			AssertionConcern.AssertArgumentLength(username, 3, 250, "The username must be 3 to 250 characters.");
 
-            DomainEventPublisher
-                .Instance
-                .Publish(new UserRegistered(
-                        tenantId,
-                        username,
-                        person.Name,
-                        person.ContactInformation.EmailAddress));
-        }
+			// Defer validation to the property setters.
+			this.Enablement = enablement;
+			this.Person = person;
+			this.TenantId = tenantId;
+			this.Username = username;
 
-        protected User() { }
+			this.ProtectPassword(string.Empty, password);
 
-        public TenantId TenantId { get; private set; }
+			person.User = this;
 
-        public bool IsEnabled
-        {
-            get
-            {
-                return this.Enablement.IsEnablementEnabled();
-            }
-        }
+			DomainEventPublisher
+				.Instance
+				.Publish(new UserRegistered(
+						tenantId,
+						username,
+						person.Name,
+						person.ContactInformation.EmailAddress));
+		}
 
-        Enablement enablement;
+		/// <summary>
+		/// Initializes a new instance of the <see cref="User"/> class for a derived type,
+		/// and otherwise blocks new instances from being created with an empty constructor.
+		/// </summary>
+		protected User()
+		{
+		}
 
-        public Enablement Enablement
-        {
-            get { return this.enablement; }
-            private set
-            {
-                AssertionConcern.AssertArgumentNotNull(value, "The enablement is required.");
-                this.enablement = value;
-            }
-        }
+		#endregion
 
-        public string Password { get; private set; }
+		#region [ Public Properties ]
 
-        public Person Person { get; private set; }
+		public TenantId TenantId { get; private set; }
 
-        public UserDescriptor UserDescriptor
-        {
-            get
-            {
-                return new UserDescriptor(
-                        this.TenantId,
-                        this.Username,
-                        this.Person.EmailAddress.Address);
-            }
-        }
+		public bool IsEnabled
+		{
+			get { return this.Enablement.IsEnablementEnabled(); }
+		}
 
-        public string Username { get; private set; }
+		public Enablement Enablement
+		{
+			get
+			{
+				return this.userEnablement;
+			}
 
-        public void ChangePassword(string currentPassword, string changedPassword)
-        {
-            AssertionConcern.AssertArgumentNotEmpty(
-                    currentPassword,
-                    "Current and new password must be provided.");
+			private set
+			{
+				AssertionConcern.AssertArgumentNotNull(value, "The enablement is required.");
 
-            AssertionConcern.AssertArgumentEquals(
-                    this.Password,
-                    this.AsEncryptedValue(currentPassword),
-                    "Current password not confirmed.");
+				this.userEnablement = value;
+			}
+		}
 
-            this.ProtectPassword(currentPassword, changedPassword);
+		public string Password { get; private set; }
 
-            DomainEventPublisher.Instance.Publish(new UserPasswordChanged(this.TenantId, this.Username));
-        }
+		public Person Person { get; private set; }
 
-        public void ChangePersonalContactInformation(ContactInformation contactInformation)
-        {
-            this.Person.ChangeContactInformation(contactInformation);
-        }
+		public UserDescriptor UserDescriptor
+		{
+			get
+			{
+				return new UserDescriptor(
+					this.TenantId,
+					this.Username,
+					this.Person.EmailAddress.Address);
+			}
+		}
 
-        public void ChangePersonalName(FullName personalName)
-        {
-            this.Person.ChangeName(personalName);
-        }
+		public string Username { get; private set; }
 
-        public void DefineEnablement(Enablement enablement)
-        {
-            this.Enablement = enablement;
+		#endregion
 
-            DomainEventPublisher
-                .Instance
-                .Publish(new UserEnablementChanged(
-                        this.TenantId,
-                        this.Username,
-                        this.Enablement));
-        }
+		#region [ Command Methods which Publish Domain Events ]
 
-        internal GroupMember ToGroupMember()
-        {
-            return new GroupMember(
-                        this.TenantId,
-                        this.Username,
-                        GroupMemberType.User);
-        }
+		public void ChangePassword(string currentPassword, string changedPassword)
+		{
+			AssertionConcern.AssertArgumentNotEmpty(
+				currentPassword, "Current and new password must be provided.");
 
-        string AsEncryptedValue(string plainTextPassword)
-        {
-            return DomainRegistry.EncryptionService.EncryptedValue(plainTextPassword);
-        }
+			AssertionConcern.AssertArgumentEquals(
+				this.Password, AsEncryptedValue(currentPassword), "Current password not confirmed.");
 
-        void ProtectPassword(string currentPassword, string changedPassword)
-        {
-            AssertionConcern.AssertArgumentNotEquals(currentPassword, changedPassword, "The password is unchanged.");
+			this.ProtectPassword(currentPassword, changedPassword);
 
-            AssertionConcern.AssertArgumentFalse(DomainRegistry.PasswordService.IsWeak(changedPassword), "The password must be stronger.");
+			DomainEventPublisher
+				.Instance
+				.Publish(new UserPasswordChanged(
+						this.TenantId,
+						this.Username));
+		}
 
-            AssertionConcern.AssertArgumentNotEquals(this.Username, changedPassword, "The username and password must not be the same.");
+		public void ChangePersonalContactInformation(ContactInformation contactInformation)
+		{
+			this.Person.ChangeContactInformation(contactInformation);
+		}
 
-            this.Password = AsEncryptedValue(changedPassword);
-        }
+		public void ChangePersonalName(FullName personalName)
+		{
+			this.Person.ChangeName(personalName);
+		}
 
-        protected override System.Collections.Generic.IEnumerable<object> GetIdentityComponents()
-        {
-            yield return this.TenantId;
-            yield return this.Username;
-        }
+		public void DefineEnablement(Enablement enablement)
+		{
+			this.Enablement = enablement;
 
-        public override string ToString()
-        {
-            return "User [tenantId=" + TenantId + ", username=" + Username
-                    + ", person=" + Person + ", enablement=" + Enablement + "]";
-        }
-    }
+			DomainEventPublisher
+				.Instance
+				.Publish(new UserEnablementChanged(
+						this.TenantId,
+						this.Username,
+						this.Enablement));
+		}
+
+		#endregion
+
+		#region [ Additional Methods ]
+
+		/// <summary>
+		/// Returns a string that represents the current entity.
+		/// </summary>
+		/// <returns>
+		/// A unique string representation of an instance of this entity.
+		/// </returns>
+		public override string ToString()
+		{
+			const string Format = "User [tenantId={0}, username={1}, person={2}, enablement={3}]";
+			return string.Format(Format, this.TenantId, this.Username, this.Person, this.Enablement);
+		}
+
+		/// <summary>
+		/// Creates a <see cref="GroupMember"/> value of
+		/// type <see cref="GroupMemberType.User"/>
+		/// based on this <see cref="User"/>.
+		/// </summary>
+		/// <returns>
+		/// A <see cref="GroupMember"/> value of type
+		/// <see cref="GroupMemberType.User"/>
+		/// based on this <see cref="User"/>.
+		/// </returns>
+		internal GroupMember ToGroupMember()
+		{
+			return new GroupMember(this.TenantId, this.Username, GroupMemberType.User);
+		}
+
+		/// <summary>
+		/// Gets the values which identify a <see cref="User"/> entity,
+		/// which are the <see cref="TenantId"/> and the unique <see cref="Username"/>.
+		/// </summary>
+		/// <returns>
+		/// A sequence of values which uniquely identifies an instance of this entity.
+		/// </returns>
+		protected override IEnumerable<object> GetIdentityComponents()
+		{
+			yield return this.TenantId;
+			yield return this.Username;
+		}
+
+		private static string AsEncryptedValue(string plainTextPassword)
+		{
+			return DomainRegistry.EncryptionService.EncryptedValue(plainTextPassword);
+		}
+
+		private void ProtectPassword(string currentPassword, string changedPassword)
+		{
+			AssertionConcern.AssertArgumentNotEquals(currentPassword, changedPassword, "The password is unchanged.");
+			AssertionConcern.AssertArgumentFalse(DomainRegistry.PasswordService.IsWeak(changedPassword), "The password must be stronger.");
+			AssertionConcern.AssertArgumentNotEquals(this.Username, changedPassword, "The username and password must not be the same.");
+
+			this.Password = AsEncryptedValue(changedPassword);
+		}
+
+		#endregion
+	}
 }
