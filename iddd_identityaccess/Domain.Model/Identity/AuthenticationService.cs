@@ -14,46 +14,66 @@
 
 namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
 {
-    using System;
-    using SaaSOvation.Common.Domain.Model;
+	using System;
 
-    public class AuthenticationService
-    {
-        public AuthenticationService(
-                ITenantRepository tenantRepository,
-                IUserRepository userRepository,
-                IEncryptionService encryptionService)
-        {
-            this.encryptionService = encryptionService;
-            this.tenantRepository = tenantRepository;
-            this.userRepository = userRepository;
-        }
+	using SaaSOvation.Common.Domain.Model;
 
-        readonly IEncryptionService encryptionService;
-        readonly ITenantRepository tenantRepository;
-        readonly IUserRepository userRepository;
+	/// <summary>
+	/// A domain service providing a method
+	/// to authenticate a <see cref="User"/>.
+	/// </summary>
+	[CLSCompliant(true)]
+	public class AuthenticationService
+	{
+		#region [ ReadOnly Fields and Constructor ]
 
-        public UserDescriptor Authenticate(TenantId tenantId, string username, string password)
-        {
-            AssertionConcern.AssertArgumentNotNull(tenantId, "TenantId must not be null.");
-            AssertionConcern.AssertArgumentNotEmpty(username, "Username must be provided.");
-            AssertionConcern.AssertArgumentNotEmpty(password, "Password must be provided.");
+		private readonly ITenantRepository tenantRepository;
+		private readonly IUserRepository userRepository;
+		private readonly IEncryptionService encryptionService;
 
-            var userDescriptor = UserDescriptor.NullDescriptorInstance();
+		/// <summary>
+		/// Initializes a new instance of the <see cref="AuthenticationService"/> class.
+		/// </summary>
+		/// <param name="tenantRepository">
+		/// An instance of <see cref="ITenantRepository"/> to use internally.
+		/// </param>
+		/// <param name="userRepository">
+		/// An instance of <see cref="IUserRepository"/> to use internally.
+		/// </param>
+		/// <param name="encryptionService">
+		/// An instance of <see cref="IEncryptionService"/> to use internally.
+		/// </param>
+		public AuthenticationService(
+			ITenantRepository tenantRepository,
+			IUserRepository userRepository,
+			IEncryptionService encryptionService)
+		{
+			this.encryptionService = encryptionService;
+			this.tenantRepository = tenantRepository;
+			this.userRepository = userRepository;
+		}
 
-            var tenant = this.tenantRepository.Get(tenantId);
+		#endregion
 
-            if (tenant != null && tenant.Active)
-            {
-                var encryptedPassword = this.encryptionService.EncryptedValue(password);
-                var user = this.userRepository.UserFromAuthenticCredentials(tenantId, username, encryptedPassword);
-                if (user != null && user.IsEnabled)
-                {
-                    userDescriptor = user.UserDescriptor;
-                }
-            }
+		public UserDescriptor Authenticate(TenantId tenantId, string username, string password)
+		{
+			AssertionConcern.AssertArgumentNotNull(tenantId, "TenantId must not be null.");
+			AssertionConcern.AssertArgumentNotEmpty(username, "Username must be provided.");
+			AssertionConcern.AssertArgumentNotEmpty(password, "Password must be provided.");
 
-            return userDescriptor;
-        }
-    }
+			UserDescriptor userDescriptor = UserDescriptor.NullDescriptorInstance();
+			Tenant tenant = this.tenantRepository.Get(tenantId);
+			if ((tenant != null) && tenant.Active)
+			{
+				string encryptedPassword = this.encryptionService.EncryptedValue(password);
+				User user = this.userRepository.UserFromAuthenticCredentials(tenantId, username, encryptedPassword);
+				if ((user != null) && user.IsEnabled)
+				{
+					userDescriptor = user.UserDescriptor;
+				}
+			}
+
+			return userDescriptor;
+		}
+	}
 }

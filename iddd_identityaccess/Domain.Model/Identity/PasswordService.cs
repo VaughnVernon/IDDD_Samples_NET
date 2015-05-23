@@ -14,140 +14,133 @@
 
 namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
 {
-    using System;
-    using SaaSOvation.Common.Domain.Model;
+	using System;
 
-    public class PasswordService
-    {
-        private const string DIGITS = "0123456789";
-        private const string LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        private const int STRONG_THRESHOLD = 20;
-        private const string SYMBOLS = "\"`!?$?%^&*()_-+={[}]:;@'~#|\\<,>.?/";
-        private const int VERY_STRONG_THRESHOLD = 40;
+	using SaaSOvation.Common.Domain.Model;
 
-        public PasswordService() 
-        {
-        }
+	/// <summary>
+	/// A domain service which generates passwords
+	/// and evaluates passwords for strength.
+	/// </summary>
+	[CLSCompliant(true)]
+	public sealed class PasswordService
+	{
+		private const string Digits = "0123456789";
+		private const string Letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		private const int StrongThreshold = 20;
+		private const string Symbols = "\"`!?$?%^&*()_-+={[}]:;@'~#|\\<,>.?/";
+		private const int VeryStrongThreshold = 40;
 
-        public string GenerateStrongPassword()
-        {
-            String generatedPassword = null;
+		public string GenerateStrongPassword()
+		{
+			string generatedPassword = null;
+			string password = string.Empty;
+			Random random = new Random();
+			bool isStrong = false;
+			while (!isStrong)
+			{
+				int index;
+				int opt = random.Next(4);
+				switch (opt)
+				{
+					case 0:
+						index = random.Next(Letters.Length);
+						password += (Letters.Substring(index, 1));
+						break;
+					case 1:
+						index = random.Next(Letters.Length);
+						password += (Letters.Substring(index, 1).ToLower());
+						break;
+					case 2:
+						index = random.Next(Digits.Length);
+						password += (Digits.Substring(index, 1));
+						break;
+					case 3:
+						index = random.Next(Symbols.Length);
+						password += (Symbols.Substring(index, 1));
+						break;
+				}
 
-            var password = "";
+				generatedPassword = password;
 
-            var random = new Random();
+				if (generatedPassword.Length >= 7)
+				{
+					isStrong = this.IsStrong(generatedPassword);
+				}
+			}
 
-            var isStrong = false;
+			return generatedPassword;
+		}
 
-            var index = 0;
+		public bool IsStrong(string plainTextPassword)
+		{
+			return CalculatePasswordStrength(plainTextPassword) >= StrongThreshold;
+		}
 
-            while (!isStrong)
-            {
-                var opt = random.Next(4);
+		public bool IsVeryStrong(string plainTextPassword)
+		{
+			return CalculatePasswordStrength(plainTextPassword) >= VeryStrongThreshold;
+		}
 
-                switch (opt)
-                {
-                    case 0:
-                        index = random.Next(LETTERS.Length);
-                        password += (LETTERS.Substring(index, 1));
-                        break;
-                    case 1:
-                        index = random.Next(LETTERS.Length);
-                        password += (LETTERS.Substring(index, 1).ToLower());
-                        break;
-                    case 2:
-                        index = random.Next(DIGITS.Length);
-                        password += (DIGITS.Substring(index, 1));
-                        break;
-                    case 3:
-                        index = random.Next(SYMBOLS.Length);
-                        password += (SYMBOLS.Substring(index, 1));
-                        break;
-                }
+		public bool IsWeak(string plainTextPassword)
+		{
+			return CalculatePasswordStrength(plainTextPassword) < StrongThreshold;
+		}
 
-                generatedPassword = password.ToString();
+		private static int CalculatePasswordStrength(string plainTextPassword)
+		{
+			AssertionConcern.AssertArgumentNotNull(plainTextPassword, "Password strength cannot be tested on null.");
 
-                if (generatedPassword.Length >= 7)
-                {
-                    isStrong = this.IsStrong(generatedPassword);
-                }
-            }
+			int strength = 0;
+			int length = plainTextPassword.Length;
+			if (length > 7)
+			{
+				strength += 10;
 
-            return generatedPassword;
-        }
+				// bonus: one point each additional
+				strength += (length - 7);
+			}
 
-        public bool IsStrong(string plainTextPassword)
-        {
-            return this.CalculatePasswordStrength(plainTextPassword) >= STRONG_THRESHOLD;
-        }
+			int digitCount = 0;
+			int letterCount = 0;
+			int lowerCount = 0;
+			int upperCount = 0;
+			int symbolCount = 0;
+			for (int idx = 0; idx < length; ++idx)
+			{
+				char ch = plainTextPassword[idx];
+				if (char.IsLetter(ch))
+				{
+					++letterCount;
 
-        public bool IsVeryStrong(string plainTextPassword)
-        {
-            return this.CalculatePasswordStrength(plainTextPassword) >= VERY_STRONG_THRESHOLD;
-        }
+					if (char.IsUpper(ch))
+					{
+						++upperCount;
+					}
+					else
+					{
+						++lowerCount;
+					}
+				}
+				else if (char.IsDigit(ch))
+				{
+					++digitCount;
+				}
+				else
+				{
+					++symbolCount;
+				}
+			}
 
-        public bool IsWeak(string plainTextPassword)
-        {
-            return this.CalculatePasswordStrength(plainTextPassword) < STRONG_THRESHOLD;
-        }
+			strength += (upperCount + lowerCount + symbolCount);
 
-        int CalculatePasswordStrength(String plainTextPassword)
-        {
-            AssertionConcern.AssertArgumentNotNull(plainTextPassword, "Password strength cannot be tested on null.");
+			// bonus: letters and digits
+			if ((letterCount >= 2) && (digitCount >= 2))
+			{
+				strength += (letterCount + digitCount);
+			}
 
-            int strength = 0;
-
-            int length = plainTextPassword.Length;
-
-            if (length > 7)
-            {
-                strength += 10;
-                // bonus: one point each additional
-                strength += (length - 7);
-            }
-
-            var digitCount = 0;
-            var letterCount = 0;
-            var lowerCount = 0;
-            var upperCount = 0;
-            var symbolCount = 0;
-
-            for (var idx = 0; idx < length; ++idx)
-            {
-                var ch = plainTextPassword[idx];
-
-                if (char.IsLetter(ch))
-                {
-                    ++letterCount;
-
-                    if (char.IsUpper(ch))
-                    {
-                        ++upperCount;
-                    }
-                    else
-                    {
-                        ++lowerCount;
-                    }
-                }
-                else if (char.IsDigit(ch))
-                {
-                    ++digitCount;
-                }
-                else
-                {
-                    ++symbolCount;
-                }
-            }
-
-            strength += (upperCount + lowerCount + symbolCount);
-
-            // bonus: letters and digits
-            if (letterCount >= 2 && digitCount >= 2)
-            {
-                strength += (letterCount + digitCount);
-            }
-
-            return strength;
-        }
-    }
+			return strength;
+		}
+	}
 }

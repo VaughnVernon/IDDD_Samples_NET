@@ -14,10 +14,20 @@
 
 namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
 {
-    using System;
+	using System;
 
-    public interface IEncryptionService
-    {
-        string EncryptedValue(string plainTextValue);
-    }
+	/// <summary>
+	/// 
+	/// </summary>
+	[CLSCompliant(true)]
+	public interface IEncryptionService
+	{
+		/// <summary>
+		/// Encrypts a given plain text string and returns the ciphertext.
+		/// Is it really ciphertext, or a one-way hash?
+		/// </summary>
+		/// <param name="plainTextValue"></param>
+		/// <returns></returns>
+		string EncryptedValue(string plainTextValue);
+	}
 }

@@ -14,56 +14,113 @@
 
 namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
 {
-    using System;
-    using SaaSOvation.Common.Domain.Model;
+	using System;
+	using System.Collections.Generic;
 
-    public class GroupMember : ValueObject
-    {
-        internal GroupMember(TenantId tenantId, string name, GroupMemberType type)
-        {
-            AssertionConcern.AssertArgumentNotNull(tenantId, "The tenantId must be provided.");
-            AssertionConcern.AssertArgumentNotEmpty(name, "Member name is required.");
-            AssertionConcern.AssertArgumentLength(name, 1, 100, "Member name must be 100 characters or less.");
+	using SaaSOvation.Common.Domain.Model;
 
-            this.Name = name;
-            this.TenantId = tenantId;
-            this.Type = type;
-        }
+	/// <summary>
+	/// A value object, based on either <see cref="User"/> or <see cref="Group"/>,
+	/// which may be among the <see cref="Group.GroupMembers"/> of a group.
+	/// </summary>
+	/// <remarks>
+	/// The <see cref="User"/> and <see cref="Group"/> entities include factory methods
+	/// <see cref="User.ToGroupMember"/> and <see cref="Group.ToGroupMember"/>,
+	/// respectively, which are used to create instances of this value.
+	/// </remarks>
+	[CLSCompliant(true)]
+	public class GroupMember : ValueObject
+	{
+		#region [ Internal Constructor ]
 
-        protected GroupMember() { }
+		/// <summary>
+		/// Initializes a new instance of the <see cref="GroupMember"/> class,
+		/// restricted to internal access.
+		/// </summary>
+		/// <param name="tenantId">
+		/// Initial value of the <see cref="TenantId"/> property.
+		/// </param>
+		/// <param name="name">
+		/// Initial value of the <see cref="Name"/> property.
+		/// </param>
+		/// <param name="type">
+		/// Initial value of the <see cref="Type"/> property.
+		/// </param>
+		/// <remarks>
+		/// This constructor is invoked by the <see cref="User.ToGroupMember"/>
+		/// or <see cref="Group.ToGroupMember"/> factory methods of
+		/// <see cref="User"/> or <see cref="Group"/>, respectively.
+		/// </remarks>
+		internal GroupMember(TenantId tenantId, string name, GroupMemberType type)
+		{
+			AssertionConcern.AssertArgumentNotNull(tenantId, "The tenantId must be provided.");
+			AssertionConcern.AssertArgumentNotEmpty(name, "Member name is required.");
+			AssertionConcern.AssertArgumentLength(name, 1, 100, "Member name must be 100 characters or less.");
 
-        public TenantId TenantId { get; private set; }
+			this.Name = name;
+			this.TenantId = tenantId;
+			this.Type = type;
+		}
 
-        public string Name { get; private set; }
+		/// <summary>
+		/// Initializes a new instance of the <see cref="GroupMember"/> class for a derived type,
+		/// and otherwise blocks new instances from being created with an empty constructor.
+		/// </summary>
+		protected GroupMember()
+		{
+		}
 
-        public GroupMemberType Type { get; private set; }
+		#endregion
 
-        public bool IsGroup
-        {
-            get
-            {
-                return this.Type == GroupMemberType.Group;
-            }
-        }
+		#region [ Public Properties ]
 
-        public bool IsUser
-        {
-            get
-            {
-                return this.Type == GroupMemberType.User;
-            }
-        }
+		public TenantId TenantId { get; private set; }
 
-        protected override System.Collections.Generic.IEnumerable<object> GetEqualityComponents()
-        {
-            yield return this.TenantId;
-            yield return this.Name;
-            yield return this.Type;
-        }
+		public string Name { get; private set; }
 
-        public override string ToString()
-        {
-            return "GroupMember [name=" + Name + ", tenantId=" + TenantId + ", type=" + Type + "]";
-        }
-    }
+		public GroupMemberType Type { get; private set; }
+
+		public bool IsGroup
+		{
+			get { return this.Type == GroupMemberType.Group; }
+		}
+
+		public bool IsUser
+		{
+			get { return this.Type == GroupMemberType.User; }
+		}
+
+		#endregion
+
+		#region [ Methods ]
+
+		/// <summary>
+		/// Returns a string that represents the current value object.
+		/// </summary>
+		/// <returns>
+		/// A unique string representation of an instance of this value object.
+		/// </returns>
+		public override string ToString()
+		{
+			const string Format = "GroupMember [tenantId={0}, name={1}, type={2:G}]";
+			return string.Format(Format, this.TenantId, this.Name, this.Type);
+		}
+
+		/// <summary>
+		/// Gets the values which define one <see cref="GroupMember"/> value
+		/// as compared to another, which are the <see cref="TenantId"/>,
+		/// and <see cref="Name"/>, and <see cref="Type"/>.
+		/// </summary>
+		/// <returns>
+		/// A sequence of values which defines this value object.
+		/// </returns>
+		protected override IEnumerable<object> GetEqualityComponents()
+		{
+			yield return this.TenantId;
+			yield return this.Name;
+			yield return this.Type;
+		}
+
+		#endregion
+	}
 }

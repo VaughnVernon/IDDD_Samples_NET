@@ -14,18 +14,40 @@
 
 namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
 {
-    using SaaSOvation.Common.Domain.Model;
+	using System;
 
-    public class TenantId : Identity
-    {
-        public TenantId()
-            : base()
-        {
-        }
+	using SaaSOvation.Common.Domain.Model;
 
-        public TenantId(string id)
-            : base(id)
-        {
-        }
-    }
+	/// <summary>
+	/// A value object derived from <see cref="Identity"/>
+	/// which identifies a <see cref="Tenant"/>,
+	/// </summary>
+	/// <remarks>
+	/// This is the only implementation of <see cref="IIdentity"/>
+	/// in the "Identity and Access" Bounded Context.
+	/// </remarks>
+	[CLSCompliant(true), Serializable]
+	public sealed class TenantId : Identity
+	{
+		/// <summary>
+		/// Initializes a new instance of the <see cref="TenantId"/> class
+		/// with a new <see cref="Guid"/> assigned to the value of the
+		/// base <see cref="IIdentity.Id"/> property.
+		/// </summary>
+		public TenantId()
+		{
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="TenantId"/> class
+		/// using a given <paramref name="id"/> string.
+		/// </summary>
+		/// <param name="id">
+		/// Initial value of the base <see cref="IIdentity.Id"/> property.
+		/// </param>
+		public TenantId(string id)
+			: base(id)
+		{
+		}
+	}
 }
