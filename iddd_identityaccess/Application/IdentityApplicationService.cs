@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using SaaSOvation.IdentityAccess.Domain.Model.Identity;
-using SaaSOvation.IdentityAccess.Domain.Model.Access;
-using SaaSOvation.IdentityAccess.Application.Commands;
-
-namespace SaaSOvation.IdentityAccess.Application
+﻿namespace SaaSOvation.IdentityAccess.Application
 {
+	using System;
+
+	using SaaSOvation.IdentityAccess.Application.Commands;
+	using SaaSOvation.IdentityAccess.Domain.Model.Identity;
+
+	/// <summary>
+	/// Coordinates interactions among entities in the "Domain.Model.Identity" namespace.
+	/// </summary>
+	[CLSCompliant(true)]
     public class IdentityApplicationService
     {
         readonly AuthenticationService authenticationService;
