@@ -14,28 +14,30 @@
 
 namespace SaaSOvation.IdentityAccess.Domain.Model
 {
-    using System;
-    using SaaSOvation.IdentityAccess.Domain.Model.Identity;
+	using System;
 
-    public class DomainRegistry
-    {
-        public static IEncryptionService EncryptionService
-        {
-            get
-            {
-                // this is not a desirable dependency since it
-                // references port adapters, but it doesn't
-                // require an IoC container
-                return new Infrastructure.Services.MD5EncryptionService();
-            }
-        }
+	using SaaSOvation.IdentityAccess.Domain.Model.Identity;
 
-        public static PasswordService PasswordService
-        {
-            get
-            {
-                return new PasswordService();
-            }
-        }
-    }
+	[CLSCompliant(true)]
+	public static class DomainRegistry
+	{
+		public static IEncryptionService EncryptionService
+		{
+			get
+			{
+				// this is not a desirable dependency since it
+				// references port adapters, but it doesn't
+				// require an IoC container
+				return new Infrastructure.Services.MD5EncryptionService();
+			}
+		}
+
+		/// <summary>
+		/// Gets an instance of a domain service?
+		/// </summary>
+		public static PasswordService PasswordService
+		{
+			get { return new PasswordService(); }
+		}
+	}
 }
