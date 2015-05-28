@@ -18,9 +18,17 @@ namespace SaaSOvation.IdentityAccess.Domain.Model
 
 	using SaaSOvation.IdentityAccess.Domain.Model.Identity;
 
+	/// <summary>
+	/// Holds static references to domain services
+	/// which would normally be configured by an
+	/// Inversion of Control container.
+	/// </summary>
 	[CLSCompliant(true)]
 	public static class DomainRegistry
 	{
+		/// <summary>
+		/// Gets the instance of <see cref="IEncryptionService"/> to use.
+		/// </summary>
 		public static IEncryptionService EncryptionService
 		{
 			get
@@ -33,7 +41,8 @@ namespace SaaSOvation.IdentityAccess.Domain.Model
 		}
 
 		/// <summary>
-		/// Gets an instance of a domain service?
+		/// Gets an instance of a domain service which generates
+		/// passwords and evaluates passwords for strength.
 		/// </summary>
 		public static PasswordService PasswordService
 		{

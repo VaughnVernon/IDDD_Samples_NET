@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="SaaSOvation.IdentityAccess.Domain.Model.Identity.AuthenticationService">
+    <Position X="0.5" Y="0.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAIAAAAAAAAAAAAAAIEAAAA=</HashCode>
+      <FileName>Domain.Model\Identity\AuthenticationService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SaaSOvation.IdentityAccess.Domain.Model.Identity.PasswordService">
+    <Position X="4.25" Y="3.5" Width="2.75" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAgAAIAAAAEIGIAAAAAAAAAAAAAAAAIgA=</HashCode>
+      <FileName>Domain.Model\Identity\PasswordService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SaaSOvation.IdentityAccess.Domain.Model.Identity.TenantProvisioningService">
+    <Position X="3.75" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAgAAAAAgAAAAAAAAAABAAAAAAAAIAAAAA=</HashCode>
+      <FileName>Domain.Model\Identity\TenantProvisioningService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SaaSOvation.IdentityAccess.Domain.Model.Access.AuthorizationService">
+    <Position X="0.5" Y="3.75" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAgAAAAAAAAAAAAQAAAAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>Domain.Model\Access\AuthorizationService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SaaSOvation.IdentityAccess.Infrastructure.Services.MD5EncryptionService" Collapsed="true">
+    <Position X="7.25" Y="5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Infrastructure\Services\MD5EncryptionService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SaaSOvation.IdentityAccess.Domain.Model.Identity.GroupMemberService">
+    <Position X="6.75" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>ABAIAAAAAAAAAAAAAAAAAAAAQAAQAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>Domain.Model\Identity\GroupMemberService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="SaaSOvation.IdentityAccess.Domain.Model.Identity.IEncryptionService">
+    <Position X="7.25" Y="3.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Domain.Model\Identity\IEncryptionService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

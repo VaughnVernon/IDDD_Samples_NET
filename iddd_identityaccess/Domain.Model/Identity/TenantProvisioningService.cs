@@ -14,88 +14,221 @@
 
 namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
 {
-    using System;
-    using SaaSOvation.Common.Domain.Model;
-    using SaaSOvation.IdentityAccess.Domain.Model.Access;
+	using System;
 
-    public class TenantProvisioningService
-    {
-        public TenantProvisioningService(
-                ITenantRepository tenantRepository,
-                IUserRepository userRepository,
-                IRoleRepository roleRepository)
-        {
-            this.roleRepository = roleRepository;
-            this.tenantRepository = tenantRepository;
-            this.userRepository = userRepository;
-        }
+	using SaaSOvation.Common.Domain.Model;
+	using SaaSOvation.IdentityAccess.Domain.Model.Access;
 
-        readonly IRoleRepository roleRepository;
-        readonly ITenantRepository tenantRepository;
-        readonly IUserRepository userRepository;
+	/// <summary>
+	/// <para>
+	/// A domain service encapsulating the process to create
+	/// and store a new <see cref="Tenant"/> instance.
+	/// </para>
+	/// <para>
+	/// This operation is complex, involving the creation
+	/// of a <see cref="User"/> and <see cref="Role"/>
+	/// for default administration of the new tenant,
+	/// and publication of requisite domain events.
+	/// </para>
+	/// </summary>
+	[CLSCompliant(true)]
+	public class TenantProvisioningService
+	{
+		#region [ Fields and Constructor ]
 
-        public Tenant ProvisionTenant(
-                string tenantName,
-                string tenantDescription,
-                FullName administorName,
-                EmailAddress emailAddress,
-                PostalAddress postalAddress,
-                Telephone primaryTelephone,
-                Telephone secondaryTelephone)
-        {
-            try
-            {
-                // must be active to register admin
-                var tenant = new Tenant(this.tenantRepository.GetNextIdentity(), tenantName, tenantDescription, true);
+		private readonly IRoleRepository roleRepository;
+		private readonly ITenantRepository tenantRepository;
+		private readonly IUserRepository userRepository;
 
-                this.tenantRepository.Add(tenant);
+		/// <summary>
+		/// Initializes a new instance of the <see cref="TenantProvisioningService"/> class.
+		/// </summary>
+		/// <param name="tenantRepository">
+		/// An instance of <see cref="ITenantRepository"/> to use internally.
+		/// </param>
+		/// <param name="userRepository">
+		/// An instance of <see cref="IUserRepository"/> to use internally.
+		/// </param>
+		/// <param name="roleRepository">
+		/// An instance of <see cref="IRoleRepository"/> to use internally.
+		/// </param>
+		public TenantProvisioningService(
+			ITenantRepository tenantRepository,
+			IUserRepository userRepository,
+			IRoleRepository roleRepository)
+		{
+			this.roleRepository = roleRepository;
+			this.tenantRepository = tenantRepository;
+			this.userRepository = userRepository;
+		}
 
-                RegisterAdministratorFor(tenant, administorName, emailAddress, postalAddress, primaryTelephone, secondaryTelephone);
+		#endregion
 
-                DomainEventPublisher.Instance.Publish(new TenantProvisioned(tenant.TenantId));
+		#region [ Public Method ProvisionTenant() ]
 
-                return tenant;
-            }
-            catch (Exception e)
-            {
-                throw new InvalidOperationException(
-                        "Cannot provision tenant because: "
-                        + e.Message);
-            }
-        }
+		/// <summary>
+		/// Creates a new <see cref="Tenant"/>, stores it in
+		/// its <see cref="ITenantRepository"/> instance, and
+		/// publishes a <see cref="TenantProvisioned"/> event,
+		/// along with requisite domain events for the creation
+		/// of a <see cref="User"/> and <see cref="Role"/>
+		/// for default administration of the new tenant.
+		/// Refer to remarks for details.
+		/// </summary>
+		/// <param name="tenantName">
+		/// The <see cref="Tenant.Name"/> of the new tenant.
+		/// </param>
+		/// <param name="tenantDescription">
+		/// The <see cref="Tenant.Description"/> of the new tenant.
+		/// </param>
+		/// <param name="administorName">
+		/// The <see cref="Person.Name"/> of the
+		/// default administrator for the new tenant.
+		/// </param>
+		/// <param name="emailAddress">
+		/// The <see cref="Person.EmailAddress"/> of the
+		/// default administrator for the new tenant.
+		/// </param>
+		/// <param name="postalAddress">
+		/// The <see cref="ContactInformation.PostalAddress"/>
+		/// of the default administrator for the new tenant.
+		/// </param>
+		/// <param name="primaryTelephone">
+		/// The <see cref="ContactInformation.PrimaryTelephone"/>
+		/// of the default administrator for the new tenant.
+		/// </param>
+		/// <param name="secondaryTelephone">
+		/// The <see cref="ContactInformation.SecondaryTelephone"/>
+		/// of the default administrator for the new tenant.
+		/// </param>
+		/// <returns>
+		/// The newly registered <see cref="Tenant"/>,
+		/// which has already been added to the internal
+		/// <see cref="ITenantRepository"/> instance.
+		/// </returns>
+		/// <remarks>
+		/// <para>
+		/// The events published, in order, are:
+		/// </para>
+		/// <list type="bullet">
+		/// <item><description><see cref="UserRegistered"/></description></item>
+		/// <item><description><see cref="RoleProvisioned"/></description></item>
+		/// <item><description><see cref="UserAssignedToRole"/></description></item>
+		/// <item><description><see cref="TenantAdministratorRegistered"/></description></item>
+		/// <item><description><see cref="TenantProvisioned"/></description></item>
+		/// </list>
+		/// </remarks>
+		public Tenant ProvisionTenant(
+			string tenantName,
+			string tenantDescription,
+			FullName administorName,
+			EmailAddress emailAddress,
+			PostalAddress postalAddress,
+			Telephone primaryTelephone,
+			Telephone secondaryTelephone)
+		{
+			try
+			{
+				// must be active to register admin
+				Tenant tenant = new Tenant(this.tenantRepository.GetNextIdentity(), tenantName, tenantDescription, true);
 
-        void RegisterAdministratorFor(Tenant tenant, FullName administorName, EmailAddress emailAddress, PostalAddress postalAddress, Telephone primaryTelephone, Telephone secondaryTelephone)
-        {
-            var invitation = tenant.OfferRegistrationInvitation("init").OpenEnded();
+				// Since this is a new entity, add it to
+				// the collection-oriented repository.
+				// Subsequent changes to the entity
+				// are implicitly persisted.
+				this.tenantRepository.Add(tenant);
 
-            var strongPassword = new PasswordService().GenerateStrongPassword();
+				// Creates user and role entities and stores them
+				// in their respective repositories, and publishes
+				// domain events UserRegistered, RoleProvisioned,
+				// UserAssignedToRole, and TenantAdministratorRegistered.
+				this.RegisterAdministratorFor(
+					tenant,
+					administorName,
+					emailAddress,
+					postalAddress,
+					primaryTelephone,
+					secondaryTelephone);
 
-            var admin =
-                tenant.RegisterUser(
-                        invitation.InvitationId,
-                        "admin",
-                        strongPassword,
-                        Enablement.IndefiniteEnablement(),
-                        new Person(
-                                tenant.TenantId,
-                                administorName,
-                                new ContactInformation(
-                                        emailAddress,
-                                        postalAddress,
-                                        primaryTelephone,
-                                        secondaryTelephone)));
+				DomainEventPublisher
+					.Instance
+					.Publish(new TenantProvisioned(
+							tenant.TenantId));
 
-            tenant.WithdrawInvitation(invitation.InvitationId);
+				return tenant;
+			}
+			catch (Exception e)
+			{
+				throw new InvalidOperationException(
+					string.Concat("Cannot provision tenant because: ", e.Message), e);
+			}
+		}
 
-            this.userRepository.Add(admin);
+		#endregion
 
-            var adminRole = tenant.ProvisionRole("Administrator", "Default " + tenant.Name + " administrator.");
+		#region [ Private Method used by ProvisionTenant() ]
 
-            adminRole.AssignUser(admin);
+		private void RegisterAdministratorFor(
+			Tenant tenant,
+			FullName administorName,
+			EmailAddress emailAddress,
+			PostalAddress postalAddress,
+			Telephone primaryTelephone,
+			Telephone secondaryTelephone)
+		{
+			RegistrationInvitation invitation = tenant.OfferRegistrationInvitation("init").OpenEnded();
+			string strongPassword = new PasswordService().GenerateStrongPassword();
 
-            this.roleRepository.Add(adminRole);
+			// Publishes domain event UserRegistered.
+			User admin = tenant.RegisterUser(
+				invitation.InvitationId,
+				"admin",
+				strongPassword,
+				Enablement.IndefiniteEnablement(),
+				new Person(
+					tenant.TenantId,
+					administorName,
+					new ContactInformation(
+						emailAddress,
+						postalAddress,
+						primaryTelephone,
+						secondaryTelephone)));
 
-            DomainEventPublisher.Instance.Publish(new TenantAdministratorRegistered(tenant.TenantId, tenant.Name, administorName, emailAddress, admin.Username, strongPassword));
-        }
-    }
+			tenant.WithdrawInvitation(invitation.InvitationId);
+
+			// Since this is a new entity, add it to
+			// the collection-oriented repository.
+			// Subsequent changes to the entity
+			// are implicitly persisted.
+			this.userRepository.Add(admin);
+
+			// Publishes domain event RoleProvisioned.
+			Role adminRole = tenant.ProvisionRole(
+				"Administrator",
+				string.Format("Default {0} administrator.", tenant.Name));
+
+			// Publishes domain event UserAssignedToRole,
+			// but not GroupUserAdded because the group
+			// reference held by the role is an "internal" group.
+			adminRole.AssignUser(admin);
+
+			// Since this is a new entity, add it to
+			// the collection-oriented repository.
+			// Subsequent changes to the entity
+			// are implicitly persisted.
+			this.roleRepository.Add(adminRole);
+
+			DomainEventPublisher
+				.Instance
+				.Publish(new TenantAdministratorRegistered(
+						tenant.TenantId,
+						tenant.Name,
+						administorName,
+						emailAddress,
+						admin.Username,
+						strongPassword));
+		}
+
+		#endregion
+	}
 }

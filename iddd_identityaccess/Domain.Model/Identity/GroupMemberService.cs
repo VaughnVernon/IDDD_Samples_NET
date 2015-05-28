@@ -28,6 +28,9 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
 	{
 		#region [ ReadOnly Fields and Constructor ]
 
+		// The maximum value of a signed byte should be 127.
+		private const int MaxGroupNestingRecursion = sbyte.MaxValue;
+
 		private readonly IGroupRepository groupRepository;
 		private readonly IUserRepository userRepository;
 
@@ -49,6 +52,8 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
 		}
 
 		#endregion
+
+		#region [ Public Methods ]
 
 		/// <summary>
 		/// Determines whether a <see cref="User"/>'s declared
@@ -76,33 +81,47 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
 			return ((confirmedUser == null) || (!confirmedUser.IsEnabled));
 		}
 
+		/// <summary>
+		/// Recursive function which determines whether
+		/// a <see cref="Group"/> is a member of a group
+		/// or of a descendant group.
+		/// </summary>
+		/// <param name="group">
+		/// An instance of <see cref="Group"/> to check for
+		/// the presence of <paramref name="memberGroup"/>
+		/// among its members or descendants.
+		/// </param>
+		/// <param name="memberGroup">
+		/// Another group which may potentially be added to the
+		/// members of <paramref name="group"/> if it's allowed.
+		/// </param>
+		/// <returns>
+		/// <c>true</c> if the given <paramref name="memberGroup"/>
+		/// is a member of the given <paramref name="group"/> or of
+		/// a descendant group; otherwise, <c>false</c>.
+		/// </returns>
 		public bool IsMemberGroup(Group group, GroupMember memberGroup)
 		{
-			bool isMember = false;
-			foreach (GroupMember member in group.GroupMembers.Where(x => x.IsGroup))
-			{
-				if (memberGroup.Equals(member))
-				{
-					isMember = true;
-				}
-				else
-				{
-					Group nestedGroup = this.groupRepository.GroupNamed(member.TenantId, member.Name);
-					if (nestedGroup != null)
-					{
-						isMember = this.IsMemberGroup(nestedGroup, memberGroup);
-					}
-				}
-
-				if (isMember)
-				{
-					break;
-				}
-			}
-
-			return isMember;
+			return this.IsMemberGroup(group, memberGroup, 0);
 		}
 
+		/// <summary>
+		/// Determines whether a <see cref="User"/> is a member
+		/// of the <see cref="Group"/> members of a group.
+		/// </summary>
+		/// <param name="group">
+		/// An instance of <see cref="Group"/> having
+		/// members which are groups.
+		/// </param>
+		/// <param name="user">
+		/// An instance of <see cref="User"/> which may be a member
+		/// of group members of the given <paramref name="group"/>.
+		/// </param>
+		/// <returns>
+		/// <c>true</c> if the given <paramref name="user"/>
+		/// is a member of the groups nested within the given
+		/// <paramref name="group"/>; otherwise, <c>false</c>.
+		/// </returns>
 		public bool IsUserInNestedGroup(Group group, User user)
 		{
 			foreach (GroupMember member in group.GroupMembers.Where(x => x.IsGroup))
@@ -120,5 +139,45 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
 
 			return false;
 		}
+
+		#endregion
+
+		#region [ Private Recursive Method with Overflow Catch ]
+
+		private bool IsMemberGroup(Group group, GroupMember memberGroup, int recursionCount)
+		{
+			if (recursionCount > MaxGroupNestingRecursion)
+			{
+				throw new InvalidOperationException("The maximum depth of group nesting has been exceeded, stopping recursive function.");
+			}
+
+			bool isMember = false;
+			foreach (GroupMember member in group.GroupMembers.Where(x => x.IsGroup))
+			{
+				if (memberGroup.Equals(member))
+				{
+					isMember = true;
+				}
+				else
+				{
+					Group nestedGroup = this.groupRepository.GroupNamed(member.TenantId, member.Name);
+					if (nestedGroup != null)
+					{
+						int nextRecursionCount = (recursionCount + 1);
+
+						isMember = this.IsMemberGroup(nestedGroup, memberGroup, nextRecursionCount);
+					}
+				}
+
+				if (isMember)
+				{
+					break;
+				}
+			}
+
+			return isMember;
+		}
+
+		#endregion
 	}
 }
