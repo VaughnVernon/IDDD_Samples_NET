@@ -55,6 +55,27 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
 
 		#endregion
 
+		/// <summary>
+		/// Authenticates a <see cref="User"/> given the
+		/// <paramref name="tenantId"/>, <paramref name="username"/>,
+		/// and <paramref name="password"/>.
+		/// </summary>
+		/// <param name="tenantId">
+		/// A <see cref="TenantId"/> identifying a <see cref="Tenant"/>
+		/// with which a <see cref="User"/> is associated.
+		/// </param>
+		/// <param name="username">
+		/// The username to authenticate.
+		/// </param>
+		/// <param name="password">
+		/// The password to authenticate.
+		/// </param>
+		/// <returns>
+		/// A <see cref="UserDescriptor"/> of the authenticated user
+		/// if the user can be authenticated; otherwise, null reference
+		/// in the username and password do not match an enabled
+		/// <see cref="User"/> for an active <see cref="Tenant"/>.
+		/// </returns>
 		public UserDescriptor Authenticate(TenantId tenantId, string username, string password)
 		{
 			AssertionConcern.AssertArgumentNotNull(tenantId, "TenantId must not be null.");

@@ -123,6 +123,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Domain.Model\DomainServices.cd" />
     <None Include="Domain.Model\EntitiesAndRepositories.cd" />
     <None Include="IDDD.IdentityAccess.nuspec" />
     <None Include="packages.config" />

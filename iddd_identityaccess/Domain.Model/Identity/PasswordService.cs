@@ -25,12 +25,27 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
 	[CLSCompliant(true)]
 	public sealed class PasswordService
 	{
+		#region [ Private Constants ]
+
 		private const string Digits = "0123456789";
 		private const string Letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-		private const int StrongThreshold = 20;
 		private const string Symbols = "\"`!?$?%^&*()_-+={[}]:;@'~#|\\<,>.?/";
+
+		private const int StrongThreshold = 20;
 		private const int VeryStrongThreshold = 40;
 
+		#endregion
+
+		#region [ Public Methods ]
+
+		/// <summary>
+		/// Generates a pseudo-random string which
+		/// qualifies as a strong password.
+		/// </summary>
+		/// <returns>
+		/// A pseudo-random string which
+		/// qualifies as a strong password.
+		/// </returns>
 		public string GenerateStrongPassword()
 		{
 			string generatedPassword = null;
@@ -72,20 +87,57 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
 			return generatedPassword;
 		}
 
+		/// <summary>
+		/// Determines whether a string qualifies as a "strong" password.
+		/// </summary>
+		/// <param name="plainTextPassword">
+		/// A string to be evaluated for password strength.
+		/// </param>
+		/// <returns>
+		/// <c>true</c> if the <paramref name="plainTextPassword"/>
+		/// exceeds the threshold to be considered a "strong"
+		/// password; otherwise, <c>false</c>.
+		/// </returns>
 		public bool IsStrong(string plainTextPassword)
 		{
 			return CalculatePasswordStrength(plainTextPassword) >= StrongThreshold;
 		}
 
+		/// <summary>
+		/// Determines whether a string qualifies as a "very strong" password.
+		/// </summary>
+		/// <param name="plainTextPassword">
+		/// A string to be evaluated for password strength.
+		/// </param>
+		/// <returns>
+		/// <c>true</c> if the <paramref name="plainTextPassword"/>
+		/// exceeds the threshold to be considered a "very strong"
+		/// password; otherwise, <c>false</c>.
+		/// </returns>
 		public bool IsVeryStrong(string plainTextPassword)
 		{
 			return CalculatePasswordStrength(plainTextPassword) >= VeryStrongThreshold;
 		}
 
+		/// <summary>
+		/// Determines whether a string does not qualify as a "strong" password.
+		/// </summary>
+		/// <param name="plainTextPassword">
+		/// A string to be evaluated for password strength.
+		/// </param>
+		/// <returns>
+		/// <c>true</c> if the <paramref name="plainTextPassword"/>
+		/// does not exceed the threshold to be considered a "strong"
+		/// password; otherwise, <c>false</c>.
+		/// </returns>
 		public bool IsWeak(string plainTextPassword)
 		{
 			return CalculatePasswordStrength(plainTextPassword) < StrongThreshold;
 		}
+
+		#endregion
+
+		#region [ Private Static Method CalculatePasswordStrength() ]
 
 		private static int CalculatePasswordStrength(string plainTextPassword)
 		{
@@ -142,5 +194,7 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Identity
 
 			return strength;
 		}
+
+		#endregion
 	}
 }

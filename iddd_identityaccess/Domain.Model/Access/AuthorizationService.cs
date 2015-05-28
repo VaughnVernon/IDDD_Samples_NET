@@ -56,6 +56,24 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Access
 
 		#endregion
 
+		/// <summary>
+		/// Determines whether a <see cref="User"/> has a <see cref="Role"/>,
+		/// given the names of the user and the role.
+		/// </summary>
+		/// <param name="tenantId">
+		/// A <see cref="TenantId"/> identifying a <see cref="Tenant"/> with
+		/// which a <see cref="User"/> and <see cref="Role"/> are associated.
+		/// </param>
+		/// <param name="username">
+		/// The unique username identifying a <see cref="User"/>.
+		/// </param>
+		/// <param name="roleName">
+		/// The unique name identifying a <see cref="Role"/>.
+		/// </param>
+		/// <returns>
+		/// <c>true</c> if the <see cref="User"/> has the
+		/// <see cref="Role"/>; otherwise, <c>false</c>.
+		/// </returns>
 		public bool IsUserInRole(TenantId tenantId, string username, string roleName)
 		{
 			AssertionConcern.AssertArgumentNotNull(tenantId, "TenantId must not be null.");
@@ -66,6 +84,20 @@ namespace SaaSOvation.IdentityAccess.Domain.Model.Access
 			return ((user != null) && this.IsUserInRole(user, roleName));
 		}
 
+		/// <summary>
+		/// Determines whether a <see cref="User"/> has a <see cref="Role"/>,
+		/// given the user and the name of the role.
+		/// </summary>
+		/// <param name="user">
+		/// A <see cref="User"/> instance.
+		/// </param>
+		/// <param name="roleName">
+		/// The unique name identifying a <see cref="Role"/>.
+		/// </param>
+		/// <returns>
+		/// <c>true</c> if the <see cref="User"/> has the
+		/// <see cref="Role"/>; otherwise, <c>false</c>.
+		/// </returns>
 		public bool IsUserInRole(User user, string roleName)
 		{
 			AssertionConcern.AssertArgumentNotNull(user, "User must not be null.");
